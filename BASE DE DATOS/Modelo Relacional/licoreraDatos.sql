@@ -77,17 +77,3 @@ INSERT INTO detalles VALUES(4,7,3);
 INSERT INTO detalles VALUES(4,2,4);
 INSERT INTO detalles VALUES(5,7,5);
 INSERT INTO detalles VALUES(5,1,10);
-
-#CONSULTA DE DETALLES DE UN PEDIDO
-SELECT l.nomb_licor AS LICOR, l.descripcion AS DESCRIPCION, d.cantidad AS CANTIDAD, l.precio AS PRECIO_UND, (l.precio*d.cantidad) AS SUBTOTAL
-FROM pedidos AS p 
-INNER JOIN detalles AS d ON p.cod_pedido=d.cod_pedido
-INNER JOIN licores AS l ON d.cod_licor=l.cod_licor
-WHERE p.cod_pedido = 1;
-
-SELECT * FROM licores;
-SELECT * FROM pedidos;
-SELECT * FROM usuarios;
-SELECT * FROM historial_facturas;
-
-UPDATE pedidos SET cod_estado = 1 WHERE cod_pedido =1;
