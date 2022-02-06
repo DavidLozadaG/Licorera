@@ -3,8 +3,8 @@
 <head th:replace="plantilla/plantilla :: head">
 </head>
 <body>
+    <nav th:replace="plantilla/plantilla :: navbar"></nav>
     <header th:replace="plantilla/plantilla :: header"></header>
-    <div th:replace="cliente/registro :: modalRegistro"></div>
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <div class="row">
@@ -28,6 +28,7 @@
             </div>
         </div>
     </div>
+    <div th:replace="cliente/registro :: modalRegistro"></div>
     <footer th:replace="plantilla/plantilla :: footer"></footer>
 </body>
 </html>
