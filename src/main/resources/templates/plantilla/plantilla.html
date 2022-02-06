@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmnlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${cabecera}"></title>
+    <link rel="shortcut icon" th:href="@{/imagenes/MaxLicor's.png}" type="">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:fragment="header">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="/home">
+                    <span>MaxLicor's</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Promociones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">Carrito</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex ms-auto py-4 py-lg-0">
+                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                        <button class="btn nav_search-btn" type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                Usuario
+                            </a>
+                            <ul th:replace="cliente/registro :: opcionesDefault"></ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+                <div class="masthead-subheading">Bienvenido a MaxLicor's!</div>
+                <div class="masthead-heading text-uppercase">Tienda Licorera Online 24/7</div>
+                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Contacto</a>
+            </div>
+        </header>
+    </div>
+    <!-- CONTENIDO-->
+
+    <!-- PIE DE PAGINA -->
+    <footer th:fragment="footer">
+        <div class="container">
+            <p>Copyrigth Beelz &copy; -2022</p>
+        </div>
+        <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/all.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+
+    </footer>
+</body>
+</html>

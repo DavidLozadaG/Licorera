@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="plantilla/plantilla :: head">
+</head>
+<body>
+    <header th:replace="plantilla/plantilla :: header"></header>
+    <div th:replace="cliente/registro :: modalRegistro"></div>
+    <div class="container">
+        <h1 th:text="${titulo}"></h1>
+        <div class="row">
+            <div class="col-sm-4" th:each="l:${licores}">
+                <div class="card">
+                    <div class="card-header">
+                        <label th:text="${l.nomb_licor}"></label>
+                    </div>
+                    <div class="card-body">
+                        <i th:text="${l.precio}">$</i>
+                        <img th:src="@{'/imagenes/licores/'+${l.foto}}" width="200" height="180">
+                    </div>
+                    <div class="card-footer text-center">
+                        <label th:text="${l.descripcion}"></label>
+                        <div>
+                            <a href="#" class="btn btn-outline-info">Agregar carrito</a>
+                            <a href="#" class="btn btn-danger">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="plantilla/plantilla :: footer"></footer>
+</body>
+</html>
