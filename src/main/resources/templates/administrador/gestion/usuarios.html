@@ -58,38 +58,59 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form th:action="@{/administrador/gestion/usuarios/guardar}" th:object="${usuario}" method="post">
+          <form class="row g-3 needs-validation" novalidate th:action="@{/administrador/gestion/usuarios/guardar}" th:object="${usuario}" method="post">
             <div class="form-group mb-3">
               <label>Número de cedula<font color="red">(*)</font></label>
-              <input type="number" th:field="*{cedula}" class="form-control" name="cod_persona">
+              <input type="number" th:field="*{cedula}" class="form-control" name="cod_persona" required>
+              <div class="invalid-feedback">
+                Por favor ingrese el numero de cedula
+              </div>
             </div>
             <div class="form-group mb-3">
               <label>Nombres<font color="red">(*)</font></label>
-              <input type="text" th:field="*{nombres}"  class="form-control" name="nombres">
+              <input type="text" th:field="*{nombres}"  class="form-control" name="nombres" required>
+              <div class="invalid-feedback">
+                Por favor ingrese los nombres
+              </div>
             </div>
             <div class="form-group mb-3">
               <label>Apellidos<font color="red">(*)</font></label>
-              <input type="text" th:field="*{apellidos}" class="form-control" name="apellidos">
+              <input type="text" th:field="*{apellidos}" class="form-control" name="apellidos" required>
+              <div class="invalid-feedback">
+                Por favor ingrese los apellidos
+              </div>
             </div>
             <div class="form-group mb-3">
               <label>Fecha de nacimiento<font color="red">(*)</font></label>
-              <input type="date" th:field="*{fecha_nac}" class="form-control" name="fecha_nac">
+              <input type="date" th:field="*{fecha_nac}" class="form-control" name="fecha_nac" required>
+              <div class="invalid-feedback">
+                Por favor ingrese la fecha de nacimiento
+              </div>
             </div>
             <div class="form-group mb-3">
               <label>Teléfono<font color="red">(*)</font></label>
-              <input type="number" th:field="*{telefono}" class="form-control" name="telefono">
+              <input type="number" th:field="*{telefono}" class="form-control" name="telefono" required>
+              <div class="invalid-feedback">
+                Por favor ingrese el numero de telefono
+              </div>
             </div>
             <div class="form-group mb-3">
               <label>E-mail<font color="red">(*)</font></label>
-              <input type="email" th:field="*{email}" class="form-control" name="email" placeholder="example@email.com">
+              <input type="email" th:field="*{email}" class="form-control" name="email" placeholder="example@email.com" required>
+              <div class="invalid-feedback">
+                Por favor ingrese el correo electronico
+              </div>
             </div>
             <div class="form-group mb-3">
               <label>Rol<font color="red">(*)</font></label>
-              <select th:field="*{cod_rol}" class="form-control" id="cbx_roles" name="cod_rol">
-                <option value="0">Seleccionar opccion</option>
+              <select th:field="*{cod_rol}" class="form-control" id="cbx_roles" name="cod_rol" required>
+                <option value="">Seleccionar opccion</option>
                 <option th:each="rol:${roles}" th:value="${rol.cod_rol}" th:text="${rol.nomb_rol}">
                 </option>
               </select>
+              <div class="invalid-feedback">
+                Por favor seleccione el rol
+              </div>
             </div>
             <div class="modal-footer">
               <input type="submit" class="btn btn-primary" value="Agregar">

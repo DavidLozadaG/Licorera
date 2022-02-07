@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 <head th:replace="plantilla/plantilla :: head">
 </head>
+
 <body>
     <nav th:replace="plantilla/plantilla :: navbar"></nav>
     <header th:replace="plantilla/plantilla :: header"></header>
@@ -31,6 +33,8 @@
         </div>
     </div>
     <div th:replace="cliente/registro :: modalRegistro"></div>
+    <div th:replace="cliente/registro :: modalInicioSesion"></div>
     <footer th:replace="plantilla/plantilla :: footer"></footer>
 </body>
+
 </html>
