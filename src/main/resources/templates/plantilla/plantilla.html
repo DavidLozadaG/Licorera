@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${cabecera}"></title>
-    <link rel="shortcut icon" th:href="@{/imagenes/MaxLicor's.png}" type="">
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="shortcut icon" th:href="@{/imagenes/logotipo/MaxLicor's.png}" type="">
     <link rel="stylesheet" th:href="@{/css/all.min.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
 <body>
@@ -25,23 +25,21 @@
                 <i class="fas fa-bars ms-1"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                <ul class="navbar-nav text-uppercase me-auto py-4 py-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-gifts"></i> Promociones
+                        <a class="nav-link" href="#"></i>Promociones
                         </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-beer"></i> Categorias
+                            <i class="fas fa-beer"></i>Categorias
                         </a>
                         <ul class="dropdown-menu">
                             <li th:each="cat:${categorias}">
                                 <a class="dropdown-item" th:href="@{'/'+${cat.nomb_cat}}"
                                  th:text="${cat.nomb_cat}">
                                 </a>
-                                
                             </li>
                         </ul>
                     </li>
@@ -83,10 +81,9 @@
         <div class="container">
             <p>Copyrigth Beelz &copy; -2022</p>
         </div>
-        <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
         <script type="text/javascript" th:src="@{/js/all.min.js}"></script>
         <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </footer>
 </body>
 

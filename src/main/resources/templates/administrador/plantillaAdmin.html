@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html xmnlns:th="http://www.thymeleaf.org" lang="es">
 
-<head th:fragment="head">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${cabecera}"></title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/all.min.css}">
-</head>
+<head th:replace="plantilla/plantilla :: head">
 
 <body>
     <!--- BARRA DE NAVEGACION -->
@@ -56,12 +49,7 @@
     <!-- CONTENIDO-->
     </div>
     <!-- PIE DE PAGINA -->
-    <footer th:fragment="footer">
-        <div class="container">
-            <p>Copyrigth Beelz &copy; -2022</p>
-        </div>
-        <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
-        <script type="text/javascript" th:src="@{/js/all.min.js}"></script>
-    </footer>
+    <footer th:replace="plantilla/plantilla :: footer"></footer>
 </body>
+
 </html>

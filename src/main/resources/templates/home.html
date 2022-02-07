@@ -6,7 +6,9 @@
     <nav th:replace="plantilla/plantilla :: navbar"></nav>
     <header th:replace="plantilla/plantilla :: header"></header>
     <div class="container">
-        <h1 th:text="${titulo}"></h1>
+        <div class="text-center">
+            <h1 th:text="${titulo}"></h1>
+        </div>
         <div class="row">
             <div class="col-sm-4" th:each="l:${licores}">
                 <div class="card">

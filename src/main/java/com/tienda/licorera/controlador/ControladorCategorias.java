@@ -28,15 +28,17 @@ public class ControladorCategorias {
         Usuario usuario = new Usuario();
         model.addAttribute("usuario", usuario);
         model.addAttribute("cabecera",nomb_cat+" | MaxLicor's");
-        model.addAttribute("titulo",nomb_cat+" PAGINA");
+        model.addAttribute("titulo",nomb_cat);
+        model.addAttribute("categoria",nomb_cat);
         List<Categoria>listadoCategorias=categoriaServicio.listarTodas();
         Categoria categoria=categoriaServicio.buscarPorNombre(nomb_cat);
         List<Licor>listadoLicores=licorServicio.buscarPorCategoria(categoria.getCod_cat());
         model.addAttribute("licores",listadoLicores);
         model.addAttribute("categorias",listadoCategorias);
+        System.out.println(nomb_cat);
         return "categoria";
     }
 
 
-    
+
 }
