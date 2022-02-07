@@ -42,5 +42,10 @@ public class Categoria implements Serializable{
         this.nomb_cat = nomb_cat;
     }
 
+    @Override
+    public String toString() {
+        return "Categoria [cod_cat=" + cod_cat + ", nomb_cat=" + nomb_cat + "]";
+    }
+    
     
 }

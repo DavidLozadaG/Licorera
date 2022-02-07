@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="plantilla/plantilla :: head">
+</head>
+<body>
+    <nav th:replace="plantilla/plantilla :: navbar"></nav>
+    <header th:fragment="header-categorias" class="masthead">
+        <div class="container">
+            <div class="masthead-subheading">Bienvenido a MaxLicor's!</div>
+            <div class="masthead-heading text-uppercase">Tienda Licorera Online 24/7</div>
+            <a class="btn btn-primary btn-xl text-uppercase" href="#services">Contacto</a>
+        </div>
+    </header>
+    <div class="container">
+        <h1 th:text="${titulo}"></h1>
+        <div class="row">
+            <div class="col-sm-4" th:each="l:${licores}">
+                <div class="card">
+                    <div class="card-header">
+                        <label th:text="${l.nomb_licor}"></label>
+                    </div>
+                    <div class="card-body">
+                        <i th:text="${l.precio}">$</i>
+                        <img th:src="@{'/imagenes/licores/'+${l.foto}}" width="200" height="180">
+                    </div>
+                    <div class="card-footer text-center">
+                        <label th:text="${l.descripcion}"></label>
+                        <div>
+                            <a href="#" class="btn btn-outline-info">Agregar carrito</a>
+                            <a href="#" class="btn btn-danger">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="cliente/registro :: modalRegistro"></div>
+    <footer th:replace="plantilla/plantilla :: footer"></footer>
+</body>
+</html>

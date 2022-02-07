@@ -37,8 +37,12 @@
                             <i class="fas fa-beer"></i> Categorias
                         </a>
                         <ul class="dropdown-menu">
-                            <li th:each="cat:${categorias}"><a class="dropdown-item" href="#"
-                                    th:text="${cat.nomb_cat}"></a></li>
+                            <li th:each="cat:${categorias}">
+                                <a class="dropdown-item" th:href="@{'/'+${cat.nomb_cat}}"
+                                 th:text="${cat.nomb_cat}">
+                                </a>
+                                
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">

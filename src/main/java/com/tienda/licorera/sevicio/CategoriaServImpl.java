@@ -35,6 +35,9 @@ public class CategoriaServImpl implements ICategoriaServicio {
         
         return (List<Categoria>)categoriaRepositorio.findAll();
     }
-
     
+    @Override
+    public Categoria buscarPorNombre(String nomb_cat) {
+        return  categoriaRepositorio.findByNomb_cat(nomb_cat);
+    }
 }

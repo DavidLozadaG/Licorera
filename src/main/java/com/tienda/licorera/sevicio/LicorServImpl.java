@@ -37,5 +37,17 @@ public class LicorServImpl implements ILicorServicio {
         
         return (List<Licor>)licorRepositorio.findAll();
     }
+
+    @Override
+    public Licor buscarPorNombre(String nomb_licor) {
+        return  licorRepositorio.findByNomb_licor(nomb_licor);
+    }
+
+    @Override
+    public List<Licor> buscarPorCategoria(int cod_cat) {
+        
+        return (List<Licor>)licorRepositorio.findByCod_cat(cod_cat);
+    }
+
     
 }
