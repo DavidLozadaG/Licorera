@@ -1,19 +1,6 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
 
-.formularioRegistro {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 20px;
-}
-
-.formulario__label {
-	display: block;
-	font-weight: 700;
-	padding: 10px;
-	cursor: pointer;
-}
-
 .formulario__grupo-input {
 	position: relative;
 }
@@ -122,23 +109,6 @@
 }
 /*FIN*/
 
-/* ----- -----  Mediaqueries ----- ----- */
-@media screen and (max-width: 800px) {
-	.formularioRegistro {
-		grid-template-columns: 1fr;
-	}
-
-	.form-group-terminos, 
-	.formulario__mensaje,
-	.form-group-btn-enviar {
-		grid-column: 1;
-	}
-
-	.formulario__btn {
-		width: 100%;
-	}
-}
-/*FIN*/
 .btn-xl {
   padding: 1.25rem 2.5rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -181,13 +151,13 @@
   border-color: #ffc800;
 }
 
-#mainNav {
+#mainNav, #categoriaNav{
   padding-top: 1rem;
   padding-bottom: 1rem;
   background-color: #212529;
 }
 
-#mainNav .navbar-toggler {
+#mainNav .navbar-toggler, #categoriaNav .navbar-toggler{
   padding: 0.75rem;
   font-size: 0.75rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -195,11 +165,15 @@
   font-weight: 700;
 }
 
-#mainNav .navbar-brand {
+.slider {
+    margin-top:95px;
+}
+
+#mainNav .navbar-brand, #categoriaNav .navbar-brand{
   font-family: 'Dancing Script', cursive;
 }
 
-#mainNav .navbar-brand span {
+#mainNav .navbar-brand span ,#categoriaNav .navbar-brand span {
   font-weight: bold;
   font-size: 35px;
   color: #ffc800;;
@@ -208,18 +182,18 @@
 #mainNav .navbar-brand img {
   height: 1.5rem;
 }
-#mainNav .navbar-nav .nav-item .nav-link {
+#mainNav .navbar-nav .nav-item .nav-link ,#categoriaNav .navbar-nav .nav-item .nav-link {
   font-family: 'Open Sans', sans-serif;
   font-size: 0.95rem;
   color: #fff;
   letter-spacing: 0.0625em;
 }
-#mainNav .navbar-nav .nav-item:hover .nav-link, #mainNav .navbar-nav .nav-item.active .nav-link{
+#mainNav .navbar-nav .nav-item:hover .nav-link, #mainNav .navbar-nav .nav-item.active .nav-link,#categoriaNav .navbar-nav .nav-item:hover .nav-link, #mainNav .navbar-nav .nav-item.active .nav-link{
   font-weight: bold;
   font-size: 18px;
   color: #ffc800;
 }
-#mainNav .nav_search-btn {
+#mainNav .nav_search-btn,#categoriaNav .nav_search-btn {
   width: auto;
   height: auto;
   padding: 0;
@@ -228,11 +202,11 @@
   margin: 0 10px;
 }
 
-#mainNav .nav_search-btn:hover {
+#mainNav .nav_search-btn:hover ,#categoriaNav .nav_search-btn:hover {
   color: #ffbe33;
 }
 
-#mainNav .navbar-toggler span::after {
+#mainNav .navbar-toggler span::after, #categoriaNav .navbar-toggler span::after {
   top: 10px;
 }
 
