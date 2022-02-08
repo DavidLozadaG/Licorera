@@ -8,20 +8,38 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "usuarios")
 
 public class Usuario implements Serializable{
     @Id
+    @NotEmpty
     private String cedula;
+
+    @NotEmpty
     private String nombres;
+
+    @NotEmpty
     private String apellidos;
+
+    @NotEmpty
     private Date fecha_nac;
+  
     private int edad;
+
+    @NotEmpty
     private String telefono;
+
+    @NotEmpty
+    @Email
     private String email;
+
+    @NotEmpty
     private String clave;
+
 
     @ManyToOne
     @JoinColumn(name="cod_rol")
@@ -118,6 +136,10 @@ public class Usuario implements Serializable{
         this.cod_rol = cod_rol;
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return "Usuario [apellidos=" + apellidos + ", cedula=" + cedula + ", clave=" + clave + ", cod_rol=" + cod_rol
+                + ", edad=" + edad + ", email=" + email + ", fecha_nac=" + fecha_nac + ", nombres=" + nombres
+                + ", telefono=" + telefono + "]";
+    }
 }

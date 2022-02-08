@@ -21,73 +21,105 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form th:action="@{/cliente/registro/crear}" th:object="${usuario}" method="post" class="row g-3 needs-validation" novalidate>
-            <div class="form-group mb-3">
-              <label for="cedula" class="form-label">Número de cedula<font color="red">(*)</font></label>
-              <input type="number" th:field="*{cedula}" class="form-control" name="cedula" required>
-              <div class="invalid-feedback">
-                Por favor ingrese su cedula
+          <form class ="formularioRegistro" id="formularioRegistro" th:action="@{/cliente/registro/crear}" th:object="${usuario}" method="post">
+            <!---GRUPO: cedula-->
+            <div class="formulario__grupo mb-3" id="grupo__cedula">
+              <label class="formulario__label">Número de cedula<font color="red">(*)</font></label>
+              <div class="formulario__grupo-input">
+                <input type="number" th:field="*{cedula}" class="form-control" name="cedula">
+                <i class="formulario__validacion-estado fas fa-times-circle"></i>
               </div>
+              <p class="form-control-error">La cedula debe contener 4-20 dígitos y solo puede contener numeros.</p>
             </div>
-            <div class="form-group mb-3">
-              <label>Nombres<font color="red">(*)</font></label>
-              <input type="text" th:field="*{nombres}" class="form-control" name="nombres" required>
-              <div class="invalid-feedback">
-                Por favor ingrese sus nombres
+            <!---GRUPO: nombres-->
+            <div class="formulario__grupo mb-3" id="grupo__nombres">
+              <label class="formulario__label">Nombres<font color="red">(*)</font></label>
+              <div class="formulario__grupo-input">
+                <input type="text" th:field="*{nombres}" class="form-control" name="nombres">
+                <i class="formulario__validacion-estado fas fa-times-circle"></i>
               </div>
+              <p class="form-control-error">El nombre debe contener 2-45 letras, no se aceptan numeros ni simbolos.</p>
             </div>
-            <div class="form-group mb-3">
-              <label>Apellidos<font color="red">(*)</font></label>
-              <input type="text" th:field="*{apellidos}" class="form-control" name="apellidos" required>
-              <div class="invalid-feedback">
-                Por favor ingrese sus apellidos
+            <!---GRUPO: apellidos-->
+            <div class="formulario__grupo mb-3" id="grupo__apellidos">
+              <label class="formulario__label">Apellidos<font color="red">(*)</font></label>
+              <div class="formulario__grupo-input">
+                <input type="text" th:field="*{apellidos}" class="form-control" name="apellidos">
+                <i class="formulario__validacion-estado fas fa-times-circle"></i>
               </div>
+              <p class="form-control-error">El apellido debe contener 2-45 letras, no se aceptan numeros ni simbolos.
+              </p>
             </div>
-            <div class="form-group mb-3">
-              <label>Fecha de nacimiento<font color="red">(*)</font></label>
-              <input type="date" th:field="*{fecha_nac}" class="form-control" name="fecha_nac" required>
-              <div class="invalid-feedback">
-                Por favor ingrese su fecha de nacimiento
+            <!---GRUPO: fecha_nac-->
+            <div class="form-group mb-3" id="grupo__fecha_nac">
+              <label class="formulario__label">Fecha de nacimiento<font color="red">(*)</font></label>
+              <div class="formulario__grupo-input">
+                <input type="date" th:field="*{fecha_nac}" id="fecha_nac" class="form-control" name="fecha_nac">
+                <i class="formulario__validacion-estado fas fa-times-circle"></i>
               </div>
+              <p class="form-control-error">Ingrese una fecha valida, recuerde que debe ser mayor de edad.
+              </p>
             </div>
-            <div class="form-group mb-3">
-              <label>Teléfono<font color="red">(*)</font></label>
-              <input type="number" th:field="*{telefono}" class="form-control" name="telefono" required>
-              <div class="invalid-feedback">
-                Por favor ingrese su numero de telefono
+            <!---GRUPO: telefono-->
+            <div class="form-group mb-3" id="grupo__telefono">
+              <label class="formulario__label">Teléfono<font color="red">(*)</font></label>
+              <div class="formulario__grupo-input">
+                <input type="number" th:field="*{telefono}" class="form-control" name="telefono">
+                <i class="formulario__validacion-estado fas fa-times-circle"></i>
               </div>
+              <p class="form-control-error">El telefono debe contener 10 digitos, no se aceptan letras ni simbolos.
+              </p>
             </div>
-            <div class="form-group mb-3">
-              <label>E-mail<font color="red">(*)</font></label>
-              <input type="email" th:field="*{email}" class="form-control" name="email" placeholder="example@email.com" required>
-              <div class="invalid-feedback">
-                Por favor ingrese su correo electronico
+            <!---GRUPO: email-->
+            <div class="form-group mb-3" id="grupo__email">
+              <label class="formulario__label">E-mail<font color="red">(*)</font></label>
+              <div class="formulario__grupo-input">
+                <input type="email" th:field="*{email}" class="form-control" name="email"
+                  placeholder="example@email.com">
+                <i class="formulario__validacion-estado fas fa-times-circle"></i>
               </div>
+              <p class="form-control-error">Ingrese un email valido(maximo 256 caracteres).
+              </p>
             </div>
-            <div class="form-group mb-3">
-              <label>Contraseña<font color="red">(*)</font></label>
-              <input type="password" th:field="*{clave}" class="form-control" name="clave" required>
-              <div class="invalid-feedback">
-                Por favor ingrese una contraseña
+            <!---GRUPO: clave-->
+            <div class="form-group mb-3" id="grupo__clave">
+              <label class="formulario__label">Contraseña<font color="red">(*)</font></label>
+              <div class="formulario__grupo-input">
+                <input type="password" th:field="*{clave}" class="form-control" name="clave">
+                <i class="formulario__validacion-estado fas fa-times-circle"></i>
               </div>
+              <p class="form-control-error">La contraseña debe contener 8-20 caracteres(mayusculas,minusculas y almenos
+                un numero y un simbolo).
+              </p>
             </div>
-            <div class="form-group mb-3">
-              <label>Confirmar contraseña<font color="red">(*)</font></label>
-              <input type="password" class="form-control" name="clave2" required>
-              <div class="invalid-feedback">
-                Por favor confirme la contraseña
+            <!---GRUPO: confirmarClave-->
+            <div class="form-group mb-3" id="grupo__confirmarClave">
+              <label class="formulario__label">Confirmar contraseña<font color="red">(*)</font></label>
+              <div class="formulario__grupo-input">
+                <input type="password" id="confirmarClave" class="form-control" name="confirmarClave">
+                <i class="formulario__validacion-estado fas fa-times-circle"></i>
               </div>
-              <div class="valid-feedback">
-                las contraseñas coinciden
-              </div>
+              <p class="form-control-error">Las contraseñas no coinciden
+              </p>
             </div>
-            <div class="modal-footer">
-              <input type="submit" class="btn btn-primary" value="Agregar">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <!-- Grupo: Terminos y Condiciones -->
+            <div class="form-group mb-3" id="grupo__terminos">
+              <label class="formulario__label">
+                <input class="formulario__checkbox" type="checkbox" name="terminos" id="terminos">
+                 <a href="#">Acepto los Terminos y Condiciones</a>
+              </label>
+            </div>
+            <div class="formulario__mensaje" id="formulario__mensaje">
+              <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor rellena el formulario correctamente. </p>
+            </div>
+            <div class="form-group mb-3 form-group-btn-enviar">
+              <button type="submit" class="formulario__btn">Enviar</button>
+              <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>
             </div>
           </form>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>

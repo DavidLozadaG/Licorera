@@ -23,7 +23,7 @@ public class ControladorCategorias {
     @Autowired
     private ICategoriaServicio  categoriaServicio;
     
-    @GetMapping("/{nomb_cat}")
+    @GetMapping("/categoria/{nomb_cat}")
     public String listarLicoresPorCat(@PathVariable("nomb_cat") String nomb_cat,Model model){
         Usuario usuario = new Usuario();
         model.addAttribute("usuario", usuario);
@@ -36,7 +36,7 @@ public class ControladorCategorias {
         model.addAttribute("licores",listadoLicores);
         model.addAttribute("categorias",listadoCategorias);
         System.out.println(nomb_cat);
-        return "categoria";
+        return "/categoria";
     }
 
 
