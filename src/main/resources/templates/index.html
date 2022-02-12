@@ -9,12 +9,24 @@
     <link rel="shortcut icon" th:href="@{/imagenes/logotipo/MaxLicor's.png}" type="">
     <script src="https://kit.fontawesome.com/9d5dec2ae8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            if (window.location.pathname == '/cliente/registro/crear') {
+                $('#registro').modal("show");
+            }
+        });
+    </script>
+
 </head>
 
 <body>
     <!-- Navigation-->
-    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <nav th:fragment="navbar" class="navbar navbar-expand-xl navbar-dark fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="/home">
                 <span>MaxLicor's</span>
@@ -38,13 +50,16 @@
                         <ul class="dropdown-menu">
                             <li th:each="cat:${categorias}">
                                 <a class="dropdown-item" th:href="@{'/categoria/'+${cat.nomb_cat}}"
-                                 th:text="${cat.nomb_cat}">
+                                    th:text="${cat.nomb_cat}">
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">Carrito</a>
+                        <a class="nav-link" href="/carrito">
+                            <i class="fas fa-shopping-cart"></i>
+                            (0)carrito
+                        </a>
                     </li>
                 </ul>
                 <form class="d-flex ms-auto py-4 py-lg-0">
@@ -60,7 +75,7 @@
                             <i class="fa fa-user" aria-hidden="true"></i>
                             Usuario
                         </a>
-                        <ul th:replace="cliente/registro :: opcionesDefault"></ul>
+                        <ul th:replace="usuario/sesion :: opcionesDefault"></ul>
                     </li>
                 </ul>
             </div>
@@ -75,16 +90,46 @@
         </div>
     </header>
     <!-- CONTENIDO-->
-
+    <div th:fragment="listaLicores" class="container">
+        <div class="text-center">
+            <h1 th:text="${titulo}"></h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-4" th:each="l:${licores}">
+                <div class="card">
+                    <div class="card-header">
+                        <label th:text="${l.nomb_licor}"></label>
+                    </div>
+                    <div class="card-body">
+                        <i th:text="'$'+${l.precio}">$</i>
+                        <img th:src="@{'/imagenes/licores/'+${l.foto}}" width="200" height="180">
+                    </div>
+                    <div class="card-footer text-center">
+                        <label th:text="${l.descripcion}"></label>
+                        <div>
+                            <a href="#" class="btn btn-outline-info">Agregar carrito</a>
+                            <a href="#" class="btn btn-danger">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- PIE DE PAGINA -->
+    <div th:replace="usuario/sesion :: modalRegistro"></div>
+    <div th:replace="usuario/sesion :: modalInicioSesion"></div>
+
+
+
     <footer th:fragment="footer">
         <div class="container">
             <p>Copyrigth Beelz &copy; -2022</p>
         </div>
         <script type="text/javascript" th:src="@{/js/validador.js}"></script>
         <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+            </script>
     </footer>
 </body>
 

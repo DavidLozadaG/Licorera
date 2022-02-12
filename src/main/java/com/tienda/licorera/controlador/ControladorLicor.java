@@ -23,8 +23,7 @@ public class ControladorLicor {
     private ICategoriaServicio categoriaServicio;
 
     @GetMapping({"/licorera","/","/home","/index"})
-    public String listarLicores(Model model){
-        Usuario usuario = new Usuario();
+    public String listarLicores(Model model,Usuario usuario){
         model.addAttribute("usuario", usuario);
         model.addAttribute("cabecera","Licores Disponibles | MaxLicor's");
         model.addAttribute("titulo","LICORES DISPONIBLES");
@@ -32,7 +31,7 @@ public class ControladorLicor {
         List<Licor>listadoLicores=licorServicio.listarTodos();
         model.addAttribute("categorias",listadoCategorias);
         model.addAttribute("licores",listadoLicores);
-        return "home";
+        return "index";
     }
 
 

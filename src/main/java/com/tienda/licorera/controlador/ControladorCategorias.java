@@ -36,7 +36,7 @@ public class ControladorCategorias {
         model.addAttribute("licores",listadoLicores);
         model.addAttribute("categorias",listadoCategorias);
         System.out.println(nomb_cat);
-        return "/categoria";
+        return "/usuario/categoria";
     }
 
 

@@ -179,7 +179,7 @@
   color: #ffc800;;
 }
 
-#mainNav .navbar-brand img {
+#mainNav .navbar-brand img ,#categoriaNav .navbar-brand img{
   height: 1.5rem;
 }
 #mainNav .navbar-nav .nav-item .nav-link ,#categoriaNav .navbar-nav .nav-item .nav-link {
@@ -210,17 +210,17 @@
   top: 10px;
 }
 
-#mainNav .navbar-toggler[aria-expanded="true"] {
+#mainNav .navbar-toggler[aria-expanded="true"] , #categoriaNav .navbar-toggler[aria-expanded="true"]{
   -webkit-transform: rotate(360deg);
           transform: rotate(360deg);
 }
 
-#mainNav .navbar-toggler[aria-expanded="true"] span {
+#mainNav .navbar-toggler[aria-expanded="true"] span ,#categoria.Nav .navbar-toggler[aria-expanded="true"] span  {
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
 }
 
-#mainNav .navbar-toggler[aria-expanded="true"] span::before, .custom_nav-container .navbar-toggler[aria-expanded="true"] span::after {
+#mainNav .navbar-toggler[aria-expanded="true"] span::before , #categoria.Nav .navbar-toggler[aria-expanded="true"] span::before , .custom_nav-container .navbar-toggler[aria-expanded="true"] span::after {
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
   top: 0;
@@ -234,30 +234,31 @@
     background-color: transparent;
     transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
   }
-  #mainNav .navbar-brand {
+  #mainNav .navbar-brand , #categoriaNav .navbar-brand {
     font-size: 1.5em;
     transition: font-size 0.3s ease-in-out;
   }
-  #mainNav .navbar-brand img {
+  #mainNav .navbar-brand img , #categoriaNav .navbar-brand img{
     height: 2rem;
     transition: height 0.3s ease-in-out;
   }
-  #mainNav.navbar-shrink {
+  #mainNav.navbar-shrink ,#categoriaNav.navbar-shrink{
     padding-top: 1rem;
     padding-bottom: 1rem;
     background-color: #212529;
   }
-  #mainNav.navbar-shrink .navbar-brand {
+  #mainNav.navbar-shrink .navbar-brand, #categoriaNav.navbar-shrink .navbar-brand{
     font-size: 1.25em;
   }
   #mainNav.navbar-shrink .navbar-brand svg,
-#mainNav.navbar-shrink .navbar-brand img {
+#mainNav.navbar-shrink .navbar-brand img, #categoriaNav.navbar-shrink .navbar-brand svg,
+#categoriaNav.navbar-shrink .navbar-brand img {
     height: 1.5rem;
   }
-  #mainNav .navbar-nav .nav-item {
+  #mainNav .navbar-nav .nav-item, #categoriaNav .navbar-nav .nav-item {
     margin-right: 1rem;
   }
-  #mainNav .navbar-nav .nav-item:last-child {
+  #mainNav .navbar-nav .nav-item:last-child, #categoriaNav .navbar-nav .nav-item:last-child {
     margin-right: 0;
   }
 }

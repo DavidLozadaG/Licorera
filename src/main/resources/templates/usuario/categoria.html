@@ -1,16 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 
-<head th:replace="plantilla/plantilla :: head">
+<head th:replace="index :: head">
 
 <body>
     <header>
-        <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top" id="categoriaNav">
+        <nav th:fragment="navbar" class="navbar navbar-expand-xl navbar-dark fixed-top" id="categoriaNav">
             <div class="container">
                 <a class="navbar-brand" href="/home">
                     <span>MaxLicor's</span>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
                 </button>
@@ -28,13 +29,16 @@
                             <ul class="dropdown-menu">
                                 <li th:each="cat:${categorias}">
                                     <a class="dropdown-item" th:href="@{'/categoria/'+${cat.nomb_cat}}"
-                                     th:text="${cat.nomb_cat}">
+                                        th:text="${cat.nomb_cat}">
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">Carrito</a>
+                            <a class="nav-link" href="/carrito">
+                                <i class="fas fa-shopping-cart"></i>
+                                (0)Carrito
+                            </a>
                         </li>
                     </ul>
                     <form class="d-flex ms-auto py-4 py-lg-0">
@@ -50,7 +54,7 @@
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 Usuario
                             </a>
-                            <ul th:replace="cliente/registro :: opcionesDefault"></ul>
+                            <ul th:replace="usuario/sesion :: opcionesDefault"></ul>
                         </li>
                     </ul>
                 </div>
@@ -108,34 +112,9 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="text-center">
-            <h1 th:text="${titulo}"></h1>
-        </div>
-        <div class="row">
-            <div class="col-sm-4" th:each="l:${licores}">
-                <div class="card">
-                    <div class="card-header">
-                        <label th:text="${l.nomb_licor}"></label>
-                    </div>
-                    <div class="card-body">
-                        <i th:text="${l.precio}">$</i>
-                        <img th:src="@{'/imagenes/licores/'+${l.foto}}" width="200" height="180">
-                    </div>
-                    <div class="card-footer text-center">
-                        <label th:text="${l.descripcion}"></label>
-                        <div>
-                            <a href="#" class="btn btn-outline-info">Agregar carrito</a>
-                            <a href="#" class="btn btn-danger">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div th:replace="cliente/registro :: modalRegistro"></div>
-    <div th:replace="cliente/registro :: modalInicioSesion"></div>
-    <footer th:replace="plantilla/plantilla :: footer"></footer>
+    <div th:replace="index :: listaLicores"></div>
+    <div th:replace="usuario/sesion :: modalRegistro"></div>
+    <div th:replace="usuario/sesion :: modalInicioSesion"></div>
+    <footer th:replace="index :: footer"></footer>
 </body>
-
 </html>
