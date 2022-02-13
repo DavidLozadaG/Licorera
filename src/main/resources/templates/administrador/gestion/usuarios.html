@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
-
-<head th:replace="administrador/plantillaAdmin :: head">
-</head>
-
-<body>
-  <header th:replace="administrador/plantillaAdmin :: header"></header>
+<section th:fragment="seccion">
   <div class="container">
     <h1 th:text="${titulo}"></h1>
     <!-- Boton que activa el modal para agregar usuarios -->
@@ -38,17 +31,15 @@
             <td th:text="${user.email}"></td>
             <td th:text="${user.cod_rol.nomb_rol}"></td>
             <td>
-              <a class="btn btn-danger btn-sm" 
-              th:href="@{/administrador/gestion/usuarios/eliminar/}+${user.cedula}" 
-              role="button" onclick="return confirm('Esta seguro de eliminar el registro')">
-              Eliminar</a>
+              <a class="btn btn-danger btn-sm" th:href="@{/administrador/gestion/usuarios/eliminar/}+${user.cedula}"
+                role="button" onclick="return confirm('Esta seguro de eliminar el registro')">
+                Eliminar</a>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-
   <!-- Modal para agregar usuario -->
   <div class="modal fade" id="agregarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -58,7 +49,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="row g-3 needs-validation" novalidate th:action="@{/administrador/gestion/usuarios/guardar}" th:object="${usuario}" method="post">
+          <form class="row g-3 needs-validation" novalidate th:action="@{/administrador/gestion/usuarios/guardar}"
+            th:object="${usuario}" method="post">
             <div class="form-group mb-3">
               <label>Número de cedula<font color="red">(*)</font></label>
               <input type="number" th:field="*{cedula}" class="form-control" name="cod_persona" required>
@@ -68,7 +60,7 @@
             </div>
             <div class="form-group mb-3">
               <label>Nombres<font color="red">(*)</font></label>
-              <input type="text" th:field="*{nombres}"  class="form-control" name="nombres" required>
+              <input type="text" th:field="*{nombres}" class="form-control" name="nombres" required>
               <div class="invalid-feedback">
                 Por favor ingrese los nombres
               </div>
@@ -96,7 +88,8 @@
             </div>
             <div class="form-group mb-3">
               <label>E-mail<font color="red">(*)</font></label>
-              <input type="email" th:field="*{email}" class="form-control" name="email" placeholder="example@email.com" required>
+              <input type="email" th:field="*{email}" class="form-control" name="email" placeholder="example@email.com"
+                required>
               <div class="invalid-feedback">
                 Por favor ingrese el correo electronico
               </div>
@@ -121,6 +114,4 @@
       </div>
     </div>
   </div>
-  <footer th:replace="administrador/plantillaAdmin :: footer"></footer>
-</body>
-</html>
+</section>

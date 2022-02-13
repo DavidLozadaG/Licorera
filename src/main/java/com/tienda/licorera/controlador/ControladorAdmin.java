@@ -34,9 +34,8 @@ public class ControladorAdmin {
     @GetMapping("")
     public String home(Model modelo) {
         modelo.addAttribute("cabecera", "Admin MaxLicor's");
-        modelo.addAttribute("titulo", "Administrador MaxLicors");
+        modelo.addAttribute("pagina", "administrador");
         return "/administrador/homeAdmin";
-
     }
 
     @GetMapping("/gestion/usuarios")
@@ -49,11 +48,12 @@ public class ControladorAdmin {
         modelo.addAttribute("navbar", "Admin MaxLicor's");
         modelo.addAttribute("cabecera", "Gestión Usuarios | Admin MaxLicor's");
         modelo.addAttribute("titulo", "GESTIÓN DE USUARIOS");
+        modelo.addAttribute("pagina","usuarios");
         modelo.addAttribute("roles", listadoRol);
         modelo.addAttribute("usuarios", listadoUsuario);
         modelo.addAttribute("usuario", usuario);
 
-        return "/administrador/gestion/usuarios";
+        return "administrador/homeAdmin";
     }
 
     @PostMapping("/gestion/usuarios/guardar")
