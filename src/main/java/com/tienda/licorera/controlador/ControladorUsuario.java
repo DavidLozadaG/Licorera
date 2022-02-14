@@ -55,7 +55,7 @@ public class ControladorUsuario {
         }
         usuario.setClave(encriptar(usuario.getClave()));
         usuarioServicio.guardar(usuario);
-        return "redirect:/index";
+        return "redirect:/home";
     }
 
 

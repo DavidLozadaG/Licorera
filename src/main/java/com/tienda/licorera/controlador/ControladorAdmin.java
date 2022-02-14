@@ -35,7 +35,7 @@ public class ControladorAdmin {
     public String home(Model modelo) {
         modelo.addAttribute("cabecera", "Admin MaxLicor's");
         modelo.addAttribute("pagina", "administrador");
-        return "/administrador/homeAdmin";
+        return "/administrador/indexAdmin";
     }
 
     @GetMapping("/gestion/usuarios")
@@ -53,7 +53,7 @@ public class ControladorAdmin {
         modelo.addAttribute("usuarios", listadoUsuario);
         modelo.addAttribute("usuario", usuario);
 
-        return "administrador/homeAdmin";
+        return "administrador/indexAdmin";
     }
 
     @PostMapping("/gestion/usuarios/guardar")

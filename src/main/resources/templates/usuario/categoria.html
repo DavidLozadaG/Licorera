@@ -1,7 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-
 <head th:replace="index :: head">
-
 <body>
     <header>
         <nav th:fragment="navbar" class="navbar navbar-expand-xl navbar-dark fixed-top" id="categoriaNav">
@@ -111,7 +109,6 @@
             </button>
         </div>
     </div>
-
     <div th:replace="index :: listaLicores"></div>
     <div th:replace="usuario/sesion :: modalRegistro"></div>
     <div th:replace="usuario/sesion :: modalInicioSesion"></div>
