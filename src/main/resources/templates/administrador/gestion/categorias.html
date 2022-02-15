@@ -1,0 +1,61 @@
+<section th:fragment="seccion">
+    <div class="container">
+      <h1 th:text="${titulo}"></h1>
+      <!-- Boton que activa el modal para agregar categorias -->
+      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#agregarCategoria">
+        Agregar Categoria
+      </button>
+      <div class="table-responsive">
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Codigo</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="categoria:${categorias}">
+              <th scope="row" th:text="${categoria.cod_cat}"></th>
+              <td th:text="${categoria.nomb_cat}"></td>
+              <td>
+                <a class="btn btn btn-warning btn-sm" th:href="@{/administrador/gestion/categorias/eliminar/}+${categoria.cod_cat}"
+                role="button" onclick="return confirm('Esta seguro de eliminar el registro')">
+                <i class="fas fa-edit"></i></a>
+                <a class="btn btn-danger btn-sm" th:href="@{/administrador/gestion/categorias/eliminar/}+${categoria.cod_cat}"
+                  role="button" onclick="return confirm('Esta seguro de eliminar el registro')">
+                <i class="fas fa-trash"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Modal para agregar categoria -->
+    <div class="modal fade" id="agregarCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ingresar Categoria</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="row g-3 needs-validation" novalidate th:action="@{/administrador/gestion/categorias/guardar}"
+              th:object="${categoria}" method="post">
+              <div class="form-group mb-3">
+                <label>Categoria<font color="red">(*)</font></label>
+                <input type="text" th:field="*{nomb_cat}" class="form-control" name="nomb_cat" required>
+                <div class="invalid-feedback">
+                  Por favor ingrese la categoria
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Agregar">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

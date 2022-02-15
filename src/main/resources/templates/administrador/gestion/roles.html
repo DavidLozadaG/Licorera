@@ -1,0 +1,61 @@
+<section th:fragment="seccion">
+    <div class="container">
+      <h1 th:text="${titulo}"></h1>
+      <!-- Boton que activa el modal para agregar roles -->
+      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#agregarRol">
+        Agregar Rol
+      </button>
+      <div class="table-responsive">
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Codigo</th>
+              <th scope="col">Rol</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="rol:${roles}">
+              <th scope="row" th:text="${rol.cod_rol}"></th>
+              <td th:text="${rol.nomb_rol}"></td>
+              <td>
+                <a class="btn btn btn-warning btn-sm" th:href="@{/administrador/gestion/roles/eliminar/}+${rol.cod_rol}"
+                role="button" onclick="return confirm('Esta seguro de eliminar el registro')">
+                <i class="fas fa-edit"></i></a>
+                <a class="btn btn-danger btn-sm" th:href="@{/administrador/gestion/roles/eliminar/}+${rol.cod_rol}"
+                  role="button" onclick="return confirm('Esta seguro de eliminar el registro')">
+                <i class="fas fa-trash"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Modal para agregar rol -->
+    <div class="modal fade" id="agregarRol" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ingresar Rol</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="row g-3 needs-validation" novalidate th:action="@{/administrador/gestion/roles/guardar}"
+              th:object="${rol}" method="post">
+              <div class="form-group mb-3">
+                <label>Rol<font color="red">(*)</font></label>
+                <input type="text" th:field="*{nomb_rol}" class="form-control" name="nomb_rol" required>
+                <div class="invalid-feedback">
+                  Por favor ingrese el rol
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Agregar">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

@@ -46,7 +46,7 @@ i {
     color: #fff;
     background: transparent;
     outline: none;
-    margin: 0 20px;
+    margin: 0 5px;
 }
 
 #sidebarCollapse:hover {
@@ -152,10 +152,10 @@ a[data-toggle="collapse"] {
 
 @media (max-width:400px) {
     #sidebar {
-        margin-top: -20px;
+        margin-top: 70px;
     }
 
     #logo {
-        display: none;
+        font-size: calc(1em + 2.1vw);
     }
 }

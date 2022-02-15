@@ -15,7 +15,7 @@ INSERT INTO usuarios values('1226857029','ANDREA CAMILA','FIGUEROA PEREZ','1998-
 
 #empresas
 INSERT INTO empresas values('DA48756Q9886','BAVARIA','CL 19 A 34-474 DC.BGTA','0180010');
-INSERT INTO empresas values('DS48/WDA4566','LICO AS','CL 45 A 34-474 DC.BGTA','1796002');
+INSERT INTO empresas values('DS486WDA4566','LICO AS','CL 45 A 34-474 DC.BGTA','1796002');
 
 #categorias
 INSERT INTO categorias values(NULL,'AGUARDIENTE');
@@ -44,10 +44,10 @@ INSERT INTO proveedores values(2,'DA48756Q9886');
 INSERT INTO proveedores values(3,'DA48756Q9886');
 INSERT INTO proveedores values(4,'DA48756Q9886');
 INSERT INTO proveedores values(5,'DA48756Q9886');
-INSERT INTO proveedores values(6,'DS48/WDA4566');
-INSERT INTO proveedores values(7,'DS48/WDA4566');
-INSERT INTO proveedores values(8,'DS48/WDA4566');
-INSERT INTO proveedores values(9,'DS48/WDA4566');
+INSERT INTO proveedores values(6,'DS486WDA4566');
+INSERT INTO proveedores values(7,'DS486WDA4566');
+INSERT INTO proveedores values(8,'DS486WDA4566');
+INSERT INTO proveedores values(9,'DS486WDA4566');
 
 #metodo de pago
 INSERT INTO metodos_pagos VALUES(NULL,'CONTRA-ENTREGA');
@@ -77,3 +77,4 @@ INSERT INTO detalles VALUES(4,7,3);
 INSERT INTO detalles VALUES(4,2,4);
 INSERT INTO detalles VALUES(5,7,5);
 INSERT INTO detalles VALUES(5,1,10);
+

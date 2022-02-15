@@ -22,6 +22,8 @@ public class ControladorLicor {
     @Autowired
     private ICategoriaServicio categoriaServicio;
 
+
+    //METODO PARA LISTAR LOS LICORES EN EL HOME
     @GetMapping({"/licorera","/","/home","/index"})
     public String listarLicores(Model model,Usuario usuario){
         model.addAttribute("usuario", usuario);
