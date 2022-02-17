@@ -61,6 +61,6 @@ public class ControladorProveedor {
         proveedorServicio.eliminarPro(proveedorId);
         return "redirect:/administrador/gestion/proveedores";
     }
-    //FINAL GESTION DE ROLES
+    //FINAL GESTION DE PROVEEDORES
 }
 

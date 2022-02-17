@@ -65,10 +65,10 @@
               Usuarios</a>
           </li>
           <li>
-            <a  th:href="@{/administrador/gestion/categorias}" class="d-block p-3"><i class="fas fa-box fa-lg"></i> Categorias</a>
+            <a th:href="@{/administrador/gestion/categorias}" class="d-block p-3"><i class="fas fa-box fa-lg"></i> Categorias</a>
           </li>
           <li>
-            <a href="#" class="d-block p-3"><i class="fas fa-beer fa-lg"></i> Licores</a>
+            <a th:href="@{/administrador/gestion/licores}"  class="d-block p-3"><i class="fas fa-beer fa-lg"></i> Licores</a>
           </li>
           <li>
             <a th:href="@{/administrador/gestion/empresas}" class="d-block p-3"><i class="fas fa-building fa-lg"></i> Empresas</a>
@@ -77,7 +77,7 @@
             <a th:href="@{/administrador/gestion/proveedores}" class="d-block p-3"><i class="fas fa-truck fa-lg"></i> Proveedores</a>
           </li>
           <li>
-            <a href="#" class="d-block p-3"><i class="fas fa-wallet fa-lg"></i> Metodos de pagos</a>
+            <a th:href="@{/administrador/gestion/metodospg}"  class="d-block p-3"><i class="fas fa-wallet fa-lg"></i> Metodos de pagos</a>
           </li>
           <li>
             <a href="#" class="d-block p-3"><i class="fas fa-clipboard-list fa-lg"></i> Estados de pedidos</a>
@@ -152,12 +152,20 @@
           <section th:replace="administrador/gestion/categorias :: seccion">
           </section>
         </div>
+        <div th:if="${pagina == 'licores'}" id="content">
+          <section th:replace="administrador/gestion/licores :: seccion">
+          </section>
+        </div>
         <div th:if="${pagina == 'empresas'}" id="content">
           <section th:replace="administrador/gestion/empresas :: seccion">
           </section>
         </div>
         <div th:if="${pagina == 'proveedores'}" id="content">
           <section th:replace="administrador/gestion/proveedores :: seccion">
+          </section>
+        </div>
+        <div th:if="${pagina == 'metodospg'}" id="content">
+          <section th:replace="administrador/gestion/metodospg :: seccion">
           </section>
         </div>
         <!-- FIN CONTENIDO-->

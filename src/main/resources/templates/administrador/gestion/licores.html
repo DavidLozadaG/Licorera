@@ -1,0 +1,119 @@
+<section th:fragment="seccion">
+    <div class="container">
+      <h1 th:text="${titulo}"></h1>
+      <!-- Boton que activa el modal para agregar licores -->
+      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#agregarLicor">
+        Agregar Licor
+      </button>
+      <div class="table-responsive">
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Codigo</th>
+              <th scope="col">Licor</th>
+              <th scope="col">Foto</th>
+              <th scope="col">%Alcohol</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="licor:${licores}">
+              <th scope="row" th:text="${licor.cod_licor}"></th>
+              <td th:text="${licor.nomb_licor}"></td>
+              <td th:text="${licor.foto}"></td>
+              <td th:text="${licor.grado_alcoh}"></td>
+              <td th:text="${licor.descripcion}"></td>
+              <td th:text="${licor.cantidad}"></td>
+              <td th:text="${licor.precio}"></td>
+              <td th:text="${licor.cod_cat.nomb_cat}"></td>
+              <td>
+                <a class="btn btn btn-warning btn-sm" th:href="@{/administrador/gestion/licores/eliminar/}+${licor.cod_licor}"
+                role="button" onclick="return confirm('Esta seguro de eliminar el registro')">
+                <i class="fas fa-edit"></i></a>
+                <a class="btn btn-danger btn-sm" th:href="@{/administrador/gestion/licores/eliminar/}+${licor.cod_licor}"
+                  role="button" onclick="return confirm('Esta seguro de eliminar el registro')">
+                <i class="fas fa-trash"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Modal para agregar licor -->
+    <div class="modal fade" id="agregarLicor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ingresar Licor</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="row g-3 needs-validation" novalidate th:action="@{/administrador/gestion/licores/guardar}"
+              th:object="${licor}" method="post">
+              <div class="form-group mb-3">
+                <label>Nombre del licor<font color="red">(*)</font></label>
+                <input type="text" th:field="*{nomb_licor}" class="form-control" name="nomb_licor" required>
+                <div class="invalid-feedback">
+                  Por favor ingrese el nombre del licor
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label>FOTO<font color="red">(*)</font></label>
+                <input type="text" th:field="*{foto}" class="form-control" name="foto" required>
+                <div class="invalid-feedback">
+                  Por favor ingrese la foto
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label>Grado de Alcohol<font color="red">(*)</font></label>
+                <input type="number" th:field="*{grado_alcoh}" class="form-control" name="grado_alcoh" required>
+                <div class="invalid-feedback">
+                  Por favor ingrese el nombre del licor
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label>Descripcion<font color="red">(*)</font></label>
+                <input type="text" th:field="*{descripcion}" class="form-control" name="descripcion" required>
+                <div class="invalid-feedback">
+                  Por favor ingrese la descripcion del licor
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label>Cantidad<font color="red">(*)</font></label>
+                <input type="number" th:field="*{cantidad}" class="form-control" name="cantidad" required>
+                <div class="invalid-feedback">
+                  Por favor ingrese la cantidad
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label>Precio<font color="red">(*)</font></label>
+                <input type="text" th:field="*{precio}" class="form-control" name="precio" required>
+                <div class="invalid-feedback">
+                  Por favor ingrese el precio del licor
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label>Categoria<font color="red">(*)</font></label>
+                <select th:field="*{cod_cat}" class="form-control" id="cbx_roles" name="cod_cat" required>
+                  <option value="">Seleccionar opccion</option>
+                  <option th:each="categoria:${categorias}" th:value="${categoria.cod_cat}" th:text="${categoria.nomb_cat}">
+                  </option>
+                </select>
+                <div class="invalid-feedback">
+                  Por favor seleccione la categoria del licor
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Agregar">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

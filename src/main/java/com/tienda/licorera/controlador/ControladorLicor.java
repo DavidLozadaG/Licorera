@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ControladorLicor {
@@ -35,6 +38,37 @@ public class ControladorLicor {
         model.addAttribute("licores",listadoLicores);
         return "index";
     }
+
+
+    //INICIO GESTION DE LICORES
+    @GetMapping("/administrador/gestion/licores")
+    public String gestionLicores(Model modelo, Licor licor) {
+        List<Licor> listadoLicor = licorServicio.listarTodos();
+        List<Categoria> listadoCategoria = categoriaServicio.listarTodas();
+        modelo.addAttribute("navbar", "Admin MaxLicor's");
+        modelo.addAttribute("cabecera", "Gestión Licores | Admin MaxLicor's");
+        modelo.addAttribute("titulo", "GESTIÓN DE LICORES");
+        modelo.addAttribute("pagina", "licores");
+        modelo.addAttribute("categorias", listadoCategoria);
+        modelo.addAttribute("licores", listadoLicor);
+        modelo.addAttribute("licor", licor);
+
+        return "administrador/indexAdmin";
+    }
+
+    @PostMapping("/administrador/gestion/licores/guardar")
+    public String guardarLicor(@ModelAttribute Licor licor) {
+        licorServicio.guardarLicor(licor);
+        return "redirect:/administrador/gestion/licores";
+    }
+
+    @GetMapping("/administrador/gestion/licores/eliminar/{cod_licor}")
+    public String eliminarLicor(@PathVariable("cod_licor") int cod_licor) {
+        licorServicio.eliminarLicor(cod_licor);
+        return "redirect:/administrador/gestion/licores";
+    }
+    //FINAL GESTION DE LICORES
+
 
 
 }
