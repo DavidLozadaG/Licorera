@@ -1,7 +1,7 @@
 #roles
 INSERT INTO roles (nomb_rol) values('ADMINISTRADOR');
 INSERT INTO roles (nomb_rol) values('CLIENTE');
-INSERT INTO roles (nomb_rol) values('REPARTIDOR');
+
 
 #estados_pedidos
 INSERT INTO estados_pedido (nomb_estado) values('PENDIENTE');
