@@ -14,7 +14,7 @@ target/
 .sts4-cache
 
 ##credenciales BD
-src/main/resources/application.properties
+#src/main/resources/application.properties
 
 ### IntelliJ IDEA ###
 .idea
