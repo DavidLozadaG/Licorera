@@ -12,7 +12,7 @@ public class ControladorAdmin {
     public String home(Model modelo) {
         modelo.addAttribute("cabecera", "Admin MaxLicor's");
         modelo.addAttribute("pagina", "administrador");
-        return "/administrador/indexAdmin";
+        return "administrador/indexAdmin";
     }
 
 }

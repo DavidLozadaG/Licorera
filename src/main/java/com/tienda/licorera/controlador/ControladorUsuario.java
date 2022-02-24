@@ -138,7 +138,7 @@ public class ControladorUsuario {
         model.addAttribute("titulo","Carrito");
         List<Categoria>listadoCategorias=categoriaServicio.listarTodas();
         model.addAttribute("categorias",listadoCategorias);
-        return "/usuario/carrito";
+        return "usuario/carrito";
     }
     
     //Metodo para encripar la contraseña del usuario con el metodo SHA-256
