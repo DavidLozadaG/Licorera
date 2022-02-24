@@ -1,6 +1,6 @@
-DROP DATABASE licorera;
-CREATE DATABASE licorera;
-USE licorera;
+#DROP DATABASE licorera;
+#CREATE DATABASE licorera;
+#USE licorera;
 CREATE TABLE IF NOT EXISTS roles(
     cod_rol INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nomb_rol VARCHAR(45) NOT NULL UNIQUE
@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS usuarios(
     fecha_nac DATE NOT NULL,
     edad INT,
     telefono VARCHAR(10) NOT NULL,
-    email VARCHAR(256) NOT NULL UNIQUE,
-    clave VARCHAR(256) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    clave VARCHAR(255) NOT NULL,
     cod_rol INT NOT NULL,
 	CHECK(fecha_nac < SYSDATE()),
     CHECK(edad>=18),
