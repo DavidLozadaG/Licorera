@@ -3,7 +3,7 @@
       Iniciar Sesión</a>
   </li>
   <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#registro">
-      Crear Cuenta</a>
+      Registrarse</a>
   </li>
   <li>
     <hr class="dropdown-divider">
@@ -17,7 +17,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabe2">Crear Cuenta</h5>
+          <h5 class="modal-title" id="exampleModalLabe2">Registrarse</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -68,6 +68,18 @@
               <p class="form-control-error">Ingrese una fecha valida, recuerde que debe ser mayor de edad.
               </p>
             </div>
+               <!---GRUPO: email-->
+               <div class="form-group mb-3" id="grupo__email">
+                <label class="formulario__label">E-mail<font color="red">(*)</font></label>
+                <div class="formulario__grupo-input">
+                  <input type="email" th:field="*{email}" class="form-control" name="email"
+                    placeholder="example@email.com">
+                  <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                  <div class="alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
+                </div>
+                <p class="form-control-error">Ingrese un email valido(maximo 256 caracteres).
+                </p>
+              </div>
             <!---GRUPO: telefono-->
             <div class="form-group mb-3" id="grupo__telefono">
               <label class="formulario__label">Teléfono<font color="red">(*)</font></label>
@@ -76,22 +88,8 @@
                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 <div class="alert-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">Name Error
                 </div>
-
               </div>
               <p class="form-control-error">El telefono debe contener 10 digitos, no se aceptan letras ni simbolos.
-              </p>
-            </div>
-            <!---GRUPO: email-->
-            <div class="form-group mb-3" id="grupo__email">
-              <label class="formulario__label">E-mail<font color="red">(*)</font></label>
-              <div class="formulario__grupo-input">
-                <input type="email" th:field="*{email}" class="form-control" name="email"
-                  placeholder="example@email.com">
-                <i class="formulario__validacion-estado fas fa-times-circle"></i>
-                <div class="alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
-
-              </div>
-              <p class="form-control-error">Ingrese un email valido(maximo 256 caracteres).
               </p>
             </div>
             <!---GRUPO: clave-->
@@ -129,7 +127,7 @@
                 correctamente. </p>
             </div>
             <div class="form-group mb-3 form-group-btn-enviar">
-              <button type="submit" class="formulario__btn">Enviar</button>
+              <button type="submit" class="formulario__btn">Registrarse</button>
               <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>
             </div>
           </form>
