@@ -10,8 +10,8 @@ INSERT INTO estados_pedido (nomb_estado) values('ENTREGADO');
 INSERT INTO estados_pedido (nomb_estado) values('CANCELADO');
 
 --personas
-INSERT INTO usuarios values('1566856457','EDGAR DAVID','LOZADA GONZALEZ','2000-07-24',NULL,'3228190672','edgarlozada663@gmail.com','564546465',1);
-INSERT INTO usuarios values('1226857029','ANDREA CAMILA','FIGUEROA PEREZ','1998-10-13',NULL,'3108560531','andrea@gmail.com','54665456',2);
+INSERT INTO usuarios values('1566856457','EDGAR DAVID','LOZADA GONZALEZ','2000-07-24',NULL,'3228190672','edgarlozada663@gmail.com','CL 19 A SUR # 38-29','564546465',1);
+INSERT INTO usuarios values('1226857029','ANDREA CAMILA','FIGUEROA PEREZ','1998-10-13',NULL,'3108560531','andrea@gmail.com','CL 17 B SUR # 18-49','54665456',2);
 
 --empresas
 INSERT INTO empresas values('DA48756Q9886','BAVARIA','CL 19 A 34-474 DC.BGTA','0180010');
@@ -54,11 +54,11 @@ INSERT INTO metodos_pagos (nomb_metodo) VALUES('CONTRA-ENTREGA');
 INSERT INTO metodos_pagos (nomb_metodo) VALUES('TRANSFERENCIA BANCARIA');
 
 --pedidos
-INSERT INTO pedidos (fecha_pedido,cedula,cod_metodo,direccion_envio,cod_estado,observacion) VALUES('2021-06-12 08:10:50','1566856457',1,'CL 19 A SUR # 38-29',1,NULL);
-INSERT INTO pedidos (fecha_pedido,cedula,cod_metodo,direccion_envio,cod_estado,observacion) VALUES('2021-08-13 09:11:51','1566856457',2,'CL 17 B SUR # 18-49',2,NULL);
-INSERT INTO pedidos (fecha_pedido,cedula,cod_metodo,direccion_envio,cod_estado,observacion) VALUES('2021-08-13 10:12:52','1226857029',1,'CL 24 C NOR # 01-12',3,NULL);
-INSERT INTO pedidos (fecha_pedido,cedula,cod_metodo,direccion_envio,cod_estado,observacion) VALUES('2021-08-14 11:13:53','1226857029',2,'CL 65 U NOR # 35-02',4,'EL CLIENTE NO REALIZO EL PAGO');
-INSERT INTO pedidos (fecha_pedido,cedula,cod_metodo,direccion_envio,cod_estado,observacion) VALUES('2022-02-22 12:14:54','1226857029',1,'CL 86 U SUE # 25-36',2,NULL);
+INSERT INTO pedidos (fecha_pedido,cedula,cod_metodo,cod_estado,observacion) VALUES('2021-06-12 08:10:50','1566856457',1,1,NULL);
+INSERT INTO pedidos (fecha_pedido,cedula,cod_metodo,cod_estado,observacion) VALUES('2021-08-13 09:11:51','1566856457',2,2,NULL);
+INSERT INTO pedidos (fecha_pedido,cedula,cod_metodo,cod_estado,observacion) VALUES('2021-08-13 10:12:52','1226857029',1,3,NULL);
+INSERT INTO pedidos (fecha_pedido,cedula,cod_metodo,cod_estado,observacion) VALUES('2021-08-14 11:13:53','1226857029',2,4,'EL CLIENTE NO REALIZO EL PAGO');
+INSERT INTO pedidos (fecha_pedido,cedula,cod_metodo,cod_estado,observacion) VALUES('2022-02-22 12:14:54','1226857029',1,2,NULL);
 
 --detalles
 INSERT INTO detalles VALUES(1,3,4);

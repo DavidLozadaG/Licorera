@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
     edad INT,
     telefono VARCHAR(10) NOT NULL,
     email VARCHAR(256) NOT NULL UNIQUE,
+	direccion VARCHAR(45) NOT NULL,
     clave VARCHAR(256) NOT NULL,
     cod_rol INT NOT NULL,
 	CHECK(fecha_nac < CURRENT_DATE),
@@ -72,7 +73,6 @@ CREATE TABLE IF NOT EXISTS pedidos(
     fecha_pedido TIMESTAMP NOT NULL,
     cedula VARCHAR(20) NOT NULL,
     cod_metodo INT NOT NULL,
-	direccion_envio VARCHAR(45) NOT NULL,
     cod_estado INT NOT NULL,
     observacion VARCHAR(45),
     CONSTRAINT fk_cedula FOREIGN KEY (cedula) REFERENCES usuarios(cedula) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -147,10 +147,11 @@ CREATE TRIGGER insertar_observacion_pedido_trigger BEFORE INSERT ON pedidos FOR 
 CREATE OR REPLACE FUNCTION insertar_datos_historial() RETURNS TRIGGER AS $$
 DECLARE
 nombre_completo VARCHAR(95) := (SELECT concat_ws(' ',nombres,apellidos) FROM usuarios WHERE cedula = NEW.cedula);
+direccion_envio VARCHAR(45) :=(SELECT direccion FROM usuarios WHERE cedula = NEW.cedula);
 metodo VARCHAR(45) := (SELECT nomb_metodo FROM metodos_pagos WHERE cod_metodo = NEW.cod_metodo);
 estado_entrega VARCHAR(45) := (SELECT nomb_estado FROM estados_pedido WHERE cod_estado = NEW.cod_estado);
 BEGIN
-	INSERT INTO historial_facturas VALUES(NEW.cod_pedido, NEW.fecha_pedido, NEW.cedula, nombre_completo, NEW.direccion_envio, NULL, NULL, metodo, estado_entrega,NEW.observacion);
+	INSERT INTO historial_facturas VALUES(NEW.cod_pedido, NEW.fecha_pedido, NEW.cedula, nombre_completo, direccion_envio, NULL, NULL, metodo, estado_entrega,NEW.observacion);
 RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;
