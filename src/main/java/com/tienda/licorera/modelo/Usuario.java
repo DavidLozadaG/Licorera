@@ -51,6 +51,10 @@ public class Usuario implements Serializable{
     private String email;
 
     @NotBlank
+    @Size(max=45)
+    private String direccion;
+
+    @NotBlank
     @Size(min=8,max=256)
     private String clave;
 
@@ -67,8 +71,11 @@ public class Usuario implements Serializable{
     public Usuario() {
     }
 
-    public Usuario(String cedula, String nombres, String apellidos, LocalDate fecha_nac, int edad, String telefono,
-            String email, String clave, String confirmarClave,Rol cod_rol) {
+    public Usuario(@NotBlank @Size(min = 4, max = 20) String cedula, @NotBlank @Size(min = 2, max = 45) String nombres,
+            @NotBlank @Size(min = 2, max = 45) String apellidos, LocalDate fecha_nac, int edad,
+            @NotBlank @Size(min = 10, max = 10) String telefono, @NotBlank @Email @Size(max = 256) String email,
+            @NotBlank @Size(max = 45) String direccion, @NotBlank @Size(min = 8, max = 256) String clave,
+            @Size(min = 8, max = 256) String confirmarClave, Rol cod_rol) {
         super();
         this.cedula = cedula;
         this.nombres = nombres;
@@ -77,9 +84,19 @@ public class Usuario implements Serializable{
         this.edad = edad;
         this.telefono = telefono;
         this.email = email;
+        this.direccion = direccion;
         this.clave = clave;
         this.confirmarClave = confirmarClave;
         this.cod_rol = cod_rol;
+    }
+
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getCedula() {

@@ -51,8 +51,8 @@ public class ControladorUsuario {
         List<Rol> listadoRol = rolServicio.ListarTodos();
 
         modelo.addAttribute("navbar", "Admin MaxLicor's");
-        modelo.addAttribute("cabecera", "Gestión Usuarios | Admin MaxLicor's");
-        modelo.addAttribute("titulo", "GESTIÓN DE USUARIOS");
+        modelo.addAttribute("cabecera", "Lista Usuarios | Admin MaxLicor's");
+        modelo.addAttribute("titulo", "LISTA DE USUARIOS");
         modelo.addAttribute("pagina", "usuarios");
         modelo.addAttribute("roles", listadoRol);
         modelo.addAttribute("usuarios", listadoUsuario);
@@ -127,8 +127,21 @@ public class ControladorUsuario {
         }
         usuario.setClave(encriptar(usuario.getClave()));
         usuarioServicio.guardar(usuario);
-        return "redirect:/home";
+        return "redirect:/cliente/registro/realizado";
     }
+
+    @GetMapping("/cliente/registro/realizado")
+    public String registroRealizo(Usuario usuario, Model model) {
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("cabecera","Licores Disponibles | MaxLicor's");
+        model.addAttribute("titulo","LICORES DISPONIBLES");
+        List<Categoria>listadoCategorias=categoriaServicio.listarTodas();
+        List<Licor>listadoLicores=licorServicio.listarTodos();
+        model.addAttribute("categorias",listadoCategorias);
+        model.addAttribute("licores",listadoLicores);
+        return "index";
+    }
+
 
 
     @GetMapping("/carrito")

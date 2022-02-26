@@ -68,18 +68,30 @@
               <p class="form-control-error">Ingrese una fecha valida, recuerde que debe ser mayor de edad.
               </p>
             </div>
-               <!---GRUPO: email-->
-               <div class="form-group mb-3" id="grupo__email">
-                <label class="formulario__label">E-mail<font color="red">(*)</font></label>
-                <div class="formulario__grupo-input">
-                  <input type="email" th:field="*{email}" class="form-control" name="email"
-                    placeholder="example@email.com">
-                  <i class="formulario__validacion-estado fas fa-times-circle"></i>
-                  <div class="alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
-                </div>
-                <p class="form-control-error">Ingrese un email valido(maximo 256 caracteres).
-                </p>
+            <!---GRUPO: email-->
+            <div class="form-group mb-3" id="grupo__email">
+              <label class="formulario__label">E-mail<font color="red">(*)</font></label>
+              <div class="formulario__grupo-input">
+                <input type="email" th:field="*{email}" class="form-control" name="email"
+                  placeholder="example@email.com">
+                <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                <div class="alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
               </div>
+              <p class="form-control-error">Ingrese un email valido(maximo 64 caracteres).
+              </p>
+            </div>
+            <!---GRUPO: direccion-->
+            <div class="formulario__grupo mb-3" id="grupo__direccion">
+              <label class="formulario__label">Direccion<font color="red">(*)</font></label>
+              <div class="formulario__grupo-input">
+                <input type="text" th:field="*{direccion}" class="form-control" name="direccion">
+                <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                <div class="alert-danger" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}">Name Error
+                </div>
+              </div>
+              <p class="form-control-error">Maximo 45 caracteres-simbolos permitidos(#+_:-)
+              </p>
+            </div>
             <!---GRUPO: telefono-->
             <div class="form-group mb-3" id="grupo__telefono">
               <label class="formulario__label">Teléfono<font color="red">(*)</font></label>
@@ -110,26 +122,27 @@
               <div class="formulario__grupo-input">
                 <input type="password" id="confirmarClave" class="form-control" name="confirmarClave">
                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
-                <div class="alert-danger" th:if="${#fields.hasErrors('confirmarClave')}" th:errors="*{confirmarClave}">Name Error
+                <div class="alert-danger" th:if="${#fields.hasErrors('confirmarClave')}" th:errors="*{confirmarClave}">
+                  Name Error
+                </div>
+                <p class="form-control-error">Las contraseñas no coinciden
+                </p>
               </div>
-              <p class="form-control-error">Las contraseñas no coinciden
-              </p>
-            </div>
-            <!-- Grupo: Terminos y Condiciones -->
-            <div class="form-group mb-3" id="grupo__terminos">
-              <label class="formulario__label">
-                <input class="formulario__checkbox" type="checkbox" name="terminos" id="terminos">
-                <a href="#">Acepto los Terminos y Condiciones</a>
-              </label>
-            </div>
-            <div class="formulario__mensaje" id="formulario__mensaje">
-              <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor rellena el formulario
-                correctamente. </p>
-            </div>
-            <div class="form-group mb-3 form-group-btn-enviar">
-              <button type="submit" class="formulario__btn">Registrarse</button>
-              <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>
-            </div>
+              <!-- Grupo: Terminos y Condiciones -->
+              <div class="form-group mb-3" id="grupo__terminos">
+                <label class="formulario__label">
+                  <input class="formulario__checkbox" type="checkbox" name="terminos" id="terminos">
+                  <a href="#">Acepto los Terminos y Condiciones</a>
+                </label>
+              </div>
+              <div class="formulario__mensaje" id="formulario__mensaje">
+                <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor rellena el formulario
+                  correctamente. </p>
+              </div>
+              <div class="form-group mb-3 form-group-btn-enviar">
+                <button type="submit" class="formulario__btn">Registrarse</button>
+                <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>
+              </div>
           </form>
         </div>
         <div class="modal-footer">
@@ -166,13 +179,14 @@
               </div>
             </div>
             <div class="form-group mb-3 form-group-btn-enviar">
-            <button type="submit" class="btn btn-primary">Ingresar</button>
-            <a href="#">¿Olvido su contraseña?</a>
-          </div>
+              <button type="submit" class="btn btn-primary">Ingresar</button>
+              <a href="#">¿Olvido su contraseña?</a>
+            </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registro">Registrate</button>
+          <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+            data-bs-target="#registro">Registrate</button>
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
         </div>
       </div>
@@ -180,3 +194,28 @@
   </div>
 </div>
 
+<!-- Modal confirmacion registro-->
+<div th:fragment="modalConfirmacion">
+  <div class="modal fade" id="confirmacion" tabindex=" -1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Registro realizado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <h1>Gracias por preferirnos!</h1>
+            <h2>Tu registro se ha realizado correctamente</h2>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inicioSesion">Iniciar
+              Sesion</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

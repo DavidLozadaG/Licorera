@@ -3,12 +3,12 @@ const inputs = document.querySelectorAll('#formularioRegistro input');
 
 const expresiones = {
     cedula: /^\d{5,20}$/, // 5 a 20 numeros.
-    nombres: /^[a-zA-ZÀ-ÿ\s]{2,40}$/, // Letras y espacios, pueden llevar acentos.
-    apellidos: /^[a-zA-ZÀ-ÿ\s]{2,40}$/, // Letras y espacios, pueden llevar acentos.
-    telefono: /^\d{10}$/, // 7 a 14 numeros.
-    email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-    clave: /^.{8,20}$/, // 4 a 12 digitos.
-
+    nombres: /^[a-zA-ZÀ-ÿ\s]{2,45}$/, // de 4-45 Letras y espacios, pueden llevar acentos.
+    apellidos: /^[a-zA-ZÀ-ÿ\s]{2,45}$/, // de 4-45 Letras y espacios, pueden llevar acentos.
+    telefono: /^\d{10}$/, // 10 numeros.
+    direccion: /^[a-zA-ZÀ-ÿ0-9\s#+_:-]{2,45}$/,
+    email: /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,64}$/i,
+    clave: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&"#/()='¡¿~{}+,_;.:<>-])([A-Za-z\d$@$!%*?&"#/()='¡¿~{}+,_;.:<>-]|[^ ]){8,20}$/ // 8 a 20 digitos.
 }
 
 const campos = {
@@ -17,6 +17,7 @@ const campos = {
     apellidos: false,
     fecha_nac: false,
     telefono: false,
+    direccion: false,
     email: false,
     clave: false,
 }
@@ -38,6 +39,9 @@ const validarFormularioRegistro = (e) => {
         case "telefono":
             validarCampo(expresiones.telefono, e.target, 'telefono');
             break;
+        case "direccion":
+            validarCampo(expresiones.direccion, e.target, 'direccion');
+        break;
         case "email":
             validarCampo(expresiones.email, e.target, 'email');
             break;
@@ -137,7 +141,7 @@ formularioRegistro.addEventListener('submit', (e) => {
 
     const terminos = document.getElementById('terminos');
 
-    if (campos.cedula && campos.nombres && campos.apellidos && campos.fecha_nac && campos.telefono && campos.email && campos.clave && terminos.checked) {
+    if (campos.cedula && campos.nombres && campos.apellidos && campos.fecha_nac && campos.telefono && campos.direccion && campos.email && campos.clave && terminos.checked) {
         formularioRegistro.submit();
         formularioRegistro.reset();
         document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
