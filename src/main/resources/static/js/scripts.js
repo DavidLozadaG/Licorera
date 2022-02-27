@@ -55,5 +55,5 @@ $(document).ready(function () {
     else if (window.location.pathname == '/cliente/registro/realizado') {
         $('#confirmacion').modal("show");
     }
-    
+
 });
