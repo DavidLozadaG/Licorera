@@ -139,9 +139,7 @@ inputs.forEach((input) => {
 formularioRegistro.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const terminos = document.getElementById('terminos');
-
-    if (campos.cedula && campos.nombres && campos.apellidos && campos.fecha_nac && campos.telefono && campos.direccion && campos.email && campos.clave && terminos.checked) {
+    if (campos.cedula && campos.nombres && campos.apellidos && campos.fecha_nac && campos.telefono && campos.direccion && campos.email && campos.clave) {
         formularioRegistro.submit();
         formularioRegistro.reset();
         document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
