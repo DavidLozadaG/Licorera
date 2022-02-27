@@ -7,13 +7,13 @@ CREATE TABLE IF NOT EXISTS roles(
 );
 
 CREATE TABLE IF NOT EXISTS usuarios(
-    cedula VARCHAR(20) NOT NULL PRIMARY KEY,
+    cedula VARCHAR(10) NOT NULL PRIMARY KEY,
     nombres VARCHAR(45) NOT NULL,
     apellidos VARCHAR(45) NOT NULL,
     fecha_nac DATE NOT NULL,
     edad INT,
     telefono VARCHAR(10) NOT NULL,
-    email VARCHAR(256) NOT NULL UNIQUE,
+    email VARCHAR(45) NOT NULL UNIQUE,
 	direccion VARCHAR(45) NOT NULL,
     clave VARCHAR(256) NOT NULL,
     cod_rol INT NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS estados_pedido(
 CREATE TABLE IF NOT EXISTS pedidos(
     cod_pedido SERIAL NOT NULL PRIMARY KEY,
     fecha_pedido TIMESTAMP NOT NULL,
-    cedula VARCHAR(20) NOT NULL,
+    cedula VARCHAR(10) NOT NULL,
     cod_metodo INT NOT NULL,
     cod_estado INT NOT NULL,
     observacion VARCHAR(45),
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS detalles(
 CREATE TABLE IF NOT EXISTS historial_facturas(
     cod_pedido INT NOT NULL PRIMARY KEY,
     fecha_pedido TIMESTAMP NOT NULL,
-    cedula VARCHAR(20) NOT NULL,
+    cedula VARCHAR(10) NOT NULL,
     nombre_completo VARCHAR(90) NOT NULL,
     direccion_envio VARCHAR(45) NOT NULL,
     cantidad_total INT,
