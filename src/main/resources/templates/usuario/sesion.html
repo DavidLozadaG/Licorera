@@ -27,33 +27,33 @@
             <div class="formulario__grupo mb-3" id="grupo__cedula">
               <label class="formulario__label">Número de cedula<font color="red">(*)</font></label>
               <div class="formulario__grupo-input">
-                <input type="number" th:field="*{cedula}" class="form-control" name="cedula">
+                <input type="number" th:field="*{cedula}" class="form-control" name="cedula" placeholder="ej: 0123456789">
                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 <div class="alert-danger" th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}">Name Error</div>
               </div>
-              <p class="form-control-error">La cedula debe contener 4-20 dígitos y solo puede contener numeros.</p>
+              <p class="form-control-error">La cedula solo puede contener numeros sin puntos ni comas y maximo 10 digitos.</p>
             </div>
             <!---GRUPO: nombres-->
             <div class="formulario__grupo mb-3" id="grupo__nombres">
               <label class="formulario__label">Nombres<font color="red">(*)</font></label>
               <div class="formulario__grupo-input">
-                <input type="text" th:field="*{nombres}" class="form-control" name="nombres">
+                <input type="text" th:field="*{nombres}" class="form-control" name="nombres" placeholder="ej: Tienda Licorera">
                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 <div class="alert-danger" th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}">Name Error
                 </div>
               </div>
-              <p class="form-control-error">El nombre debe contener 2-45 letras, no se aceptan numeros ni simbolos.</p>
+              <p class="form-control-error">El nombre debe tener máximo 45 letras, ademas no se aceptan numeros ni simbolos.</p>
             </div>
             <!---GRUPO: apellidos-->
             <div class="formulario__grupo mb-3" id="grupo__apellidos">
               <label class="formulario__label">Apellidos<font color="red">(*)</font></label>
               <div class="formulario__grupo-input">
-                <input type="text" th:field="*{apellidos}" class="form-control" name="apellidos">
+                <input type="text" th:field="*{apellidos}" class="form-control" name="apellidos" placeholder="ej: MaxLicors">
                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 <div class="alert-danger" th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}">Name Error
                 </div>
               </div>
-              <p class="form-control-error">El apellido debe contener 2-45 letras, no se aceptan numeros ni simbolos.
+              <p class="form-control-error">El apellido debe tener máximo 45 letras, ademas no se aceptan numeros ni simbolos.
               </p>
             </div>
             <!---GRUPO: fecha_nac-->
@@ -73,30 +73,30 @@
               <label class="formulario__label">E-mail<font color="red">(*)</font></label>
               <div class="formulario__grupo-input">
                 <input type="email" th:field="*{email}" class="form-control" name="email"
-                  placeholder="example@email.com">
+                  placeholder="ej: example@email.com">
                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 <div class="alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
               </div>
-              <p class="form-control-error">Ingrese un email valido(maximo 64 caracteres).
+              <p class="form-control-error">Ingrese un email valido, maximo 45 caracteres).
               </p>
             </div>
             <!---GRUPO: direccion-->
             <div class="formulario__grupo mb-3" id="grupo__direccion">
               <label class="formulario__label">Direccion<font color="red">(*)</font></label>
               <div class="formulario__grupo-input">
-                <input type="text" th:field="*{direccion}" class="form-control" name="direccion">
+                <input type="text" th:field="*{direccion}" class="form-control" name="direccion" placeholder="ej: CL 00 B NOR #00-00 UNKNOWN">
                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 <div class="alert-danger" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}">Name Error
                 </div>
               </div>
-              <p class="form-control-error">Maximo 45 caracteres-simbolos permitidos(#+_:-)
+              <p class="form-control-error">Maximo 45 caracteres-simbolos permitidos: #+_:-
               </p>
             </div>
             <!---GRUPO: telefono-->
             <div class="form-group mb-3" id="grupo__telefono">
               <label class="formulario__label">Teléfono<font color="red">(*)</font></label>
               <div class="formulario__grupo-input">
-                <input type="number" th:field="*{telefono}" class="form-control" name="telefono">
+                <input type="number" th:field="*{telefono}" class="form-control" name="telefono" placeholder="ej: 0123456789">
                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 <div class="alert-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">Name Error
                 </div>
@@ -108,11 +108,11 @@
             <div class="form-group mb-3" id="grupo__clave">
               <label class="formulario__label">Contraseña<font color="red">(*)</font></label>
               <div class="formulario__grupo-input">
-                <input type="password" th:field="*{clave}" class="form-control" name="clave">
+                <input type="password" th:field="*{clave}" class="form-control" name="clave" placeholder="ej: Unkn0w_m">
                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 <div class="alert-danger" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}">Name Error</div>
               </div>
-              <p class="form-control-error">La contraseña debe contener 8-20 caracteres(mayusculas,minusculas y almenos
+              <p class="form-control-error">La contraseña debe contener 8-20 caracteres(mayuscula,minuscula y almenos
                 un numero y un simbolo).
               </p>
             </div>
@@ -132,7 +132,7 @@
               <div class="form-group mb-3" id="grupo__terminos">
                 <br/>
                 <label class="formulario__label">
-                  <div class="g-recaptcha" data-sitekey="6LfpxaIeAAAAAGkzkWkWB0XNmFDmtE_3bx-B3CKO"></div>
+                  <div class="g-recaptcha" data-sitekey="6LfpxaIeAAAAAGkzkWkWB0XNmFDmtE_3bx-B3CKO" name="terminos" id="terminos"></div>
                 </label>
               </div>
               <div class="formulario__mensaje" id="formulario__mensaje">
