@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quédate en casa y disfruta en familia con nuestros licores de calidad y a los mejores precios. Tu Licorera Online preferida las 24 horas. Domicilios Gratis.">
+    <meta name="keywords" content="Licorera, Licorera Online, Aguardiente, Cerveza, Ron, Whiskey, Tequila, Vodka, Vino, Ginebra, licores, Domicilios Gratis">
     <title th:text="${cabecera}"></title>
     <link rel="shortcut icon" th:href="@{/imagenes/logotipo/MaxLicor's.png}" type="">
     <script src="https://kit.fontawesome.com/9d5dec2ae8.js" crossorigin="anonymous"></script>
@@ -78,8 +80,8 @@
         </div>
     </header>
     <!-- CONTENIDO-->
-    <div th:fragment="listaLicores" class="container">
-        <div class="text-center">
+    <div th:fragment="listaLicores" class="container" id="licores">
+        <div class="text-center" >
             <h1 th:text="${titulo}"></h1>
         </div>
         <div class="row">
@@ -108,18 +110,40 @@
     <div th:replace="usuario/sesion :: modalInicioSesion"></div>
     <div th:replace="usuario/sesion :: modalConfirmacion"></div>
 
-
-
-    <footer th:fragment="footer">
-        <div class="container">
-            <p>Copyrigth Beelz &copy; -2022</p>
+    <footer th:fragment="footer" class="pie-pagina">
+        <div class="grupo-1">
+            <div class="box">
+                <figure>
+                    <a href="/home">
+                        <img th:src="@{/imagenes/logotipo/MaxLicor's.png}" alt="Logo de MaxLicor's">
+                    </a>
+                </figure>
+            </div>
+            <div class="box">
+                <h2>SOBRE NOSOTROS</h2>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A, incidunt.</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A, incidunt.</p>
+                <a href="/MapaDelSitio">Mapa de sitio</a>
+            </div>
+            <div class="box">
+                <h2>SIGUENOS</h2>
+                <div class="red-social">
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-youtube"></a>
+                </div>
+            </div>
+        </div>
+        <div class="grupo-2">
+            <small>&copy; 2022 <b>MaxLicor's</b> - Todos los Derechos Reservados.</small>
         </div>
         <script type="text/javascript" th:src="@{/js/validador.js}"></script>
         <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-        </script>
-       
+            </script>
+
     </footer>
 </body>
 

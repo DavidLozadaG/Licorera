@@ -2,12 +2,12 @@ const formulario = document.getElementById('formularioRegistro');
 const inputs = document.querySelectorAll('#formularioRegistro input');
 
 const expresiones = {
-    cedula: /^\d{5,20}$/, // 5 a 20 numeros.
+    cedula: /^\d{5,10}$/, // 5 a 10 numeros.
     nombres: /^[a-zA-ZÀ-ÿ\s]{2,45}$/, // de 4-45 Letras y espacios, pueden llevar acentos.
     apellidos: /^[a-zA-ZÀ-ÿ\s]{2,45}$/, // de 4-45 Letras y espacios, pueden llevar acentos.
     telefono: /^\d{10}$/, // 10 numeros.
     direccion: /^[a-zA-ZÀ-ÿ0-9\s#+_:-]{2,45}$/,
-    email: /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,64}$/i,
+    email: /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,45}$/i,
     clave: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&"#/()='¡¿~{}+,_;.:<>-])([A-Za-z\d$@$!%*?&"#/()='¡¿~{}+,_;.:<>-]|[^ ]){8,20}$/ // 8 a 20 digitos.
 }
 

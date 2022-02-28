@@ -153,7 +153,17 @@ public class ControladorUsuario {
         model.addAttribute("categorias",listadoCategorias);
         return "usuario/carrito";
     }
-    
+
+    @GetMapping("/MapaDelSitio")
+    public String mapa(Model model, Usuario usuario){
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("cabecera","Mapa del sitio | MaxLicor's");
+        model.addAttribute("titulo","Mapa del sitio");
+        List<Categoria>listadoCategorias=categoriaServicio.listarTodas();
+        model.addAttribute("categorias",listadoCategorias);
+        return "usuario/mapadesitio";
+    }
+
     //Metodo para encripar la contraseña del usuario con el metodo SHA-256
     public String encriptar(String password) {
         MessageDigest md = null;
