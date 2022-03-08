@@ -49,11 +49,13 @@ $(document).ready(function () {
         document.getElementById("bodyContent").style.width = "100%";
     });
 
-    if (window.location.pathname == '/cliente/registro/crear') {
+    if (window.location.pathname == '/registro') {
         $('#registro').modal("show");
     }
-    else if (window.location.pathname == '/cliente/registro/realizado') {
+    else if (window.location.pathname == '/login') {
+        $('#inicioSesion').modal("show");
+    }
+    else if (window.location.pathname == '/registro/realizado') {
         $('#confirmacion').modal("show");
     }
-
 });

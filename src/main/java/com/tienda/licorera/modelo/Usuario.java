@@ -9,10 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,65 +19,35 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Usuario implements Serializable{
 
     @Id
-    @NotBlank
-    @Size(min=4,max = 20)
     private String cedula;
-
-    @NotBlank
-    @Size(min=2,max = 45)
     private String nombres;
-
-    @NotBlank
-    @Size(min=2,max = 45)
     private String apellidos;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fecha_nac;
   
-    private int edad;
-
-    @NotBlank
-    @Size(min = 10,max=10)
     private String telefono;
-
-    @NotBlank
-    @Email
-    @Size(max=256)
     private String email;
-
-    @NotBlank
-    @Size(max=45)
     private String direccion;
-
-    @NotBlank
-    @Size(min=8,max=256)
     private String clave;
-
     @Transient
-    @Size(min=8,max=256)
     private String confirmarClave;
-
     @ManyToOne
     @JoinColumn(name="cod_rol")
     private Rol cod_rol;
     
-    
 
     public Usuario() {
     }
-
-    public Usuario(@NotBlank @Size(min = 4, max = 20) String cedula, @NotBlank @Size(min = 2, max = 45) String nombres,
-            @NotBlank @Size(min = 2, max = 45) String apellidos, LocalDate fecha_nac, int edad,
-            @NotBlank @Size(min = 10, max = 10) String telefono, @NotBlank @Email @Size(max = 256) String email,
-            @NotBlank @Size(max = 45) String direccion, @NotBlank @Size(min = 8, max = 256) String clave,
-            @Size(min = 8, max = 256) String confirmarClave, Rol cod_rol) {
+ 
+    public Usuario(String cedula, String nombres, String apellidos, LocalDate fecha_nac, String telefono,
+            String email, String direccion, String clave, String confirmarClave, Rol cod_rol) {
         super();
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.fecha_nac = fecha_nac;
-        this.edad = edad;
         this.telefono = telefono;
         this.email = email;
         this.direccion = direccion;
@@ -89,6 +55,7 @@ public class Usuario implements Serializable{
         this.confirmarClave = confirmarClave;
         this.cod_rol = cod_rol;
     }
+
 
 
     public String getDireccion() {
@@ -129,14 +96,6 @@ public class Usuario implements Serializable{
 
     public void setFecha_nac(LocalDate fecha_nac) {
         this.fecha_nac = fecha_nac;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
     }
 
     public String getTelefono() {
@@ -182,7 +141,7 @@ public class Usuario implements Serializable{
     @Override
     public String toString() {
         return "Usuario [apellidos=" + apellidos + ", cedula=" + cedula + ", clave=" + clave + ", cod_rol=" + cod_rol
-                + ", edad=" + edad + ", email=" + email + ", fecha_nac=" + fecha_nac + ", nombres=" + nombres
+                + ", email=" + email + ", fecha_nac=" + fecha_nac + ", nombres=" + nombres
                 + ", telefono=" + telefono + "]";
     }
 }

@@ -40,7 +40,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form class="row g-3 needs-validation" novalidate th:action="@{/administrador/gestion/metodospg/guardar}"
+            <form class="row g-3 needs-validation" th:action="@{/administrador/gestion/metodospg/guardar}"
               th:object="${metodo_pago}" method="post">
               <div class="form-group mb-3">
                 <label>Metodo de pago<font color="red">(*)</font></label>

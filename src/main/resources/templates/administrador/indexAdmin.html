@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmnlns:th="http://www.thymeleaf.org" lang="es">
-
+<html xmnlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,8 +41,7 @@
               <i class="fas fa-store"></i> Tienda</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" id="link" href="#">
-              <i class="fas fa-sign-out-alt"></i> Cerrar Sesión<span class="sr-only">(current) </span></a>
+              <a class="nav-link" id="link" data-bs-toggle="modal" data-bs-target="#cerrarSesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a>
           </li>
         </ul>
       </div>
@@ -54,7 +52,10 @@
     <div class="wrapper fixed-left">
       <nav id="sidebar">
         <div class="sidebar-header">
-          <h3><i class="fas fa-user"></i>Username</h3>
+          <span th:if="${session.usuario!=null}">
+          <i class="fas fa-user"><span class="font-weight-bold mb-0" th:text="${session.usuario.cod_rol.nomb_rol}"></span>
+          </i>
+          </span>
         </div>
         <ul class="list-unstyled components">
           <li>
@@ -62,19 +63,24 @@
               Usuarios</a>
           </li>
           <li>
-            <a th:href="@{/administrador/gestion/categorias}" class="d-block p-3"><i class="fas fa-box fa-lg"></i> Categorias</a>
+            <a th:href="@{/administrador/gestion/categorias}" class="d-block p-3"><i class="fas fa-box fa-lg"></i>
+              Categorias</a>
           </li>
           <li>
-            <a th:href="@{/administrador/gestion/licores}"  class="d-block p-3"><i class="fas fa-beer fa-lg"></i> Licores</a>
+            <a th:href="@{/administrador/gestion/licores}" class="d-block p-3"><i class="fas fa-beer fa-lg"></i>
+              Licores</a>
           </li>
           <li>
-            <a th:href="@{/administrador/gestion/empresas}" class="d-block p-3"><i class="fas fa-building fa-lg"></i> Empresas</a>
+            <a th:href="@{/administrador/gestion/empresas}" class="d-block p-3"><i class="fas fa-building fa-lg"></i>
+              Empresas</a>
           </li>
           <li>
-            <a th:href="@{/administrador/gestion/proveedores}" class="d-block p-3"><i class="fas fa-truck fa-lg"></i> Proveedores</a>
+            <a th:href="@{/administrador/gestion/proveedores}" class="d-block p-3"><i class="fas fa-truck fa-lg"></i>
+              Proveedores</a>
           </li>
           <li>
-            <a th:href="@{/administrador/gestion/metodospg}"  class="d-block p-3"><i class="fas fa-wallet fa-lg"></i> Metodos de pagos</a>
+            <a th:href="@{/administrador/gestion/metodospg}" class="d-block p-3"><i class="fas fa-wallet fa-lg"></i>
+              Metodos de pagos</a>
           </li>
           <li>
             <a href="#" class="d-block p-3"><i class="fas fa-clipboard-list fa-lg"></i> Estados de pedidos</a>
@@ -89,7 +95,9 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-9">
-                  <h1 class="font-weight-bold mb-0">Bienvenido NombreAdmin</h1>
+                  <span th:if="${session.usuario!=null}" class="font-weight-bold mb-0">Bienvenido/a
+                    <span class="font-weight-bold mb-0" th:text="${session.usuario.nombres}"></span></span>
+                  </h1>
                   <p class="lead text-muted">Revisa la ultima informacion</p>
                 </div>
                 <div class="col-lg-3 d-flex">
@@ -172,6 +180,7 @@
           <div class="container">
             <p>Copyrigth Beelz &copy; -2022</p>
           </div>
+          <div th:replace="publico/sesion :: modalCerrarSesion"></div>
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
             </script>
@@ -183,4 +192,5 @@
   </div>
   <!--- Fin de Dashboard -->
 </body>
+
 </html>

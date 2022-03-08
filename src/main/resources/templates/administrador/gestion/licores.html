@@ -52,7 +52,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form class="row g-3 needs-validation" novalidate th:action="@{/administrador/gestion/licores/guardar}"
+            <form class="row g-3 needs-validation" th:action="@{/administrador/gestion/licores/guardar}"
               th:object="${licor}" method="post">
               <div class="form-group mb-3">
                 <label>Nombre del licor<font color="red">(*)</font></label>

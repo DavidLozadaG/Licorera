@@ -8,7 +8,7 @@ const expresiones = {
     telefono: /^\d{10}$/, // 10 numeros.
     direccion: /^[a-zA-ZÀ-ÿ0-9\s#+_:-]{2,45}$/,
     email: /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,45}$/i,
-    clave: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&"#/()='¡¿~{}+,_;.:<>-])([A-Za-z\d$@$!%*?&"#/()='¡¿~{}+,_;.:<>-]|[^ ]){8,20}$/ // 8 a 20 digitos.
+    clave: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&"#/()='¡¿~{}+,_;.:<>-])([A-Za-z\d$@$!%*?&"#/()='¡¿~{}+,_;.:<>-]|[^ ]){8,32}$/ // 8 a 32 digitos.
 }
 
 const campos = {
@@ -120,12 +120,12 @@ function getEdad(dateString) {
     let fechaNacimiento = new Date(dateString)
     let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
     let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
+
     if (
         diferenciaMeses < 0 ||
-        (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
+        (diferenciaMeses === 0 && hoy.getDate() <= fechaNacimiento.getDate())
     ) {
         edad--
-        console.log(edad);
     }
     return edad
 
@@ -138,9 +138,9 @@ inputs.forEach((input) => {
 
 formularioRegistro.addEventListener('submit', (e) => {
     e.preventDefault();
-    var response = grecaptcha.getResponse();
+    //var response = grecaptcha.getResponse();
 
-    if (campos.cedula && campos.nombres && campos.apellidos && campos.fecha_nac && campos.telefono && campos.direccion && campos.email && campos.clave && response!=0) {
+    if (campos.cedula && campos.nombres && campos.apellidos && campos.fecha_nac && campos.telefono && campos.direccion && campos.email && campos.clave) {
         formularioRegistro.submit();
         formularioRegistro.reset();
         document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');

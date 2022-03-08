@@ -4,6 +4,12 @@ import java.util.List;
 
 import com.tienda.licorera.modelo.Rol;
 
+/**
+ * 
+ * Esta interface define los servicios que tiene el rol
+ * 
+ * @author Beelz
+ */
 public interface IRolServicio {
     
     public List<Rol>ListarTodos();

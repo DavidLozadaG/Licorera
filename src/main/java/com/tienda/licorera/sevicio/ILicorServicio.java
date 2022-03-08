@@ -4,6 +4,12 @@ import java.util.List;
 
 import com.tienda.licorera.modelo.Licor;
 
+/**
+ * 
+ * Esta interface define los servicios que tiene el licor
+ * 
+ * @author Beelz
+ */
 public interface ILicorServicio {
     
     public List<Licor>listarTodos();

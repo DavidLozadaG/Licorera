@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.tienda.licorera.modelo.Categoria;
 import com.tienda.licorera.modelo.Licor;
-import com.tienda.licorera.modelo.Usuario;
 import com.tienda.licorera.sevicio.ICategoriaServicio;
 import com.tienda.licorera.sevicio.ILicorServicio;
 
@@ -24,20 +23,6 @@ public class ControladorLicor {
 
     @Autowired
     private ICategoriaServicio categoriaServicio;
-
-
-    //METODO PARA LISTAR LOS LICORES EN EL HOME
-    @GetMapping({"/licorera","/","/home","/index"})
-    public String listarLicores(Model model,Usuario usuario){
-        model.addAttribute("usuario", usuario);
-        model.addAttribute("cabecera","Licores Disponibles | MaxLicor's");
-        model.addAttribute("titulo","LICORES DISPONIBLES");
-        List<Categoria>listadoCategorias=categoriaServicio.listarTodas();
-        List<Licor>listadoLicores=licorServicio.listarTodos();
-        model.addAttribute("categorias",listadoCategorias);
-        model.addAttribute("licores",listadoLicores);
-        return "index";
-    }
 
 
     //INICIO GESTION DE LICORES

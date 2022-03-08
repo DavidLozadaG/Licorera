@@ -1,6 +1,90 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Montserrat:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Codystar&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Codystar&family=Londrina+Outline&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Codystar&family=Londrina+Outline&family=Tourney:wght@500&display=swap');
 
+
+body{
+  background-color: #000;
+}
+/*....Texto Neon.......*/
+.container2 span {
+  font-size: 40pt;
+  font-weight: bold;
+  position: relative;
+  font-family: 'Dancing Script', cursive;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+.container3 span{
+  font-family: 'Tourney', cursive;
+  font-size: 40pt;
+  
+}
+
+.container2 span::before {
+  content: var(--l);
+  position: absolute;
+  transform: scale(1.1);
+  filter: blur(15px);
+}
+.container2 span::after {
+  content: var(--l);
+  position: absolute;
+  top: 80%;
+  left: 0;
+  filter: blur(30px);
+  transform: rotateX(50deg);
+}
+.container2 span:hover {
+  filter: contrast(350%);
+}
+
+.container2 span:nth-child(1){
+  color:#00bef8 ;
+}
+.container2 span:nth-child(2){
+  color:#ffc800 ;
+}
+.container2 span:nth-child(3){
+  color:#ffc800 ;
+}
+.container2 span:nth-child(4){
+  color:red;
+}
+
+/*---------Fin Texto Neon----------*/
+
+/*----Efecto maquina escribir------*/
+.maquina{
+  position: relative;
+  white-space: nowrap;
+  color:#ffc800;
+  font-weight: bold;
+  background: white;
+}
+
+.maquina::after{
+ content: "";
+ border-left: 3px solid;
+ background: white;
+ right: 0;
+ height: 100%;
+ position: absolute;
+ animation:typing 2s infinite alternate steps(15);
+}
+
+@keyframes typing{
+  from{width: 100%;}
+  to{width: 0;}
+}
+
+
+/*------Estilos Formularios----*/
 .formulario__grupo-input {
   position: relative;
 }
@@ -90,6 +174,9 @@
   display: block;
 }
 
+/*------Fin Estilos Formulario--------*/
+
+
 /*-----Estilos de validacion--------------*/
 .formulario__grupo-correcto .formulario__validacion-estado {
   color: #1ed12d;
@@ -109,7 +196,7 @@
   border: 3px solid #bb2929;
 }
 
-/*FIN*/
+/*FIN Estilos validacion*/
 
 .btn-xl {
   padding: 1.25rem 2.5rem;
@@ -153,6 +240,40 @@
   border-color: #ffc800;
 }
 
+/*---Estilos Menu desplegable-----*/
+.dropdown-menu li a:hover{
+  color:#ffff;
+  transform: scale(1.1);
+  background:#ffc800;
+  border: 1px solid #ffc800;
+}
+
+.dropdown-menu li a:hover::before{
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: -1.5px;
+  top: -12.5px;
+  border-style: solid;
+  border-width: 0 0 11.5px 11.5px;
+  border-color: transparent transparent #b38d06  transparent;
+}
+
+.dropdown-menu li a:hover::after{
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: -1.5px;
+  top: -12.5px;
+  border-style: solid;
+  border-width: 11.5px 0 0 11.5px;
+  border-color: transparent transparent transparent #b38d06;
+}
+
+/*---Estilos Menu desplegable-----*/
+
 #mainNav, #categoriaNav {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -163,7 +284,7 @@
   padding: 0.75rem;
   font-size: 0.75rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  text-transform: uppercase;
+  text-transform:capitalize;
   font-weight: 700;
 }
 
@@ -180,7 +301,7 @@
   font-size: 35px;
   margin: 0 50px;
   color: #ffc800;
-  ;
+  
 }
 
 #mainNav .navbar-brand img, #categoriaNav .navbar-brand img {
@@ -188,15 +309,14 @@
 }
 
 #mainNav .navbar-nav .nav-item .nav-link, #categoriaNav .navbar-nav .nav-item .nav-link {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
   font-size: 0.95rem;
   color: #fff;
   letter-spacing: 0.0625em;
 }
 
 #mainNav .navbar-nav .nav-item:hover .nav-link, #mainNav .navbar-nav .nav-item.active .nav-link, #categoriaNav .navbar-nav .nav-item:hover .nav-link, #mainNav .navbar-nav .nav-item.active .nav-link {
-  font-weight: bold;
-  font-size: 18px;
   color: #ffc800;
 }
 
@@ -233,6 +353,418 @@
   top: 0;
 }
 
+.bloque{
+  color:black;
+  height: 180px;
+  text-align: center;
+}
+ .imagen-bloque{
+   height: 100px;
+   padding-bottom: 10px;
+ }
+
+ .text{
+  font-size: 1.8rem;
+  font-style: italic;
+  line-height: 2rem;
+  margin-bottom: 25px;
+  font-family: 'Londrina Outline', cursive;
+  font-weight: bold;
+ }
+
+ .bloque2{
+  background-image: url(../imagenes/banners/home/banner3.jpg);
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
+  color:black;
+  height: 150px;
+  text-align: center;
+  font-family: 'Merienda', cursive;
+  font-weight: bold;
+  margin-bottom: 20px;
+
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.bloque2 h1{
+  background: white;
+}
+
+header.masthead {
+  padding-top: 10.5rem;
+  padding-bottom: 6rem;
+  text-align: center;
+  color: #fff;
+  /*background-image: url("../imagenes/banners/home/banner.jpeg");*/
+  background: -webkit-radial-gradient(#560e86, #0a0011);
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
+}
+
+header.masthead .masthead-subheading {
+  font-size: 1.5rem;
+  font-style: italic;
+  line-height: 1.5rem;
+  margin-bottom: 25px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+header.masthead .masthead-heading {
+  font-size: 3.25rem;
+  font-weight: 700;
+  line-height: 3.25rem;
+  margin-bottom: 2rem;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.bg-image {
+  padding-top: 10.5rem;
+  padding-bottom: 6rem;
+  background-image: url("../imagenes/banners/sitemap/sitemap.jpg");
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
+}
+
+#sitemap {
+  background-color: #212529;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.bg-image #sitemap ul {
+  list-style-type: none;
+}
+
+.bg-image #sitemap h1 {
+  color: #ffc800;
+  padding-bottom: 3rem;
+}
+
+.bg-image #sitemap ul p {
+  line-height: 1.4;
+  text-decoration: none;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5em;
+  display: block;
+  color: white;
+  font-weight: bold;
+  
+}
+
+.bg-image #sitemap ul li #categorias, .bg-image #sitemap ul li #usuario {
+  padding: 0px 30px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  display: block;
+  color: white;
+}
+
+.bg-image #sitemap ul li #inicio, .bg-image #sitemap ul li #carrito {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.5em;
+  display: block;
+  color: white;
+  font-weight: bold;
+}
+
+.bg-image #sitemap ul li a:hover, .bg-image #sitemap ul li #categorias:hover, .bg-image #sitemap ul li #usuario:hover, .bg-image #sitemap ul li #inicio:hover, .bg-image#sitemap ul li #carrito:hover {
+  color: #d9aa00;
+}
+
+/*::Pie de pagina*/
+
+.pie-pagina {
+  width: 100%;
+  background-image:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)), url(../imagenes/banners/home/banner.jpeg);
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
+}
+.box-text{
+  font-weight: bold;
+  font-family: 'Dancing Script', cursive;
+  font-size: 35px;
+  margin: 0 50px;
+  color: #ffc800;
+}
+.mapa{
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-style: italic;
+  line-height: 2rem;
+  margin-bottom: 25px;
+  font-family: 'Londrina Outline', cursive;
+  font-weight: bold;
+}
+
+.pie-pagina .grupo-1 {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 50px;
+  padding-top: 45px;
+  padding-bottom: 0px;
+}
+
+.pie-pagina .grupo-1 .box figure {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pie-pagina .grupo-1 .box figure img {
+  width: 250px;
+}
+
+.pie-pagina .grupo-1 .box h2 {
+  color: #fff;
+  margin-bottom: 25px;
+  font-size: 20px;
+}
+
+.pie-pagina .grupo-1 .box p{
+  color: #efefef;
+  margin-bottom: 3px;
+  font-size: 1.8rem;
+  font-style: italic;
+  line-height: 2rem;
+  margin-bottom: 25px;
+  font-family: 'Londrina Outline', cursive;
+  font-weight: bold;
+}
+
+.pie-pagina .grupo-1 .red-social a {
+  display: inline-block;
+  text-decoration: none;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  color: #fff;
+  margin-right: 10px;
+  background-color: #ffc800;
+  text-align: center;
+  transition: all 300ms ease;
+
+}
+
+.pie-pagina .grupo-1 .red-social a:hover {
+  color: black;
+}
+
+.pie-pagina .grupo-2 {
+  background-color: black;
+  padding-bottom: 10px;
+  text-align: center;
+  color: #fff;
+}
+
+.text-color{
+  color:#ffc800;
+}
+.pie-pagina .grupo-2 small {
+  font-size: 15px;
+}
+
+#licores{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+#carritopg{
+  padding-top: 46px;
+}
+
+
+/*----RESPONSIVE-------*/
+
+
+@media (min-width: 900px) {
+  header.masthead {
+    padding-top: 12rem;
+    padding-bottom: 3.5rem;
+  }
+
+  header.masthead .masthead-subheading {
+    font-size: 2.25rem;
+    font-style: italic;
+    line-height: 2.25rem;
+    
+  }
+  
+
+  header.masthead .masthead-heading {
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 4.5rem;
+    margin-bottom: 4rem;
+  }
+
+/*.........Redes Sociales Flotantes-------*/
+  #btn-mas{
+    display: none;
+  }
+  .container1{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .redes a, .fa-wine-bottle{
+    display: block;
+    text-decoration: none;
+    background: #ffc800;
+    color: white;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 1px 10px rgba(0,0,0,1);
+    transition: all 500ms ease;
+  }
+  
+  .redes a:hover{
+    background: white;
+    color: #ffc800;
+  }
+  .redes a{
+     margin-bottom: -15px;
+     opacity: 0;
+     visibility: hidden;
+  }
+  
+  #btn-mas:checked~.redes a{
+     margin-bottom: 10px;
+     opacity: 1;
+     visibility: visible;
+  }
+  
+  .redes [class*="fa-"]{
+    font-size: 1.4em;   
+  }
+  
+  .fa-wine-bottle{
+    cursor: pointer;
+  }
+  
+  #btn-mas:checked ~ .btn-mas .fa-wine-bottle{
+    transform: rotate(270deg);
+    font-size: 20px;
+
+    /*.........Fin Redes Sociales Flotantes-------*/
+  }
+}
+@media screen and (min-width:510px){
+.bloque{
+  color:black;
+  height: 150px;
+  text-align: center;
+}
+}
+@media screen and (max-width:800px) {
+  .pie-pagina .grupo-1 {
+    width: 90%;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 30px;
+    padding-top: 35px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+
+@media (min-width:700px){
+  .container2 span {
+    font-size: 65pt;
+    font-weight: bold;
+    position: relative;
+    font-family: 'Dancing Script', cursive;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+  }
+  .container3 span{
+    font-family: 'Tourney', cursive;
+    font-size: 50pt;
+  }
+}
+@media (min-width:800px){
+  .container2 span {
+    font-size: 90pt;
+    font-weight: bold;
+    position: relative;
+    font-family: 'Dancing Script', cursive;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+  }
+  .container3 span{
+    font-family: 'Tourney', cursive;
+    font-size: 60pt;
+  }
+}
+@media (min-width:1200px){
+  .container2 span {
+    font-size: 120pt;
+    font-weight: bold;
+    position: relative;
+    font-family: 'Dancing Script', cursive;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+  }
+  .container3 span{
+    font-family: 'Tourney', cursive;
+    font-size: 70pt;
+  }
+}
+@media (max-width:1200px){
+  /*---Estilos Menu desplegable-----*/
+.dropdown-menu li a:hover{
+  color:#ffff;
+  transform: scale(1.01);
+  background:#ffc800;
+  border: 1px solid #ffc800;
+}
+
+.dropdown-menu li a:hover::before{
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: -1.5px;
+  top: -12.5px;
+  border-style: solid;
+  border-width: 0 0 11.5px 11.5px;
+  border-color: transparent transparent #b38d06  transparent;
+}
+
+.dropdown-menu li a:hover::after{
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: -1.5px;
+  top: -12.5px;
+  border-style: solid;
+  border-width: 11.5px 0 0 11.5px;
+  border-color: transparent transparent transparent #b38d06;
+}
+
+/*---Estilos Menu desplegable-----*/
+}
 @media (min-width: 992px) {
   #mainNav {
     padding-top: 1.5rem;
@@ -275,199 +807,4 @@
   #mainNav .navbar-nav .nav-item:last-child, #categoriaNav .navbar-nav .nav-item:last-child {
     margin-right: 0;
   }
-}
-
-header.masthead {
-  padding-top: 10.5rem;
-  padding-bottom: 6rem;
-  text-align: center;
-  color: #fff;
-  background-image: url("../imagenes/banners/home/hero-bg.jpg");
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center center;
-  background-size: cover;
-}
-
-header.masthead .masthead-subheading {
-  font-size: 1.5rem;
-  font-style: italic;
-  line-height: 1.5rem;
-  margin-bottom: 25px;
-  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
-header.masthead .masthead-heading {
-  font-size: 3.25rem;
-  font-weight: 700;
-  line-height: 3.25rem;
-  margin-bottom: 2rem;
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
-@media (min-width: 768px) {
-  header.masthead {
-    padding-top: 17rem;
-    padding-bottom: 12.5rem;
-  }
-
-  header.masthead .masthead-subheading {
-    font-size: 2.25rem;
-    font-style: italic;
-    line-height: 2.25rem;
-    margin-bottom: 2rem;
-  }
-
-  header.masthead .masthead-heading {
-    font-size: 4.5rem;
-    font-weight: 700;
-    line-height: 4.5rem;
-    margin-bottom: 4rem;
-  }
-}
-
-.bg-image {
-  padding-top: 10.5rem;
-  padding-bottom: 6rem;
-  background-image: url("../imagenes/banners/sitemap/sitemap.jpg");
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center center;
-  background-size: cover;
-}
-
-#sitemap {
-  background-color: #212529;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-.bg-image #sitemap ul {
-  list-style-type: none;
-}
-
-.bg-image #sitemap h1 {
-  color: #ffc800;
-  padding-bottom: 3rem;
-}
-
-.bg-image #sitemap ul p {
-  line-height: 1.4;
-  text-decoration: none;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1.5em;
-  display: block;
-  color: white;
-  font-weight: bold;
-}
-
-.bg-image #sitemap ul li #categorias, .bg-image #sitemap ul li #usuario {
-  padding: 0px 30px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1em;
-  display: block;
-  color: white;
-}
-
-.bg-image #sitemap ul li #inicio, .bg-image #sitemap ul li #carrito {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1.5em;
-  display: block;
-  color: white;
-  font-weight: bold;
-}
-
-.bg-image #sitemap ul li a:hover, .bg-image #sitemap ul li #categorias:hover, .bg-image #sitemap ul li #usuario:hover, .bg-image #sitemap ul li #inicio:hover, .bg-image#sitemap ul li #carrito:hover {
-  color: #d9aa00;
-}
-
-/*::Pie de pagina*/
-
-.pie-pagina {
-  width: 100%;
-  background-color: #212529;
-}
-
-.pie-pagina .grupo-1 {
-  width: 100%;
-  max-width: 1200px;
-  margin-top: auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 50px;
-  padding-top: 45px;
-  padding-bottom: 0px;
-}
-
-.pie-pagina .grupo-1 .box figure {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.pie-pagina .grupo-1 .box figure img {
-  width: 250px;
-}
-
-.pie-pagina .grupo-1 .box h2 {
-  color: #fff;
-  margin-bottom: 25px;
-  font-size: 20px;
-}
-
-.pie-pagina .grupo-1 .box p {
-  color: #efefef;
-  margin-bottom: 10px;
-}
-
-.pie-pagina .grupo-1 .red-social a {
-  display: inline-block;
-  text-decoration: none;
-  width: 45px;
-  height: 45px;
-  line-height: 45px;
-  color: #fff;
-  margin-right: 10px;
-  background-color: #0d2023;
-  text-align: center;
-  transition: all 300ms ease;
-
-}
-
-.pie-pagina .grupo-1 .red-social a:hover {
-  color: #d9aa00;
-}
-
-.pie-pagina .grupo-2 {
-  background-color: #212529;
-  padding-bottom: 10px;
-  text-align: center;
-  color: #fff;
-}
-
-.pie-pagina .grupo-2 small {
-  font-size: 15px;
-}
-
-@media screen and (max-width:800px) {
-  .pie-pagina .grupo-1 {
-    width: 90%;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 30px;
-    padding-top: 35px;
-    padding-left: 10px;
-    padding-bottom: 10px;
-  }
-}
-
-#licores{
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-#carritopg{
-  padding-top: 46px;
 }
