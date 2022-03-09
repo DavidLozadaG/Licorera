@@ -1,11 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 <head th:replace="publico/index :: head">
+
 <body>
+    <div th:replace="publico/index :: redes"></div>
     <header>
         <nav th:fragment="navbar" class="navbar navbar-expand-xl navbar-dark fixed-top" id="categoriaNav">
             <div class="container">
-                <a class="navbar-brand" href="/home">
-                    <span>MaxLicor's</span>
+                <a th:if="${session.usuario==null}" class="navbar-brand" href="/home">
+                    <span><i class="fas fa-glass-cheers"></i>MaxLicor's</span>
+                </a>
+                <a th:if="${session.usuario!=null}" class="navbar-brand" href="/licorera">
+                    <span><i class="fas fa-glass-cheers"></i>MaxLicor's</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -43,12 +49,17 @@
                     </form>
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <a th:if="${session.usuario==null}" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 Usuario
                             </a>
-                            <ul th:replace="publico/sesion :: opcionesDefault"></ul>
+                            <ul th:if="${session.usuario==null}" th:replace="publico/sesion :: opcionesDefault"></ul>
+                            <a th:if="${session.usuario!=null}" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false" th:text="${session.usuario.nombres}">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                            <ul th:if="${session.usuario!=null}" th:replace="publico/sesion :: opcionesMenu"></ul>
                         </li>
                     </ul>
                 </div>
@@ -107,8 +118,11 @@
         </div>
     </div>
     <div th:replace="publico/index :: listaLicores"></div>
-    <div th:replace="publico/sesion :: modalRegistro"></div>
-    <div th:replace="publico/sesion :: modalInicioSesion"></div>
+    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalRegistro"></div>
+    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalInicioSesion"></div>
+    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalConfirmacion"></div>
+    <div th:if="${session.usuario!=null}" th:replace="publico/sesion :: modalCerrarSesion"></div>
     <footer th:replace="publico/index :: footer"></footer>
 </body>
+
 </html>

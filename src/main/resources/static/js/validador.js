@@ -138,9 +138,9 @@ inputs.forEach((input) => {
 
 formularioRegistro.addEventListener('submit', (e) => {
     e.preventDefault();
-    //var response = grecaptcha.getResponse();
+    var response = grecaptcha.getResponse();
 
-    if (campos.cedula && campos.nombres && campos.apellidos && campos.fecha_nac && campos.telefono && campos.direccion && campos.email && campos.clave) {
+    if (campos.cedula && campos.nombres && campos.apellidos && campos.fecha_nac && campos.telefono && campos.direccion && campos.email && campos.clave && response) {
         formularioRegistro.submit();
         formularioRegistro.reset();
         document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');

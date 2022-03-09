@@ -780,7 +780,7 @@ header.masthead .masthead-heading {
   }
 
   #mainNav .navbar-brand img, #categoriaNav .navbar-brand img {
-    height: 2rem;
+    height: 1.5rem;
     transition: height 0.3s ease-in-out;
   }
 

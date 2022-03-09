@@ -37,7 +37,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="link" href="/home">
+            <a class="nav-link" id="link" href="/licorera">
               <i class="fas fa-store"></i> Tienda</a>
           </li>
           <li class="nav-item active">
@@ -53,7 +53,7 @@
       <nav id="sidebar">
         <div class="sidebar-header">
           <span th:if="${session.usuario!=null}">
-          <i class="fas fa-user"><span class="font-weight-bold mb-0" th:text="${session.usuario.cod_rol.nomb_rol}"></span>
+          <i class="fas fa-user"><span class="font-weight-bold mb-0" th:text="' '+${session.usuario.cod_rol.nomb_rol}"></span>
           </i>
           </span>
         </div>

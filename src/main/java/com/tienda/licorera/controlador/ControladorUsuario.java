@@ -1,16 +1,23 @@
 package com.tienda.licorera.controlador;
 
+import com.tienda.licorera.modelo.Categoria;
+import com.tienda.licorera.modelo.Licor;
 import com.tienda.licorera.modelo.Rol;
 import com.tienda.licorera.modelo.Usuario;
+import com.tienda.licorera.sevicio.ICategoriaServicio;
+import com.tienda.licorera.sevicio.ILicorServicio;
 import com.tienda.licorera.sevicio.IRolServicio;
 import com.tienda.licorera.sevicio.IUsuarioServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -20,8 +27,29 @@ public class ControladorUsuario {
     private IUsuarioServicio usuarioServicio;
 
     @Autowired
-    private IRolServicio rolServicio;
+    private ICategoriaServicio categoriaServicio;
 
+    @Autowired
+    private ILicorServicio licorServicio;
+    @Autowired
+    private IRolServicio rolServicio;
+      // METODO PARA LISTAR LOS LICORES EN EL HOME
+      @GetMapping("/licorera")
+      public String listarLicores(Authentication auth, HttpSession session,Model model) {
+          model.addAttribute("cabecera", "Licores Disponibles | MaxLicor's");
+          model.addAttribute("titulo", "LICORES");
+          List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
+          List<Licor> listadoLicores = licorServicio.listarTodos();
+          model.addAttribute("categorias", listadoCategorias);
+          model.addAttribute("licores", listadoLicores);
+          String email = auth.getName();
+          if(session.getAttribute("usuario")==null){
+              Usuario usuario = usuarioServicio.buscarPorEmail(email);
+              usuario.setClave(null); 
+              session.setAttribute("usuario", usuario);
+          }
+          return "usuario/indexUsuario";
+      }
     //INICIO GESTION DE USUARIO 
     @GetMapping("/administrador/gestion/usuarios")
     public String listarUsuarios(Model modelo, Usuario usuario) {

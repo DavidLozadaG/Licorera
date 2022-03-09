@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmnlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="publico/index :: head">
+</head>
+
+<body>
+    <div th:replace="publico/index :: redes"></div>
+    <!-- Navigation-->
+    <nav th:fragment="navbar" class="navbar navbar-expand-xl navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="/licorera">
+                <span><i class="fas fa-glass-cheers"></i>MaxLicor's</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav  me-auto py-4 py-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-beer"></i> Categorías
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li th:each="cat:${categorias}">
+                                <a class="dropdown-item" th:href="@{'/categoria/'+${cat.nomb_cat}}"
+                                    th:text="${cat.nomb_cat}">
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/carrito">
+                            <i class="fas fa-shopping-cart"></i>
+                            (0)Carrito
+                        </a>
+                    </li>
+                </ul>
+                <form class="d-flex ms-auto py-4 py-lg-0">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                    <button class="btn nav_search-btn" type="submit">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </form>
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item dropdown">
+                        <a th:if="${session.usuario==null}" class="nav-link dropdown-toggle" href="#"
+                            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            Usuario
+                        </a>
+                        <ul th:if="${session.usuario==null}" th:replace="publico/sesion :: opcionesDefault"></ul>
+                        <a th:if="${session.usuario!=null}" class="nav-link dropdown-toggle" href="#"
+                            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span><i class="fa fa-user" aria-hidden="true"></i>
+                                <span th:text="' '+${session.usuario.nombres}"></span>
+                            </span>
+                        </a>
+                        <ul th:if="${session.usuario!=null}" th:replace="publico/sesion :: opcionesMenu"></ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header th:replace="publico/index :: header">
+    </header>
+    <br>
+    <div th:replace="publico/index :: bloque"></div>
+    <div th:replace="publico/index :: listaLicores"></div>
+    <div th:replace="publico/sesion :: modalCerrarSesion"></div>
+    <div th:replace="publico/index :: footer"></div>
+</body>
+
+</html>

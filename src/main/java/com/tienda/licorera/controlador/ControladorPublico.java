@@ -37,11 +37,11 @@ public class ControladorPublico {
     private ILicorServicio licorServicio;
 
     // METODO PARA LISTAR LOS LICORES EN EL HOME
-    @GetMapping({ "/licorera", "/", "/home", "/index" })
+    @GetMapping({"/", "/home", "/index" })
     public String listarLicores(Model model, Usuario usuario) {
         model.addAttribute("usuario", usuario);
         model.addAttribute("cabecera", "Licores Disponibles | MaxLicor's");
-        model.addAttribute("titulo", "LICORES DISPONIBLES");
+        model.addAttribute("titulo", "LICORES");
         List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
         List<Licor> listadoLicores = licorServicio.listarTodos();
         model.addAttribute("categorias", listadoCategorias);
@@ -61,7 +61,7 @@ public class ControladorPublico {
             System.out.println("Hay errores en el formulario:" + ex.getMessage());
             model.addAttribute("usuario", usuario);
             model.addAttribute("cabecera", "Licores Disponibles | MaxLicor's");
-            model.addAttribute("titulo", "LICORES DISPONIBLES");
+            model.addAttribute("titulo", "LICORES");
             List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
             List<Licor> listadoLicores = licorServicio.listarTodos();
             model.addAttribute("categorias", listadoCategorias);
@@ -77,7 +77,7 @@ public class ControladorPublico {
     public String registro(Usuario usuario, Model model) {
         model.addAttribute("usuario", usuario);
         model.addAttribute("cabecera", "Licores Disponibles | MaxLicor's");
-        model.addAttribute("titulo", "LICORES DISPONIBLES");
+        model.addAttribute("titulo", "LICORES");
         List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
         List<Licor> listadoLicores = licorServicio.listarTodos();
         model.addAttribute("categorias", listadoCategorias);
@@ -89,7 +89,7 @@ public class ControladorPublico {
     public String registroRealizo(Usuario usuario, Model model) {
         model.addAttribute("usuario", usuario);
         model.addAttribute("cabecera", "Licores Disponibles | MaxLicor's");
-        model.addAttribute("titulo", "LICORES DISPONIBLES");
+        model.addAttribute("titulo", "LICORES");
         List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
         List<Licor> listadoLicores = licorServicio.listarTodos();
         model.addAttribute("categorias", listadoCategorias);
@@ -101,7 +101,7 @@ public class ControladorPublico {
     public String login(Usuario usuario, Model model) {
         model.addAttribute("usuario", usuario);
         model.addAttribute("cabecera", "Licores Disponibles | MaxLicor's");
-        model.addAttribute("titulo", "LICORES DISPONIBLES");
+        model.addAttribute("titulo", "LICORES");
         List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
         List<Licor> listadoLicores = licorServicio.listarTodos();
         model.addAttribute("categorias", listadoCategorias);
