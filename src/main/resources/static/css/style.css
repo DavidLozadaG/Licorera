@@ -21,9 +21,9 @@ body{
   transition: all 300ms ease-in-out;
 }
 .container3 span{
-  font-family: 'Tourney', cursive;
+  font-family: 'Montserrat', sans-serif;
   font-size: 40pt;
-  
+  font-weight: bold;
 }
 
 .container2 span::before {
@@ -289,8 +289,14 @@ body{
 }
 
 .slider {
-  margin-top: 95px;
+  margin-top: 42px;
 }
+
+.carousel, .carousel-inner > .item > img {
+  max-width: 100%;
+  height: auto;
+}
+
 
 #mainNav .navbar-brand, #categoriaNav .navbar-brand {
   font-family: 'Dancing Script', cursive;
@@ -373,7 +379,7 @@ body{
  }
 
  .bloque2{
-  background-image: url(../imagenes/banners/home/banner3.jpg);
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../imagenes/banners/home/banner3.jpg);
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -408,6 +414,7 @@ header.masthead {
   background-size: cover;
 }
 
+
 header.masthead .masthead-subheading {
   font-size: 1.5rem;
   font-style: italic;
@@ -427,17 +434,70 @@ header.masthead .masthead-heading {
 .bg-image {
   padding-top: 10.5rem;
   padding-bottom: 6rem;
-  background-image: url("../imagenes/banners/sitemap/sitemap.jpg");
-  background-repeat: no-repeat;
+  background-image: url(../imagenes/banners/home/fondomax.jpg);
   background-attachment: scroll;
   background-position: center center;
-  background-size: cover;
+  
 }
 
 #sitemap {
   background-color: #212529;
   padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-bottom: 9rem;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  width: 50%;
+  color: white;
+}
+
+#perfil {
+  background: -webkit-radial-gradient(#212529, #0a0011);
+  padding-top: 3rem;
+  padding-bottom: 9rem;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  width: 98%;
+  color: white;
+  border: 5px solid white;
+}
+
+#perfil td{
+  color: white;
+}
+.form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form input {
+  width: 100%;
+  height: 30px;
+  margin: 0.5rem;
+  color: #000;
+  font-weight: bold;
+}
+
+.form a{
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+.form a:hover{
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+.form button {
+  padding: 0.5em 1em;
+  border: none;
+  background: rgb(100, 200, 255);
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .bg-image #sitemap ul {
@@ -447,6 +507,16 @@ header.masthead .masthead-heading {
 .bg-image #sitemap h1 {
   color: #ffc800;
   padding-bottom: 3rem;
+}
+
+.bg-image #perfil h1 {
+  color: #ffc800;
+  padding-bottom: 3rem;
+}
+
+.bg-image #sitemap a {
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
 }
 
 .bg-image #sitemap ul p {
@@ -482,6 +552,82 @@ header.masthead .masthead-heading {
   color: #d9aa00;
 }
 
+#columnas{
+  column-count:2;
+  column-gap:20px;
+  column-rule:4px dotted gray;
+  list-style: none;
+  text-align: center;
+  font-weight: bold;
+}
+#columnas a{
+  color: white;
+}
+
+/* Boton ir arriba  */
+.go-top-container {
+  position: fixed;
+  bottom: 1px;
+  width: 6.6rem;
+  height: 6.6rem;
+  z-index: -1;
+}
+
+.go-top-button {
+  width: 0rem;
+  height: 0rem;
+  background: #2071b2;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.fa-chevron-up {
+  position: absolute;
+  font-size: 1.7rem;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  color: #fff;
+  transition: 0.2s;
+}
+
+.show {
+  z-index: 10;
+}
+
+.show .go-top-button {
+  animation: popup 0.3s ease-in-out;
+  width: 55px;
+  height: 55px;
+  z-index: 11;
+}
+
+.fa-chevron-up {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes popup {
+  0% {
+      width: 0;
+      height: 0;
+  }
+  50% {
+      width: 30px;
+      height: 30px;
+  }
+  100% {
+      width: 55px;
+      height: 55px;
+  }
+}
+
+
 /*::Pie de pagina*/
 
 .pie-pagina {
@@ -505,8 +651,7 @@ header.masthead .masthead-heading {
   font-style: italic;
   line-height: 2rem;
   margin-bottom: 25px;
-  font-family: 'Londrina Outline', cursive;
-  font-weight: bold;
+  font-family: "Fredoka One";
 }
 
 .pie-pagina .grupo-1 {
@@ -545,7 +690,7 @@ header.masthead .masthead-heading {
   font-style: italic;
   line-height: 2rem;
   margin-bottom: 25px;
-  font-family: 'Londrina Outline', cursive;
+  font-family: 'Montserrat', sans-serif;
   font-weight: bold;
 }
 
@@ -589,6 +734,60 @@ header.masthead .masthead-heading {
   padding-top: 46px;
 }
 
+
+/*-----Licores------*/
+
+.card{
+  margin-bottom: 20px;
+}
+.image-card{
+  width: 200px;
+  height: 180px;
+  
+}
+
+.image-card:hover{
+  border: 5px solid white;
+}
+.card-header{
+  color: white;
+  text-align: center;
+  background: -webkit-radial-gradient(#560e86, #0a0011);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+.card-body{
+  text-align: center;
+  font-weight: bold;
+  color: #000;
+  font-family: 'Montserrat', sans-serif;
+  border-right: 5px solid #0a0011;
+  border-left: 5px solid #0a0011;
+}
+
+.precio{
+  width: 100%;
+  font-weight: bold;
+}
+
+.card-footer{
+ font-size: 12px;
+ color: white; 
+ background: -webkit-radial-gradient(#0a0011, #0a0011);
+ font-family: 'Montserrat', sans-serif;
+ 
+}
+.btn-primary{
+  background: -webkit-radial-gradient(#00bef8, #00bef8);
+}
+.btn-primary:hover{
+  background: -webkit-radial-gradient(#006888, #006888);
+}
+
+.card-footer a{
+  font-weight: bold;
+}
 
 /*----RESPONSIVE-------*/
 
@@ -698,8 +897,9 @@ header.masthead .masthead-heading {
     transition: all 300ms ease-in-out;
   }
   .container3 span{
-    font-family: 'Tourney', cursive;
+    font-family: 'Montserrat', sans-serif;
     font-size: 50pt;
+    font-weight: bold;
   }
 }
 @media (min-width:800px){
@@ -712,8 +912,9 @@ header.masthead .masthead-heading {
     transition: all 300ms ease-in-out;
   }
   .container3 span{
-    font-family: 'Tourney', cursive;
+    font-family: 'Montserrat', sans-serif;
     font-size: 60pt;
+    font-weight: bold;
   }
 }
 @media (min-width:1200px){
@@ -726,8 +927,9 @@ header.masthead .masthead-heading {
     transition: all 300ms ease-in-out;
   }
   .container3 span{
-    font-family: 'Tourney', cursive;
+    font-family: 'Montserrat', sans-serif;
     font-size: 70pt;
+    font-weight: bold;
   }
 }
 @media (max-width:1200px){
@@ -807,4 +1009,70 @@ header.masthead .masthead-heading {
   #mainNav .navbar-nav .nav-item:last-child, #categoriaNav .navbar-nav .nav-item:last-child {
     margin-right: 0;
   }
+}
+/*---Estilos pushbar carrito de compras----*/
+.pushbar.pushbar-carrito {
+  background: #000;
+  width: 365px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.pushbar-carrito .titulo {
+  font-size: 22px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(112, 112, 112, .60);
+  margin-bottom: 20px;
+}
+
+.pushbar-carrito .item {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(112, 112, 112, 0.60);
+}
+
+.pushbar-carrito .item img {
+  width: 100%;
+  max-width: 85px;
+}
+
+.pushbar-carrito .textos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.pushbar-carrito .textos .nombre-item {
+  color: #AAAAAA;
+}
+
+.pushbar-carrito .total {
+  margin: 40px 0 20px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pushbar-carrito .total .precio-total {
+  color: #AAAAAA;
+}
+
+.pushbar{
+  background: #000;
+  color: #fff;
+  padding:  20PX;
+}
+
+.pushbar .btn-cerrar.izquierda{
+  text-align: left;
+}
+
+.pushbar .btn-cerrar button{
+  background: none;
+  color: #808080;
+  border: none;
+  cursor:pointer;
+  font-size: 20px;
+
 }

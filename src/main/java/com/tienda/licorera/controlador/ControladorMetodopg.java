@@ -6,6 +6,7 @@ import com.tienda.licorera.modelo.Metodo_pago;
 import com.tienda.licorera.sevicio.IMetodoPgServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ public class ControladorMetodopg {
     IMetodoPgServicio metodo_pagoServicio;
 
     //INICIO GESTION DE METODOS DE PAGO
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @GetMapping("/administrador/gestion/metodospg")
     public String gestionMet(Model modelo, Metodo_pago metodo_pago) {
         List<Metodo_pago> listadometodo_pago = metodo_pagoServicio.listarTodos();
@@ -33,12 +35,14 @@ public class ControladorMetodopg {
         return "administrador/indexAdmin";
     }
 
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @PostMapping("/administrador/gestion/metodospg/guardar")
     public String guardarMet(@ModelAttribute Metodo_pago metodo_pago) {
         metodo_pagoServicio.guardarMet(metodo_pago);
         return "redirect:/administrador/gestion/metodospg";
     }
-
+    
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @GetMapping("/administrador/gestion/metodospg/eliminar/{cod_metodo}")
     public String eliminarPro(@PathVariable("cod_metodo") Integer cod_metodo) {
         metodo_pagoServicio.eliminarMet(cod_metodo);

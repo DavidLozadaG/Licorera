@@ -8,6 +8,7 @@ import com.tienda.licorera.sevicio.ICategoriaServicio;
 import com.tienda.licorera.sevicio.ILicorServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,8 @@ public class ControladorLicor {
 
 
     //INICIO GESTION DE LICORES
+    
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @GetMapping("/administrador/gestion/licores")
     public String gestionLicores(Model modelo, Licor licor) {
         List<Licor> listadoLicor = licorServicio.listarTodos();
@@ -41,12 +44,14 @@ public class ControladorLicor {
         return "administrador/indexAdmin";
     }
 
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @PostMapping("/administrador/gestion/licores/guardar")
     public String guardarLicor(@ModelAttribute Licor licor) {
         licorServicio.guardarLicor(licor);
         return "redirect:/administrador/gestion/licores";
     }
 
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @GetMapping("/administrador/gestion/licores/eliminar/{cod_licor}")
     public String eliminarLicor(@PathVariable("cod_licor") int cod_licor) {
         licorServicio.eliminarLicor(cod_licor);

@@ -11,12 +11,11 @@
         content="Licorera, Licorera Online, Aguardiente, Cerveza, Ron, Whiskey, Tequila, Vodka, Vino, Ginebra, licores, Domicilios Gratis">
     <title th:text="${cabecera}"></title>
     <link rel="shortcut icon" th:href="@{/imagenes/logotipo/MaxLicor's.png}" type="">
-    <script src="https://kit.fontawesome.com/9d5dec2ae8.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{/js/kit-fontawesome.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/pushbar.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
@@ -32,6 +31,15 @@
         </div>
         <div class="btn-mas">
             <label for="btn-mas"><i class="fas fa-wine-bottle"></i></label>
+        </div>
+    </div>
+
+    <!-- Boton Ir Arriba-->
+    <div th:fragment="irArriba">
+        <div class="go-top-container">
+            <div class="go-top-button">
+                <i class="fas fa-chevron-up"></i>
+            </div>
         </div>
     </div>
 
@@ -131,22 +139,47 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4" th:each="l:${licores}">
+            <div class="col-lg-4 col-md-6 col-sm-12" th:each="l:${licores}">
                 <div class="card">
                     <div class="card-header">
                         <label th:text="${l.nomb_licor}"></label>
                     </div>
                     <div class="card-body">
-                        <i th:text="'$'+${l.precio}">$</i>
-                        <img th:src="@{'/imagenes/licores/'+${l.foto}}" width="200" height="180">
+                        <img class="image-card" th:src="@{'/imagenes/licores/'+${l.foto}}">
+                        <div class="precio" th:text="'$'+${l.precio}"></div>
                     </div>
                     <div class="card-footer text-center">
                         <label th:text="${l.descripcion}"></label>
-                        <div>
-                            <a href="#" class="btn btn-outline-info">Agregar carrito</a>
-                            <a href="#" class="btn btn-danger">Comprar</a>
+                        <div th:if="${session.usuario==null}">
+                            <a href="/login" class="btn btn-outline-warning">Agregar carrito</a>
+                            <a href="/login" class="btn btn-primary">Comprar</a>
+                        </div>
+                        <div th:if="${session.usuario!=null}">
+                            <a href="#" data-pushbar-target="pushbar-carrito" class="btn btn-outline-warning">Agregar
+                                carrito</a>
+                            <a href="#" class="btn btn-primary">Comprar</a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--CARRITO DE COMPRAS-->
+    <div th:fragment="carrito">
+        <div data-pushbar-id="pushbar-carrito" class="pushbar from_right pushbar-carrito">
+            <div class="btn-cerrar izquierda">
+                <button data-pushbar-close><i class="fas fa-times"></i></button>
+            </div>
+            <p class="titulo">Carrito de compras</p>
+            <div class="item">
+                <div class="textos">
+                    <p class="nombre-item">AGUILA</p>
+                    <p>$12000</p>
+                </div>
+                <div class="total">
+                    <p class="precio-total">Total:</p>
+                    <p>$</p>
                 </div>
             </div>
         </div>
@@ -155,12 +188,17 @@
     <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalRegistro"></div>
     <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalInicioSesion"></div>
     <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalConfirmacion"></div>
+    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalOlvidoClave"></div>
     <div th:if="${session.usuario!=null}" th:replace="publico/sesion :: modalCerrarSesion"></div>
+
     <footer th:fragment="footer" class="pie-pagina">
         <div class="grupo-1">
             <div class="box">
                 <figure>
-                    <a href="/home">
+                    <a th:if="${session.usuario==null}" href="/home">
+                        <img th:src="@{/imagenes/logotipo/MaxLicor's.png}" alt="Logo de MaxLicor's">
+                    </a>
+                    <a th:if="${session.usuario!=null}" href="/licorera">
                         <img th:src="@{/imagenes/logotipo/MaxLicor's.png}" alt="Logo de MaxLicor's">
                     </a>
                 </figure>
@@ -171,7 +209,7 @@
                 <p><i class="fas fa-glass-cheers"></i>100% Garantizado</p>
                 <p><i class="fas fa-glass-cheers"></i>100% Seguros</p>
                 <p><i class="fas fa-glass-cheers"></i>Domicilio Gratis</p>
-                <p><a class="mapa" href="/MapaDelSitio">-->Mapa de sitio</a></p>
+                <p><a class="mapa" href="/MapaDelSitio">>>Mapa de sitio</a></p>
             </div>
             <div class="box">
                 <h2>SIGUENOS</h2>
@@ -188,6 +226,13 @@
         </div>
         <script th:if="${session.usuario==null}" type="text/javascript" th:src="@{/js/validador.js}"></script>
         <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+        <script th:if="${session.usuario!=null}" type="text/javascript" th:src="@{/js/pushbar.js}"></script>
+        <script>
+            var pushbar = new Pushbar({
+                blur: true,
+                overlay: true
+            });
+        </script>
         <script th:if="${session.usuario==null}">
             $(document).ready(function () {
                 if (window.location.pathname == '/registro') {
@@ -199,13 +244,13 @@
                 else if (window.location.pathname == '/registro/realizado') {
                     $('#confirmacion').modal("show");
                 }
+                else if (window.location.pathname == '/olvidoClave') {
+                    $('#olvidoClave').modal("show");
+                }
             });
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-            </script>
-
+        <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script src="/js/gotop.js"></script>
     </footer>
 </body>
-
 </html>

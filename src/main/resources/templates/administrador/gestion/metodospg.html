@@ -20,10 +20,10 @@
               <td th:text="${metodo_pago.nomb_metodo}"></td>
               <td>
                 <a class="btn btn btn-warning btn-sm" th:href="@{/administrador/gestion/metodospg/eliminar/}+${metodo_pago.cod_metodo}"
-                role="button" onclick="return confirm('Esta seguro de eliminar el registro')">
+                role="button" onclick="confirm('Esta seguro de eliminar el registro')">
                 <i class="fas fa-edit"></i></a>
                 <a class="btn btn-danger btn-sm" th:href="@{/administrador/gestion/metodospg/eliminar/}+${metodo_pago.cod_metodo}"
-                  role="button" onclick="return confirm('Esta seguro de eliminar el registro')">
+                  role="button" onclick="confirm('Esta seguro de eliminar el registro')">
                 <i class="fas fa-trash"></i></a>
               </td>
             </tr>

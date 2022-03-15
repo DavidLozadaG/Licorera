@@ -24,10 +24,10 @@
               <td th:text="${empresa.telefono}"></td>
               <td>
                 <a class="btn btn btn-warning btn-sm" th:href="@{/administrador/gestion/empresas/eliminar/}+${empresa.nit_empresa}"
-                role="button" onclick="return confirm('Esta seguro de eliminar el registro')">
+                role="button" onclick="confirm('Esta seguro de eliminar el registro')">
                 <i class="fas fa-edit"></i></a>
                 <a class="btn btn-danger btn-sm" th:href="@{/administrador/gestion/empresas/eliminar/}+${empresa.nit_empresa}"
-                  role="button" onclick="return confirm('Esta seguro de eliminar el registro')">
+                  role="button" onclick="confirm('Esta seguro de eliminar el registro')">
                 <i class="fas fa-trash"></i></a>
               </td>
             </tr>

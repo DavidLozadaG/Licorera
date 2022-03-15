@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
 	direccion VARCHAR(45) NOT NULL,
     clave VARCHAR(256) NOT NULL,
     cod_rol INT NOT NULL,
+    restablecer_clave_token VARCHAR(30),
 	CHECK(fecha_nac < CURRENT_DATE),
     CHECK(length(telefono)=10),
     CONSTRAINT fk_cod_rol FOREIGN KEY (cod_rol) REFERENCES roles(cod_rol) ON DELETE RESTRICT ON UPDATE CASCADE

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmnlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="publico/index :: head"></head>
+
+<body>
+    <!-- Redes sociales flotantes-->
+    <div th:replace="publico/index ::redes"></div>
+    <!-- Boton Ir Arriba-->
+    <div th:replace="publico/index :: irArriba"></div>
+    <!-- Navigation-->
+    <!-- Masthead-->
+    <!---->
+    <header class="masthead">
+        <div class="container">
+            <!--<div class="masthead-subheading">Bienvenido a MaxLicor's!</div>-->
+            <div class="container2 container3">
+                <span style="--l: '';" th:text="${mensaje==null ? 'Intenta nuevamente' : mensaje}"></span>
+            </div>
+            <div class="container2">
+                <span style="--l: '';"></span>
+                <span style="--l: '';"><i class="fas fa-glass-cheers"></i></span>
+                <span style="--l: '';" th:text="${codigo}"></span>
+            </div>
+            <a type="button" href="javascript: history.go(-1)" class="btn btn-outline-warning">Volver</a>
+            <!--<div class="masthead-heading text-uppercase">a un solo clic</div>-->
+        </div>
+    </header>
+    <!-- PIE DE PAGINA -->
+    <footer class="pie-pagina">
+        <div class="grupo-1">
+            <div class="box">
+                <figure>
+                    <a th:if="${session.usuario==null}" href="/home">
+                        <img th:src="@{/imagenes/logotipo/MaxLicor's.png}" alt="Logo de MaxLicor's">
+                    </a>
+                    <a th:if="${session.usuario!=null}" href="/licorera">
+                        <img th:src="@{/imagenes/logotipo/MaxLicor's.png}" alt="Logo de MaxLicor's">
+                    </a>
+                </figure>
+            </div>
+            <div class="box">
+                <span class="box-text"><i class="fas fa-glass-cheers"></i>MaxLicor's</span>
+                <p><i class="fas fa-glass-cheers"></i> Servicio de ENTREGA</p>
+                <p><i class="fas fa-glass-cheers"></i>100% Garantizado</p>
+                <p><i class="fas fa-glass-cheers"></i>100% Seguros</p>
+                <p><i class="fas fa-glass-cheers"></i>Domicilio Gratis</p>
+                <p><a class="mapa" href="/MapaDelSitio">>>Mapa de sitio</a></p>
+            </div>
+            <div class="box">
+                <h2>SIGUENOS</h2>
+                <div class="red-social">
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-youtube"></a>
+                </div>
+            </div>
+        </div>
+        <div class="grupo-2">
+            <small>&copy; 2022 <b class="text-color">MaxLicor's</b> - Todos los Derechos Reservados.</small>
+        </div>
+        <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script src="/js/gotop.js"></script>
+    </footer>
+</body>
+
+</html>

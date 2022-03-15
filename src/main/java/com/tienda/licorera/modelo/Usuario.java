@@ -32,17 +32,23 @@ public class Usuario implements Serializable{
     private String direccion;
     private String clave;
     @Transient
+    private int edad;
+    @Transient
     private String confirmarClave;
     @ManyToOne
     @JoinColumn(name="cod_rol")
     private Rol cod_rol;
-    
+
+    private String restablecer_clave_token;
 
     public Usuario() {
     }
  
-    public Usuario(String cedula, String nombres, String apellidos, LocalDate fecha_nac, String telefono,
-            String email, String direccion, String clave, String confirmarClave, Rol cod_rol) {
+    
+
+    public Usuario(String cedula, String nombres, String apellidos, LocalDate fecha_nac, String telefono, String email,
+            String direccion, String clave, int edad, String confirmarClave, Rol cod_rol,
+            String restablecer_clave_token) {
         super();
         this.cedula = cedula;
         this.nombres = nombres;
@@ -52,8 +58,10 @@ public class Usuario implements Serializable{
         this.email = email;
         this.direccion = direccion;
         this.clave = clave;
+        this.edad = edad;
         this.confirmarClave = confirmarClave;
         this.cod_rol = cod_rol;
+        this.restablecer_clave_token = restablecer_clave_token;
     }
 
 
@@ -136,6 +144,22 @@ public class Usuario implements Serializable{
 
     public void setCod_rol(Rol cod_rol) {
         this.cod_rol = cod_rol;
+    }
+    
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+    
+    public String getRestablecer_clave_token() {
+        return restablecer_clave_token;
+    }
+
+    public void setRestablecer_clave_token(String restablecer_clave_token) {
+        this.restablecer_clave_token = restablecer_clave_token;
     }
 
     @Override

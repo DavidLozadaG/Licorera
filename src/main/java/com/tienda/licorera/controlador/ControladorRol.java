@@ -6,6 +6,7 @@ import com.tienda.licorera.modelo.Rol;
 import com.tienda.licorera.sevicio.IRolServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ public class ControladorRol {
     private IRolServicio rolServicio;
 
     //INICIO GESTION DE ROLES
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @GetMapping("/administrador/gestion/roles")
     public String gestionRoles(Model modelo, Rol rol) {
         List<Rol> listadoRol = rolServicio.ListarTodos();
@@ -31,13 +33,13 @@ public class ControladorRol {
 
         return "administrador/indexAdmin";
     }
-
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @PostMapping("/administrador/gestion/roles/guardar")
     public String guardarRol(@ModelAttribute Rol rol) {
         rolServicio.guardar(rol);
         return "redirect:/administrador/gestion/roles";
     }
-
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @GetMapping("/administrador/gestion/roles/eliminar/{cod_rol}")
     public String eliminarRol(@PathVariable("cod_rol") int cod_rol) {
         rolServicio.eliminar(cod_rol);

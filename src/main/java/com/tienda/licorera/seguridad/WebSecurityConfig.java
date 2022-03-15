@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin().and()
                 .authorizeRequests()
                 .antMatchers("/", "/registro/**", "/categoria/**", "/MapaDelSitio**", "/login**", "/css/**",
-                        "/imagenes/**", "/js/**", "/webfonts/**", "/index", "/home")
+                        "/imagenes/**", "/js/**", "/webfonts/**", "/index", "/home", "/contactoSoporte", "/olvidoClave","/recuperarContraseña/**")
                 .permitAll()
                 .antMatchers("/administrador/**").access("hasAuthority('ADMINISTRADOR')")
                 .antMatchers("/licorera/**").access("hasAuthority('CLIENTE') OR hasAuthority('ADMINISTRADOR')")

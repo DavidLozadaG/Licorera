@@ -45,6 +45,17 @@ $(document).ready(function () {
         $('#sidebar, #content').toggleClass('active');
         $('.collapse.in').toggleClass('in');
         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-        document.getElementById("bodyContent").style.width = "100%";
+        document.getElementById("content").style.width = "100%";
     });
+    if (window.location.pathname == '/administrador/gestion/categorias/guardar') {
+        $('#agregarCategoria').modal("show");
+      }
+      if (window.location.pathname == '/administrador/gestion/categorias/actualizar') {
+        $('#editarCategoria').modal("show");
+      }
+      var pathArray = window.location.pathname.split('/');
+      if (window.location.pathname == '/administrador/gestion/categorias/editar/'+pathArray[5]) {
+        $('#editarCategoria').modal("show");
+      }
 });
+

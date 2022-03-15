@@ -6,6 +6,7 @@ import com.tienda.licorera.modelo.Empresa;
 import com.tienda.licorera.sevicio.IEmpresaServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,9 @@ public class ControladorEmpresa {
     @Autowired
     private IEmpresaServicio empresaServicio;
 
-    //INICIO GESTION DE EMPRESAS
+    // INICIO GESTION DE EMPRESAS
+
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @GetMapping("/administrador/gestion/empresas")
     public String gestionRoles(Model modelo, Empresa empresa) {
         List<Empresa> listadoEmp = empresaServicio.listarTodas();
@@ -32,16 +35,18 @@ public class ControladorEmpresa {
         return "administrador/indexAdmin";
     }
 
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @PostMapping("/administrador/gestion/empresas/guardar")
     public String guardarRol(@ModelAttribute Empresa empresa) {
         empresaServicio.guardarEmp(empresa);
         return "redirect:/administrador/gestion/empresas";
     }
 
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @GetMapping("/administrador/gestion/empresas/eliminar/{nit_empresa}")
     public String eliminarRol(@PathVariable("nit_empresa") String nit_empresa) {
         empresaServicio.elimiarEmp(nit_empresa);
         return "redirect:/administrador/gestion/empresas";
     }
-    //FINAL GESTION DE EMPRESAS
+    // FINAL GESTION DE EMPRESAS
 }

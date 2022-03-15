@@ -1,4 +1,5 @@
-<ul th:if="${session.usuario==null}" th:fragment="opcionesDefault" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+<ul th:if="${session.usuario==null}" th:fragment="opcionesDefault" class="dropdown-menu"
+  aria-labelledby="dropdownMenuButton1">
   <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#inicioSesion">
       Iniciar Sesión</a>
   </li>
@@ -8,22 +9,24 @@
   <li>
     <hr class="dropdown-divider">
   </li>
-  <li><a class="dropdown-item" href="#">Contacto soporte</a></li>
+  <li><a class="dropdown-item" th:href="@{/contactoSoporte}">Contacto soporte</a></li>
 </ul>
 
-<ul th:if="${session.usuario!=null}" th:fragment="opcionesMenu" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-  <li><a class="dropdown-item" href="#">
+<ul th:if="${session.usuario!=null}" th:fragment="opcionesMenu" class="dropdown-menu"
+  aria-labelledby="dropdownMenuButton1">
+  <li><a class="dropdown-item" th:href="@{/perfil}">
       Perfil</a>
   </li>
   <li><a th:if="${session.usuario.cod_rol.nomb_rol=='ADMINISTRADOR'}" th:href="@{/administrador}" class="dropdown-item">
       Administrar</a>
-    <a th:if="${session.usuario.cod_rol.nomb_rol=='CLIENTE'}" href="#" class="dropdown-item">
+    <a th:if="${session.usuario.cod_rol.nomb_rol=='CLIENTE'}" th:href="@{/contactoSoporte}" class="dropdown-item">
       Contacto soporte</a>
   </li>
   <li>
     <hr class="dropdown-divider">
   </li>
-  <li><a class="dropdown-item" href="#"data-bs-toggle="modal" data-bs-target="#cerrarSesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a></li>
+  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#cerrarSesion"><i
+        class="fas fa-sign-out-alt"></i> Cerrar Sesion</a></li>
 </ul>
 
 <div th:fragment="modalRegistro">
@@ -124,8 +127,8 @@
                 <input type="password" th:field="*{clave}" class="form-control" name="clave" placeholder="ej: Unkn0w_m">
                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
               </div>
-              <p class="form-control-error">La contraseña debe contener 8-20 caracteres(mayuscula,minuscula y almenos
-                un numero y un simbolo).
+              <p class="form-control-error">La contraseña debe contener 8-32 caracteres(mayuscula,minuscula y almenos
+                un numero y un simbolo), no se permiten espacios.
               </p>
             </div>
             <!---GRUPO: confirmarClave-->
@@ -173,10 +176,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="needs-validation" novalidate method="POST" action="/login-post">
+          <form class="needs-validation" method="POST" action="/login-post">
             <div class="form-floating mb-3">
-              <input type="email" class="form-control UpperCase" id="floatingInput" name="email" placeholder="name@example.com"
-                required>
+              <input type="email" class="form-control UpperCase" id="floatingInput" name="email"
+                placeholder="name@example.com" required>
               <label class="form-label" for="floatingInput">Correo electronico</label>
               <div class="invalid-feedback">
                 Por favor ingrese su correo electronico
@@ -195,7 +198,7 @@
             </div>
           </form>
           <div>
-            <a href="#">¿Olvido su contraseña?</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#olvidoClave">¿Olvido su contraseña?</a>
           </div>
           <div th:if="${param.error}" class="alert alert-danger" role="alert">
             Email y/o contraseña incorrectas.
@@ -208,6 +211,35 @@
           <button type="button" class="btn btn-warning" data-bs-toggle="modal"
             data-bs-target="#registro">Registrate</button>
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para el formulario de olvido de clave -->
+<div th:fragment="modalOlvidoClave">
+  <div class="modal fade" id="olvidoClave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/olvidoClave}" method="post" class="needs-validation">
+            <p>Se le enviara un mensaje al correo electronico, con las instrucciones para restablecer su contraseña.</p>
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" placeholder="email" name="email" required>
+              <label class="form-label">Email</label>
+            </div>
+            <div class="alert-danger" th:if="${error!=null}" th:text="${error}">Name Error</div>
+            <div class="alert-warning" th:if="${message!=null}" th:text="${message}">Name Error</div>
+            <br>
+            <div class="form-group mb-3 form-group-btn-enviar">
+              <button type="submit" class="btn btn-success">Enviar</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -256,7 +288,7 @@
         </div>
         <div class="modal-footer">
           <div>
-              <a href="/logout" class="btn btn-success"> Si, estoy seguro</a>
+            <a href="/logout" class="btn btn-success"> Si, estoy seguro</a>
           </div>
         </div>
       </div>

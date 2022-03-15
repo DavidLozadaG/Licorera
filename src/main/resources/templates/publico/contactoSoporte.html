@@ -1,0 +1,42 @@
+<!--CONTACTO-->
+<!DOCTYPE html>
+<html xmnlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="publico/index :: head"></head>
+<body>
+    <div th:replace="publico/index :: redes"></div>
+    <div th:replace="publico/index :: irArriba"></div>
+    <header>
+        <nav th:replace="publico/categoria :: navbar"></nav>
+    </header>
+    <div class="bg-image">
+        <div class="container" id="sitemap">
+            <h1 class="text-center"><i class="fas fa-info-circle"></i>Contacto MaxLicor´s</h1>
+    
+            <div id="columnas">
+                <li>Teléfono</li>
+                <li>Correo</li>
+                <li>Dirección</li>
+                <li>Horario</li>
+                <li>Redes</li>
+                <li>3224563464</li>
+                <li>licoreramaxlicors@gmail.com</li>
+                <li>Villavicencio, Meta</li>
+                <li>4pm - 12pm</li>
+                <li>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                </li>
+                
+           </div>        
+        </div>
+    </div>
+        </div>
+    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalRegistro"></div>
+    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalInicioSesion"></div>
+    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalConfirmacion"></div>
+    <div th:if="${session.usuario!=null}" th:replace="publico/sesion :: modalCerrarSesion"></div>
+    <footer th:replace="publico/index :: footer"></footer>
+</body>
+
+</html>
