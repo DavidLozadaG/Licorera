@@ -6,83 +6,85 @@
 
 <body>
     <div th:replace="publico/index :: redes"></div>
-    <header>
-        <nav th:replace="publico/categoria :: navbar"></nav>
-    </header>
-    <div class="bg-image">
-        <div class="container" id="perfil">
-            <h1 class="text-center"><i class="fas fa-tools"></i>Recuperar Contraseña</h1>
+    <div th:if="${session.usuario!=null}" th:replace="usuario/carrito :: carrito"></div>
+    <main class="pushbar_main_content">
+        <header>
+            <nav th:replace="publico/categoria :: navbar"></nav>
+        </header>
+        <div class="bg-image">
+            <div class="container" id="perfil">
+                <h1 class="text-center"><i class="fas fa-tools"></i>Recuperar Contraseña</h1>
+                <div class="row">
+                    <form class="form" role="form" id="restablecerClaveForm" method="post" th:object="${CambiarClave}">
+                        <br>
+                        <div class="panel-body">
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td class='col-md-3'>Nueva Contraseña:</td>
+                                        <td>
+                                            <input type="hidden" id="token" th:value="${token}" />
+                                            <input type="password" class="form-control input-sm"
+                                                placeholder="Nueva Contraseña" id="nueva_contrasena" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class='col-md-3'>Confirmar Contraseña:</td>
+                                        <td><input type="password" class="form-control input-sm"
+                                                placeholder="Confirmar Contraseña" id="conf_contrasena" required></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="color:red" ; class="d-none text-center" id="restablecerClaveError">
+                            Cambiar clave error
+                        </div>
+                        <div style="color:greenyellow" class="d-none text-center" id="formEnviado">Cambiar clave exito!
+                        </div>
+                        <br>
+                        <button type="button" class="btn btn-success" onClick="enviarRestablecerClave()"><i
+                                class="glyphicon glyphicon-refresh"></i>Guardar contraseña</button>
+                    </form>
+                </div>
 
-            <div class="row">
-                <form class="form" role="form" id="restablecerClaveForm" method="post" th:object="${CambiarClave}">
-                    <br>
-                    <div class="panel-body">
-                        <table class="table table-condensed">
-                            <tbody>
-                                <tr>
-                                    <td class='col-md-3'>Nueva Contraseña:</td>
-                                    <td>
-                                        <input type="hidden" id="token" th:value="${token}" />
-                                        <input type="password" class="form-control input-sm"
-                                            placeholder="Nueva Contraseña" id="nueva_contrasena" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class='col-md-3'>Confirmar Contraseña:</td>
-                                    <td><input type="password" class="form-control input-sm"
-                                            placeholder="Confirmar Contraseña" id="conf_contrasena" required></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div style="color:red" ; class="d-none text-center" id="restablecerClaveError">
-                        Cambiar clave error
-                    </div>
-                    <div style="color:greenyellow"class="d-none text-center" id="formEnviado">Cambiar clave exito!
-                    </div>
-                    <br>
-                    <button type="button" class="btn btn-success" onClick="enviarRestablecerClave()"><i
-                            class="glyphicon glyphicon-refresh"></i>Guardar contraseña</button>
-                </form>
             </div>
-
         </div>
-    </div>
-    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalRegistro"></div>
-    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalInicioSesion"></div>
-    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalConfirmacion"></div>
-    <div th:if="${session.usuario!=null}" th:replace="publico/sesion :: modalCerrarSesion"></div>
-    <footer th:replace="publico/index :: footer"></footer>
-    <script>
-        function enviarRestablecerClave() {
-            var params = {};
-            params["id"] = $("#token").val();
-            params["claveNueva"] = $("#nueva_contrasena").val();
-            params["confirmarClaveNueva"] = $("#conf_contrasena").val();
+        <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalRegistro"></div>
+        <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalInicioSesion"></div>
+        <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalConfirmacion"></div>
+        <div th:if="${session.usuario!=null}" th:replace="publico/sesion :: modalCerrarSesion"></div>
+        <footer th:replace="publico/index :: footer"></footer>
+        <script>
+            function enviarRestablecerClave() {
+                var params = {};
+                params["id"] = $("#token").val();
+                params["claveNueva"] = $("#nueva_contrasena").val();
+                params["confirmarClaveNueva"] = $("#conf_contrasena").val();
 
-            $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: "/recuperarContraseña",
-                data: JSON.stringify(params),
-                dataType: 'text',
-                cache: false,
-                timeout: 600000,
-                success: function (data) {
-                    $("#restablecerClaveForm")[0].reset();
-                    $("#restablecerClaveError").addClass("d-none");
-                    $("#formEnviado").removeClass("d-none");
-                    $("#formEnviado").html("Contraseña cambiada con exito!");
-                    setTimeout(function () { window.location.href = "home"; }, 2000);
-                },
-                error: function (e) {
-                    $("#restablecerClaveError").removeClass("d-none");
-                    $("#formEnviado").addClass("d-none");
-                    $("#restablecerClaveError").html(e.responseText);
-                }
-            });
-        }
-    </script>
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "/recuperarContraseña",
+                    data: JSON.stringify(params),
+                    dataType: 'text',
+                    cache: false,
+                    timeout: 600000,
+                    success: function (data) {
+                        $("#restablecerClaveForm")[0].reset();
+                        $("#restablecerClaveError").addClass("d-none");
+                        $("#formEnviado").removeClass("d-none");
+                        $("#formEnviado").html("Contraseña cambiada con exito!");
+                        setTimeout(function () { window.location.href = "home"; }, 2000);
+                    },
+                    error: function (e) {
+                        $("#restablecerClaveError").removeClass("d-none");
+                        $("#formEnviado").addClass("d-none");
+                        $("#restablecerClaveError").html(e.responseText);
+                    }
+                });
+            }
+        </script>
+
+    </main>
 </body>
-
 </html>

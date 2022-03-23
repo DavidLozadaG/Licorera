@@ -2,16 +2,19 @@
 <html xmnlns:th="http://www.thymeleaf.org" lang="es">
 <head th:replace="publico/index :: head"></head>
 <body>
+    <aside th:replace="usuario/carrito :: carrito"></aside>
     <div th:replace="publico/index :: redes"></div>
     <div th:replace="publico/index :: irArriba"></div>
-    <!-- Navigation-->
-    <nav tH:replace="publico/index :: navbar"></nav>
-    <header th:replace="publico/index :: header"></header>
-    <br>
-    <div th:replace="publico/index :: bloque"></div>
-    <div th:replace="publico/index :: listaLicores"></div>
-    <div th:replace="publico/index :: carrito"></div>
-    <div th:replace="publico/sesion :: modalCerrarSesion"></div>
-    <div th:replace="publico/index :: footer"></div>
+    <main class="pushbar_main_content">
+        <!-- Navigation-->
+        <nav th:replace="publico/index :: navbar"></nav>
+        <header th:replace="publico/index :: header"></header>
+        <br>
+        <div th:replace="publico/index :: bloque"></div>
+        <div th:replace="publico/index :: listaLicores"></div>
+        <div th:replace="publico/sesion :: modalCerrarSesion"></div>
+        <div th:replace="usuario/finalizarPedido :: modalFinalizarPedido"></div>
+        <div th:replace="publico/index :: footer"></div>
+    </main>
 </body>
 </html>

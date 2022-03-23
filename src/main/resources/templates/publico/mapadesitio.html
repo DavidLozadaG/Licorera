@@ -1,79 +1,90 @@
 <!DOCTYPE html>
 <html xmnlns:th="http://www.thymeleaf.org" lang="es">
+
 <head th:replace="publico/index :: head"></head>
+
 <body>
     <div th:replace="publico/index :: redes"></div>
     <div th:replace="publico/index :: irArriba"></div>
-    <header>
-        <nav th:replace="publico/categoria :: navbar"></nav>
-    </header>
-    <div class="bg-image">
-        <div class="container" id="sitemap">
-            <h1 class="text-center" th:text="${titulo}"></h1>
-            <ul th:if="${session.usuario==null}">
-                <li>
-                    <a id="inicio" href="/home" title="Ir a MaxLicor's">Inicio</a>
-                </li>
-                <p>Categorias</p>
-                <li th:each="cat:${categorias}">
-                    <a id="categorias" th:href="@{'/categoria/'+${cat.nomb_cat}}" th:title="'CATEGORIA '+ ${cat.nomb_cat}"
-                        th:text="${cat.nomb_cat}">
-                    </a>
-                </li>
-                <li>
-                    <a id="carrito" href="/carrito" title="Ir a carrito de compras">Carrito</a>
-                </li>
-                <p>Usuario</p>
-                <li>
-                    <a id="usuario" href=""title="Ir a Iniciar Sesion" data-bs-toggle="modal" data-bs-target="#inicioSesion">Iniciar Sesión</a>
-                </li>
-                <li>
-                    <a id="usuario" href=""title="Ir a Crear Cuenta" data-bs-toggle="modal" data-bs-target="#registro">Crear Cuenta</a>
-                </li>
-                <li>
-                    <a id="usuario" href="/contactoSoporte" title="Ir a Contacto">Contacto de soporte</a>
-                </li>
-                <li>
-                    <a id="usuario" href="/MapaDelSitio" title="Ir a Mapa de sitio">Mapa del sitio</a>
-                </li>
-            </ul>
-            <ul th:if="${session.usuario!=null}">
-                <li>
-                    <a id="inicio" href="/licorera" title="Ir a MaxLicor's">Inicio</a>
-                </li>
-                <p>Categorias</p>
-                <li th:each="cat:${categorias}">
-                    <a id="categorias" th:href="@{'/categoria/'+${cat.nomb_cat}}" th:title="'CATEGORIA '+ ${cat.nomb_cat}"
-                        th:text="${cat.nomb_cat}">
-                    </a>
-                </li>
-                <li>
-                    <a id="carrito" href="/carrito" title="Ir a carrito de compras">Carrito</a>
-                </li>
-                <p>Usuario</p>
-                <li>
-                    <a id="usuario" href="/perfil" title="Ir a perfil">Perfil</a>
-                </li>
-                <li>
-                    <a th:if="${session.usuario.cod_rol.nomb_rol=='ADMINISTRADOR'}" id="usuario" href="/administrador" title="Ir a administrar">Administrar</a>
-                </li>
-                <li>
-                    <a th:if="${session.usuario.cod_rol.nomb_rol=='CLIENTE'}"id="usuario" href="/contactoSoporte" title="Ir a Contacto">Contacto de soporte</a>
-                </li>
-                <li>
-                    <a id="usuario" href="" data-bs-toggle="modal" data-bs-target="#cerrarSesion" title="Cerrar sesión">Cerrar sesión</a>
-                </li>
-                <li>
-                    <a id="usuario" href="/MapaDelSitio" title="Ir a Mapa de sitio">Mapa del sitio</a>
-                </li>
-            </ul>
+    <aside th:if="${session.usuario!=null}" th:replace="usuario/carrito :: carrito"></aside>
+    <main class="pushbar_main_content">
+        <header>
+            <nav th:replace="publico/categoria :: navbar"></nav>
+        </header>
+        <div class="bg-image">
+            <div class="container" id="sitemap">
+                <h1 class="text-center" th:text="${titulo}"></h1>
+                <ul th:if="${session.usuario==null}">
+                    <li>
+                        <a id="inicio" href="/home" title="Ir a MaxLicor's">Inicio</a>
+                    </li>
+                    <p>Categorias</p>
+                    <li th:each="cat:${categorias}">
+                        <a id="categorias" th:href="@{'/categoria/'+${cat.nomb_cat}}"
+                            th:title="'CATEGORIA '+ ${cat.nomb_cat}" th:text="${cat.nomb_cat}">
+                        </a>
+                    </li>
+                    <li>
+                        <a id="carrito" href="/carrito" title="Ir a carrito de compras">Carrito</a>
+                    </li>
+                    <p>Usuario</p>
+                    <li>
+                        <a id="usuario" href="" title="Ir a Iniciar Sesion" data-bs-toggle="modal"
+                            data-bs-target="#inicioSesion">Iniciar Sesión</a>
+                    </li>
+                    <li>
+                        <a id="usuario" href="" title="Ir a Crear Cuenta" data-bs-toggle="modal"
+                            data-bs-target="#registro">Crear Cuenta</a>
+                    </li>
+                    <li>
+                        <a id="usuario" href="/contactoSoporte" title="Ir a Contacto">Contacto de soporte</a>
+                    </li>
+                    <li>
+                        <a id="usuario" href="/MapaDelSitio" title="Ir a Mapa de sitio">Mapa del sitio</a>
+                    </li>
+                </ul>
+                <ul th:if="${session.usuario!=null}">
+                    <li>
+                        <a id="inicio" href="/licorera" title="Ir a MaxLicor's">Inicio</a>
+                    </li>
+                    <p>Categorias</p>
+                    <li th:each="cat:${categorias}">
+                        <a id="categorias" th:href="@{'/categoria/'+${cat.nomb_cat}}"
+                            th:title="'CATEGORIA '+ ${cat.nomb_cat}" th:text="${cat.nomb_cat}">
+                        </a>
+                    </li>
+                    <li>
+                        <a id="carrito" href="/carrito" title="Ir a carrito de compras">Carrito</a>
+                    </li>
+                    <p>Usuario</p>
+                    <li>
+                        <a id="usuario" href="/perfil" title="Ir a perfil">Perfil</a>
+                    </li>
+                    <li>
+                        <a th:if="${session.usuario.cod_rol.nomb_rol=='ADMINISTRADOR'}" id="usuario"
+                            href="/administrador" title="Ir a administrar">Administrar</a>
+                    </li>
+                    <li>
+                        <a th:if="${session.usuario.cod_rol.nomb_rol=='CLIENTE'}" id="usuario" href="/contactoSoporte"
+                            title="Ir a Contacto">Contacto de soporte</a>
+                    </li>
+                    <li>
+                        <a id="usuario" href="" data-bs-toggle="modal" data-bs-target="#cerrarSesion"
+                            title="Cerrar sesión">Cerrar sesión</a>
+                    </li>
+                    <li>
+                        <a id="usuario" href="/MapaDelSitio" title="Ir a Mapa de sitio">Mapa del sitio</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalRegistro"></div>
-    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalInicioSesion"></div>
-    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalConfirmacion"></div>
-    <div th:if="${session.usuario!=null}" th:replace="publico/sesion :: modalCerrarSesion"></div>
-    <footer th:replace="publico/index :: footer"></footer>
+        <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalRegistro"></div>
+        <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalInicioSesion"></div>
+        <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalConfirmacion"></div>
+        <div th:if="${session.usuario!=null}" th:replace="publico/sesion :: modalCerrarSesion"></div>
+        <div th:if="${session.usuario!=null}" th:replace="usuario/finalizarPedido :: modalFinalizarPedido"></div>
+        <footer th:replace="publico/index :: footer"></footer>
+    </main>
 </body>
 
 </html>

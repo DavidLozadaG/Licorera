@@ -12,14 +12,18 @@
     <title th:text="${cabecera}"></title>
     <link rel="shortcut icon" th:href="@{/imagenes/logotipo/MaxLicor's.png}" type="">
     <script type="text/javascript" th:src="@{/js/kit-fontawesome.min.js}"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/pushbar.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
     <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pushbar.js@1.0.0/src/pushbar.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sweetalert2.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/alertify.min.css}">
 </head>
 
 <body>
+    <!--CARRITO DE COMPRAS-->
+    <aside th:if="${session.usuario!=null}" th:replace="usuario/carrito :: carrito"></aside>
     <!-- Redes sociales flotantes-->
     <div th:fragment="redes" class="container1">
         <input type="checkbox" id="btn-mas">
@@ -44,213 +48,206 @@
     </div>
 
     <!-- Navigation-->
-    <nav th:fragment="navbar" class="navbar navbar-expand-xl navbar-dark fixed-top" id="mainNav">
-        <div class="container">
-            <a th:if="${session.usuario==null}" class="navbar-brand" href="/home">
-                <span><i class="fas fa-glass-cheers"></i>MaxLicor's</span>
-            </a>
-            <a th:if="${session.usuario!=null}" class="navbar-brand" href="/licorera">
-                <span><i class="fas fa-glass-cheers"></i>MaxLicor's</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars ms-1"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav  me-auto py-4 py-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-beer"></i> Categorías
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li th:each="cat:${categorias}">
-                                <a class="dropdown-item" th:href="@{'/categoria/'+${cat.nomb_cat}}"
-                                    th:text="${cat.nomb_cat}">
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/carrito">
-                            <i class="fas fa-shopping-cart"></i>
-                            (0)Carrito
-                        </a>
-                    </li>
-                </ul>
-                <form class="d-flex ms-auto py-4 py-lg-0">
-                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-                    <button class="btn nav_search-btn" type="submit">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
-                </form>
-                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                    <li class="nav-item dropdown">
-                        <a th:if="${session.usuario==null}" class="nav-link dropdown-toggle" href="#"
-                            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            Usuario
-                        </a>
-                        <ul th:if="${session.usuario==null}" th:replace="publico/sesion :: opcionesDefault"></ul>
-                        <a th:if="${session.usuario!=null}" class="nav-link dropdown-toggle" href="#"
-                            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span><i class="fa fa-user" aria-hidden="true"></i>
-                                <span th:text="' '+${session.usuario.nombres}"></span>
-                            </span>
-                        </a>
-                        <ul th:if="${session.usuario!=null}" th:replace="publico/sesion :: opcionesMenu"></ul>
-                    </li>
-                </ul>
+    <main class="pushbar_main_content">
+        <nav th:fragment="navbar" class="navbar navbar-expand-xl navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a th:if="${session.usuario==null}" class="navbar-brand" href="/home">
+                    <span><i class="fas fa-glass-cheers"></i>MaxLicor's</span>
+                </a>
+                <a th:if="${session.usuario!=null}" class="navbar-brand" href="/licorera">
+                    <span><i class="fas fa-glass-cheers"></i>MaxLicor's</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav  me-auto py-4 py-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-beer"></i> Categorías
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li th:each="cat:${categorias}">
+                                    <a class="dropdown-item" th:href="@{'/categoria/'+${cat.nomb_cat}}"
+                                        th:text="${cat.nomb_cat}">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a th:if="${session.usuario!=null}" class="nav-link" data-pushbar-target="right"
+                                type="button" role="button">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cantidad">(0)</span>Carrito
+                            </a>
+                            <a th:if="${session.usuario==null}" class="nav-link" th:href="@{/login}">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cantidad">(0)</span>Carrito
+                            </a>
+                        </li>
+                    </ul>
+                    <form class="d-flex ms-auto py-4 py-lg-0">
+                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                        <button class="btn nav_search-btn" type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item dropdown">
+                            <a th:if="${session.usuario==null}" class="nav-link dropdown-toggle" href="#"
+                                id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                Usuario
+                            </a>
+                            <ul th:if="${session.usuario==null}" th:replace="publico/sesion :: opcionesDefault"></ul>
+                            <a th:if="${session.usuario!=null}" class="nav-link dropdown-toggle" href="#"
+                                id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span><i class="fa fa-user" aria-hidden="true"></i>
+                                    <span th:text="' '+${session.usuario.nombres}"></span>
+                                </span>
+                            </a>
+                            <ul th:if="${session.usuario!=null}" th:replace="publico/sesion :: opcionesMenu"></ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-    <!-- Masthead-->
-    <!---->
-    <header th:fragment="header" class="masthead">
-        <div class="container">
-            <!--<div class="masthead-subheading">Bienvenido a MaxLicor's!</div>-->
-            <div class="container2 container3">
-                <span style="--l: 'Tu Licorera';">Tu Licorera</span>
-            </div>
-            <div class="container2">
-                <span style="--l: '';"></span>
-                <span style="--l: '';"><i class="fas fa-glass-cheers"></i></span>
-                <span style="--l: 'MaxLicor´s';">MaxLicor´s</span>
-            </div>
-            <div class="masthead-subheading"><i class="fas fa-star"></i> A un solo click 24/7 <i
-                    class="fas fa-star"></i></div>
+        </nav>
+        <!-- Masthead-->
+        <!---->
+        <header th:fragment="header" class="masthead">
+            <div class="container">
+                <!--<div class="masthead-subheading">Bienvenido a MaxLicor's!</div>-->
+                <div class="container2 container3">
+                    <span style="--l: 'Tu Licorera';">Tu Licorera</span>
+                </div>
+                <div class="container2">
+                    <span style="--l: '';"></span>
+                    <span style="--l: '';"><i class="fas fa-glass-cheers"></i></span>
+                    <span style="--l: 'MaxLicor´s';">MaxLicor´s</span>
+                </div>
+                <div class="masthead-subheading"><i class="fas fa-star"></i> A un solo click 24/7 <i
+                        class="fas fa-star"></i></div>
 
-            <!--<div class="masthead-heading text-uppercase">a un solo clic</div>-->
-        </div>
-    </header>
-    <br>
-    <div th:fragment="bloque" class="bloque">
-        <h4 class="text">Solicita AQUÍ tu pedido <span class="maquina">#Domicilios Gratis . . . .</span></h4>
-        <img class="imagen-bloque" src="imagenes/banners/home/truck-animation.gif" />
-    </div>
-
-    <!-- CONTENIDO-->
-    <div th:fragment="listaLicores" class="container" id="licores">
-        <div class="bloque2">
-            <div class="container2 container3">
-                <span style="--l: '';"></span>
-                <span style="--l: '';" th:text="${titulo}"></h1></span>
+                <!--<div class="masthead-heading text-uppercase">a un solo clic</div>-->
             </div>
+        </header>
+        <br>
+        <div th:fragment="bloque" class="bloque">
+            <h4 class="text">Solicita AQUÍ tu pedido <span class="maquina">#Domicilios Gratis . . . .</span></h4>
+            <img class="imagen-bloque" src="imagenes/banners/home/truck-animation.gif" />
         </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12" th:each="l:${licores}">
-                <div class="card">
-                    <div class="card-header">
-                        <label th:text="${l.nomb_licor}"></label>
-                    </div>
-                    <div class="card-body">
-                        <img class="image-card" th:src="@{'/imagenes/licores/'+${l.foto}}">
-                        <div class="precio" th:text="'$'+${l.precio}"></div>
-                    </div>
-                    <div class="card-footer text-center">
-                        <label th:text="${l.descripcion}"></label>
-                        <div th:if="${session.usuario==null}">
-                            <a href="/login" class="btn btn-outline-warning">Agregar carrito</a>
-                            <a href="/login" class="btn btn-primary">Comprar</a>
+
+        <!-- CONTENIDO-->
+        <div th:fragment="listaLicores" class="container" id="licores">
+            <div class="bloque2">
+                <div class="container2 container3">
+                    <span style="--l: '';"></span>
+                    <span style="--l: '';" th:text="${titulo}"></h1></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12" th:each="l:${licores}">
+                    <div class="card">
+                        <div class="card-header">
+                            <input class="cod_licor" type="hidden" th:value="${l.cod_licor}">
+                            <input class="stock" type="hidden" th:value="${l.cantidad}">
+                            <label class="title" th:text="${l.nomb_licor}"></label>
                         </div>
-                        <div th:if="${session.usuario!=null}">
-                            <a href="#" data-pushbar-target="pushbar-carrito" class="btn btn-outline-warning">Agregar
-                                carrito</a>
-                            <a href="#" class="btn btn-primary">Comprar</a>
+                        <div class="card-body">
+                            <img class="image-card" th:src="@{'/imagenes/licores/'+${l.foto}}">
+                            <div class="precio" th:text="'$'+${l.precio}"></div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <label class="descripcion" th:text="${l.descripcion}"></label>
+                            <div th:if="${session.usuario==null}">
+                                <a href="/login" class="btn btn-outline-warning">Agregar carrito</a>
+                                <a href="/login" class="btn btn-primary">Comprar</a>
+                            </div>
+                            <div th:if="${session.usuario!=null}">
+                                <button class="btn btn-outline-warning addToCart">Agregar carrito</button>
+                                <button type="button" class="btn btn-primary addToCart comprarProducto">Comprar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!--CARRITO DE COMPRAS-->
-    <div th:fragment="carrito">
-        <div data-pushbar-id="pushbar-carrito" class="pushbar from_right pushbar-carrito">
-            <div class="btn-cerrar izquierda">
-                <button data-pushbar-close><i class="fas fa-times"></i></button>
-            </div>
-            <p class="titulo">Carrito de compras</p>
-            <div class="item">
-                <div class="textos">
-                    <p class="nombre-item">AGUILA</p>
-                    <p>$12000</p>
+        <!-- PIE DE PAGINA -->
+        <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalRegistro"></div>
+        <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalInicioSesion"></div>
+        <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalConfirmacion"></div>
+        <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalOlvidoClave"></div>
+        <div th:if="${session.usuario!=null}" th:replace="publico/sesion :: modalCerrarSesion"></div>
+        <div th:if="${session.usuario!=null}" th:replace="usuario/finalizarPedido :: modalFinalizarPedido"></div>
+        <footer th:fragment="footer" class="pie-pagina">
+            <div class="grupo-1">
+                <div class="box">
+                    <figure>
+                        <a th:if="${session.usuario==null}" href="/home">
+                            <img th:src="@{/imagenes/logotipo/MaxLicor's.png}" alt="Logo de MaxLicor's">
+                        </a>
+                        <a th:if="${session.usuario!=null}" href="/licorera">
+                            <img th:src="@{/imagenes/logotipo/MaxLicor's.png}" alt="Logo de MaxLicor's">
+                        </a>
+                    </figure>
                 </div>
-                <div class="total">
-                    <p class="precio-total">Total:</p>
-                    <p>$</p>
+                <div class="box">
+                    <span class="box-text"><i class="fas fa-glass-cheers"></i>MaxLicor's</span>
+                    <p><i class="fas fa-glass-cheers"></i> Servicio de ENTREGA</p>
+                    <p><i class="fas fa-glass-cheers"></i>100% Garantizado</p>
+                    <p><i class="fas fa-glass-cheers"></i>100% Seguros</p>
+                    <p><i class="fas fa-glass-cheers"></i>Domicilio Gratis</p>
+                    <p><a class="mapa" href="/MapaDelSitio">>>Mapa de sitio</a></p>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- PIE DE PAGINA -->
-    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalRegistro"></div>
-    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalInicioSesion"></div>
-    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalConfirmacion"></div>
-    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalOlvidoClave"></div>
-    <div th:if="${session.usuario!=null}" th:replace="publico/sesion :: modalCerrarSesion"></div>
-
-    <footer th:fragment="footer" class="pie-pagina">
-        <div class="grupo-1">
-            <div class="box">
-                <figure>
-                    <a th:if="${session.usuario==null}" href="/home">
-                        <img th:src="@{/imagenes/logotipo/MaxLicor's.png}" alt="Logo de MaxLicor's">
-                    </a>
-                    <a th:if="${session.usuario!=null}" href="/licorera">
-                        <img th:src="@{/imagenes/logotipo/MaxLicor's.png}" alt="Logo de MaxLicor's">
-                    </a>
-                </figure>
-            </div>
-            <div class="box">
-                <span class="box-text"><i class="fas fa-glass-cheers"></i>MaxLicor's</span>
-                <p><i class="fas fa-glass-cheers"></i> Servicio de ENTREGA</p>
-                <p><i class="fas fa-glass-cheers"></i>100% Garantizado</p>
-                <p><i class="fas fa-glass-cheers"></i>100% Seguros</p>
-                <p><i class="fas fa-glass-cheers"></i>Domicilio Gratis</p>
-                <p><a class="mapa" href="/MapaDelSitio">>>Mapa de sitio</a></p>
-            </div>
-            <div class="box">
-                <h2>SIGUENOS</h2>
-                <div class="red-social">
-                    <a href="#" class="fa fa-facebook"></a>
-                    <a href="#" class="fa fa-instagram"></a>
-                    <a href="#" class="fa fa-twitter"></a>
-                    <a href="#" class="fa fa-youtube"></a>
+                <div class="box">
+                    <h2>SIGUENOS</h2>
+                    <div class="red-social">
+                        <a href="#" class="fa fa-facebook"></a>
+                        <a href="#" class="fa fa-instagram"></a>
+                        <a href="#" class="fa fa-twitter"></a>
+                        <a href="#" class="fa fa-youtube"></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="grupo-2">
-            <small>&copy; 2022 <b class="text-color">MaxLicor's</b> - Todos los Derechos Reservados.</small>
-        </div>
-        <script th:if="${session.usuario==null}" type="text/javascript" th:src="@{/js/validador.js}"></script>
-        <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
-        <script th:if="${session.usuario!=null}" type="text/javascript" th:src="@{/js/pushbar.js}"></script>
-        <script>
-            var pushbar = new Pushbar({
-                blur: true,
-                overlay: true
-            });
-        </script>
-        <script th:if="${session.usuario==null}">
-            $(document).ready(function () {
-                if (window.location.pathname == '/registro') {
-                    $('#registro').modal("show");
-                }
-                else if (window.location.pathname == '/login') {
-                    $('#inicioSesion').modal("show");
-                }
-                else if (window.location.pathname == '/registro/realizado') {
-                    $('#confirmacion').modal("show");
-                }
-                else if (window.location.pathname == '/olvidoClave') {
-                    $('#olvidoClave').modal("show");
-                }
-            });
-        </script>
-        <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
-        <script src="/js/gotop.js"></script>
-    </footer>
+            <div class="grupo-2">
+                <small>&copy; 2022 <b class="text-color">MaxLicor's</b> - Todos los Derechos Reservados.</small>
+            </div>
+            <script th:if="${session.usuario==null}" type="text/javascript" th:src="@{/js/validador.js}"></script>
+            <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+            <script th:if="${session.usuario==null}">
+                $(document).ready(function () {
+                    if (window.location.pathname == '/registro') {
+                        $('#registro').modal("show");
+                    }
+                    else if (window.location.pathname == '/login') {
+                        $('#inicioSesion').modal("show");
+                    }
+                    else if (window.location.pathname == '/registro/realizado') {
+                        $('#confirmacion').modal("show");
+                    }
+                    else if (window.location.pathname == '/olvidoClave') {
+                        $('#olvidoClave').modal("show");
+                    }
+                });
+            </script>
+            <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+            <script src="/js/gotop.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/pushbar.js@1.0.0/src/pushbar.min.js"></script>
+            <script th:if="${session.usuario!=null}" type="text/javascript" th:src="@{/js/tienda.js}"></script>
+            <script th:if="${session.usuario!=null}" type="text/javascript">
+                const pushbar = new Pushbar({
+                    blur: true,
+                    overlay: true,
+                });
+            </script>
+            <script type="text/javascript" th:src="@{/js/sweetalert2.all.min.js}"></script>
+            <script type="text/javascript" th:src="@{/js/alertify.min.js}"></script>
+        </footer>
+    </main>
 </body>
+
 </html>

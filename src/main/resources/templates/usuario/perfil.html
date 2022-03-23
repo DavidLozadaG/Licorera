@@ -7,176 +7,182 @@
 <body>
     <div th:replace="publico/index :: redes"></div>
     <div th:replace="publico/index :: irArriba"></div>
-    <header>
-        <nav th:replace="publico/categoria :: navbar"></nav>
-    </header>
-    <div class="bg-image">
-        <div class="container" id="perfil">
-            <h1 class="text-center"><i class="fa fa-user" aria-hidden="true"></i>Perfil</h1>
-            <div class="row">
-                <form class="form" th:action="@{/perfil/actualizar}" th:object="${usuario}" method="post">
-                    <br>
-                    <div class="panel-body">
-                        <table class="table table-condensed">
-                            <tbody>
-                                <div class="alert-danger" th:if="${error!=null}" th:text="${error}">Name Error</div>
-                                <br>
-                                <tr>
-                                    <td class='col-md-3'>Cédula:</td>
-                                    <td><input type="text" class="form-control input-sm" name="editcedula"
-                                            th:field="*{cedula}" placeholder="Cedula" id="editcedula" disabled=""></td>
-                                </tr>
-                                <tr>
-                                    <td class='col-md-3'>Nombre:</td>
-                                    <td>
-                                        <input type="text" class="form-control input-sm" name="editnombre"
-                                            th:field="*{nombres}" placeholder="Nombre" id="editnombre" disabled=""
-                                            required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class='col-md-3'>Apellido:</td>
-                                    <td><input type="text" class="form-control input-sm" name="editapellido"
-                                            th:field="*{apellidos}" placeholder="Apellido" id="editapellido" disabled=""
-                                            required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class='col-md-3'>Fecha de Nacimiento:</td>
-                                    <td><input type="date" class="form-control input-sm" name="editfecha_nac"
-                                            th:field="*{fecha_nac}" id="editfecha_nac" disabled=""></td>
-                                </tr>
-                                <tr>
-                                    <td class='col-md-3'>Correo:</td>
-                                    <td><input type="text" class="form-control input-sm" name="editcorreo"
-                                            th:field="*{email}" placeholder="Correo" id="editcorreo" disabled=""></td>
-                                </tr>
-                                <tr>
-                                    <td class='col-md-3'>Dirección:</td>
-                                    <td><input type="text" class="form-control input-sm" name="editdireccion"
-                                            th:field="*{direccion}" placeholder="Dirección" id="editdireccion"
-                                            disabled="" required></td>
-                                </tr>
-                                <tr>
-                                    <td class='col-md-3'>Teléfono:</td>
-                                    <td><input type="number" class="form-control input-sm" name="edittelefono"
-                                            th:field="*{telefono}" placeholder="Teléfono" id="edittelefono" disabled=""
-                                            required>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="alert alert-success d-none text-center" id="formSuccess">Contraseña guardada</div>
+    <aside th:if="${session.usuario!=null}" th:replace="usuario/carrito :: carrito"></aside>
+    <main class="pushbar_main_content">
+        <header>
+            <nav th:replace="publico/categoria :: navbar"></nav>
+        </header>
+        <div class="bg-image">
+            <div class="container" id="perfil">
+                <h1 class="text-center"><i class="fa fa-user" aria-hidden="true"></i>Perfil</h1>
+                <div class="row">
+                    <form class="form" th:action="@{/perfil/actualizar}" th:object="${usuario}" method="post">
                         <br>
-                        <button data-bs-toggle="modal" data-bs-target="#cambioClave" type="button" role="button"
-                            class="btn btn-sm btn-success"><i class="glyphicon glyphicon-refresh"></i>Cambiar
-                            Contraseña</button>
-                        <button type="button" class="btn btn-sm btn-success" id="editar" onclick="editable()"><i
-                                class="glyphicon glyphicon-refresh"></i> Editar Perfil</button>
-                        <button type="submit" class="btn btn-sm btn-success" id="actualizar" disabled><i
-                                class="glyphicon glyphicon-refresh"></i> Actualizar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalRegistro"></div>
-    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalInicioSesion"></div>
-    <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalConfirmacion"></div>
-    <div th:if="${session.usuario!=null}" th:replace="publico/sesion :: modalCerrarSesion"></div>
-
-    <div class="modal fade" id="cambioClave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Actualizar Contraseña</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="needs-validation" role="form" id="cambiarClaveForm" th:object="${CambiarClave}"
-                        method="post">
-                        <input class="form-control" type="hidden" th:field="${CambiarClave.id}"
-                            th:value="${CambiarClave.id}">
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" th:field="${CambiarClave.claveActual}"
-                                placeholder="Password" required>
-                            <label class="form-label">Contraseña actual</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" th:field="${CambiarClave.claveNueva}"
-                                placeholder="Password" required>
-                            <label class="form-label">Contraseña nueva</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" th:field="${CambiarClave.confirmarClaveNueva}"
-                                placeholder="Password" required>
-                            <label class="form-label">Confirmar contraseña nueva</label>
-                        </div>
-                        <div class="alert alert-danger d-none text-center" id="cambiarClaveError">Cambiar clave error
-                        </div>
-                        <br>
-                        <div class="form-group mb-3 form-group-btn-enviar">
-                            <button type="button" onClick="enviarCambiarClave()" class="btn btn-primary">Guardar
-                                cambios</button>
+                        <div class="panel-body">
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <div class="alert-danger" th:if="${error!=null}" th:text="${error}">Name Error</div>
+                                    <br>
+                                    <tr>
+                                        <td class='col-md-3'>Cédula:</td>
+                                        <td><input type="text" class="form-control input-sm" name="editcedula"
+                                                th:field="*{cedula}" placeholder="Cedula" id="editcedula" disabled="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class='col-md-3'>Nombre:</td>
+                                        <td>
+                                            <input type="text" class="form-control input-sm" name="editnombre"
+                                                th:field="*{nombres}" placeholder="Nombre" id="editnombre" disabled=""
+                                                required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class='col-md-3'>Apellido:</td>
+                                        <td><input type="text" class="form-control input-sm" name="editapellido"
+                                                th:field="*{apellidos}" placeholder="Apellido" id="editapellido"
+                                                disabled="" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class='col-md-3'>Fecha de Nacimiento:</td>
+                                        <td><input type="date" class="form-control input-sm" name="editfecha_nac"
+                                                th:field="*{fecha_nac}" id="editfecha_nac" disabled=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td class='col-md-3'>Correo:</td>
+                                        <td><input type="text" class="form-control input-sm" name="editcorreo"
+                                                th:field="*{email}" placeholder="Correo" id="editcorreo" disabled="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class='col-md-3'>Dirección:</td>
+                                        <td><input type="text" class="form-control input-sm" name="editdireccion"
+                                                th:field="*{direccion}" placeholder="Dirección" id="editdireccion"
+                                                disabled="" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td class='col-md-3'>Teléfono:</td>
+                                        <td><input type="number" class="form-control input-sm" name="edittelefono"
+                                                th:field="*{telefono}" placeholder="Teléfono" id="edittelefono"
+                                                disabled="" required>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="alert alert-success d-none text-center" id="formSuccess">Contraseña guardada
+                            </div>
+                            <br>
+                            <button data-bs-toggle="modal" data-bs-target="#cambioClave" type="button" role="button"
+                                class="btn btn-sm btn-success"><i class="glyphicon glyphicon-refresh"></i>Cambiar
+                                Contraseña</button>
+                            <button type="button" class="btn btn-sm btn-success" id="editar" onclick="editable()"><i
+                                    class="glyphicon glyphicon-refresh"></i> Editar Perfil</button>
+                            <button type="submit" class="btn btn-sm btn-success" id="actualizar" disabled><i
+                                    class="glyphicon glyphicon-refresh"></i> Actualizar</button>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+        <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalRegistro"></div>
+        <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalInicioSesion"></div>
+        <div th:if="${session.usuario==null}" th:replace="publico/sesion :: modalConfirmacion"></div>
+        <div th:if="${session.usuario!=null}" th:replace="publico/sesion :: modalCerrarSesion"></div>
+        <div th:if="${session.usuario!=null}" th:replace="usuario/finalizarPedido :: modalFinalizarPedido"></div>
+        <div class="modal fade" id="cambioClave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Actualizar Contraseña</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="needs-validation" role="form" id="cambiarClaveForm" th:object="${CambiarClave}"
+                            method="post">
+                            <input class="form-control" type="hidden" th:field="${CambiarClave.id}"
+                                th:value="${CambiarClave.id}">
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" th:field="${CambiarClave.claveActual}"
+                                    placeholder="Password" required>
+                                <label class="form-label">Contraseña actual</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" th:field="${CambiarClave.claveNueva}"
+                                    placeholder="Password" required>
+                                <label class="form-label">Contraseña nueva</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control"
+                                    th:field="${CambiarClave.confirmarClaveNueva}" placeholder="Password" required>
+                                <label class="form-label">Confirmar contraseña nueva</label>
+                            </div>
+                            <div class="alert alert-danger d-none text-center" id="cambiarClaveError">Cambiar clave
+                                error
+                            </div>
+                            <br>
+                            <div class="form-group mb-3 form-group-btn-enviar">
+                                <button type="button" onClick="enviarCambiarClave()" class="btn btn-primary">Guardar
+                                    cambios</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <footer th:replace="publico/index :: footer"></footer>
-    <script>
-        function editable() {
-            document.getElementById('editnombre').disabled = false;
-            document.getElementById('editapellido').disabled = false;
-            document.getElementById('editdireccion').disabled = false;
-            document.getElementById('edittelefono').disabled = false;
-            document.getElementById('actualizar').disabled = false;
-        }
-        function noeditable() {
-            document.getElementById('editnombre').disabled = true;
-            document.getElementById('editapellido').disabled = true;
-            document.getElementById('editdireccion').disabled = true;
-            document.getElementById('edittelefono').disabled = true;
-            document.getElementById('actualizar').disabled = true;
-        }
-    </script>
-    <script>
-        function enviarCambiarClave() {
-            var params = {};
-            params["id"] = $("#id").val();
-            params["claveActual"] = $("#claveActual").val();
-            params["claveNueva"] = $("#claveNueva").val();
-            params["confirmarClaveNueva"] = $("#confirmarClaveNueva").val();
-            
-            $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: "/perfil/cambiarClave",
-                data: JSON.stringify(params),
-                dataType: 'text',
-                cache: false,
-                timeout: 600000,
-                success: function (data) {
-                    $("#cambiarClaveForm")[0].reset();
-                    $("#cambiarClaveError").addClass("d-none");
-                    $("#formSuccess").removeClass("d-none");
-                    $("#formSuccess").html("Contraseña cambiada con exito!");
+        <footer th:replace="publico/index :: footer"></footer>
+        <script>
+            function editable() {
+                document.getElementById('editnombre').disabled = false;
+                document.getElementById('editapellido').disabled = false;
+                document.getElementById('editdireccion').disabled = false;
+                document.getElementById('edittelefono').disabled = false;
+                document.getElementById('actualizar').disabled = false;
+            }
+            function noeditable() {
+                document.getElementById('editnombre').disabled = true;
+                document.getElementById('editapellido').disabled = true;
+                document.getElementById('editdireccion').disabled = true;
+                document.getElementById('edittelefono').disabled = true;
+                document.getElementById('actualizar').disabled = true;
+            }
+        </script>
+        <script>
+            function enviarCambiarClave() {
+                var params = {};
+                params["id"] = $("#id").val();
+                params["claveActual"] = $("#claveActual").val();
+                params["claveNueva"] = $("#claveNueva").val();
+                params["confirmarClaveNueva"] = $("#confirmarClaveNueva").val();
 
-                    $("#cambioClave").modal('toggle');
-                    setTimeout(function () { $("#formSuccess").hide('slow'); }, 2000);
-                },
-                error: function (e) {
-                    $("#cambiarClaveError").removeClass("d-none");
-                    $("#formSucces").addClass("d-none");
-                    $("#cambiarClaveError").html(e.responseText);
-                }
-            });
-        }
-    </script>
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "/perfil/cambiarClave",
+                    data: JSON.stringify(params),
+                    dataType: 'text',
+                    cache: false,
+                    timeout: 600000,
+                    success: function (data) {
+                        $("#cambiarClaveForm")[0].reset();
+                        $("#cambiarClaveError").addClass("d-none");
+                        $("#formSuccess").removeClass("d-none");
+                        $("#formSuccess").html("Contraseña cambiada con exito!");
+
+                        $("#cambioClave").modal('toggle');
+                        setTimeout(function () { $("#formSuccess").hide('slow'); }, 2000);
+                    },
+                    error: function (e) {
+                        $("#cambiarClaveError").removeClass("d-none");
+                        $("#formSucces").addClass("d-none");
+                        $("#cambiarClaveError").html(e.responseText);
+                    }
+                });
+            }
+        </script>
+    </main>
 </body>
-
 </html>
