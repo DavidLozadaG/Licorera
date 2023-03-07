@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS historial_facturas(
     pago_total INT,
     nomb_metodo VARCHAR(45) NOT NULL,
     nomb_estado VARCHAR(45) NOT NULL,
-    observacion VARCHAR(45) NOT NULL
+    observacion VARCHAR(45) 
 );
 
 CREATE TABLE IF NOT EXISTS detalles_pedido(
@@ -155,7 +155,7 @@ RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER insertar_datos_historial_trigger AFTER INSERT ON pedidos FOR EACH ROW EXECUTE PROCEDURE insertar_datos_historial();
+CREATE TRIGGER insertar_datos_historial_trigger BEFORE INSERT ON pedidos FOR EACH ROW EXECUTE PROCEDURE insertar_datos_historial();
 
 /*DISPARADOR PARA ACTUALIZAR EL ESTADO DEL PEDIDO*/
 CREATE OR REPLACE FUNCTION actualizar_estado_pedido() RETURNS TRIGGER AS $$
