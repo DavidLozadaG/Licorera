@@ -27,7 +27,6 @@ public class Pedido implements Serializable{
     @ManyToOne
     @JoinColumn(name="cod_metodo")
     private Metodo_pago cod_metodo;
-    private String direccion_envio;
 
     @ManyToOne
     @JoinColumn(name="cod_estado")
@@ -37,14 +36,12 @@ public class Pedido implements Serializable{
     public Pedido() {
     }
 
-    public Pedido(int cod_pedido, Timestamp fecha_pedido, Usuario cedula, Metodo_pago cod_metodo,
-            String direccion_envio, Estado_pedido cod_estado, String observacion) {
+    public Pedido(int cod_pedido, Timestamp fecha_pedido, Usuario cedula, Metodo_pago cod_metodo, Estado_pedido cod_estado, String observacion) {
         super();
         this.cod_pedido = cod_pedido;
         this.fecha_pedido = fecha_pedido;
         this.cedula = cedula;
         this.cod_metodo = cod_metodo;
-        this.direccion_envio = direccion_envio;
         this.cod_estado = cod_estado;
         this.observacion = observacion;
     }
@@ -81,14 +78,6 @@ public class Pedido implements Serializable{
         this.cod_metodo = cod_metodo;
     }
 
-    public String getDireccion_envio() {
-        return direccion_envio;
-    }
-
-    public void setDireccion_envio(String direccion_envio) {
-        this.direccion_envio = direccion_envio;
-    }
-
     public Estado_pedido getCod_estado() {
         return cod_estado;
     }
@@ -104,6 +93,12 @@ public class Pedido implements Serializable{
     public void setObservacion(String observacion) {
         this.observacion = observacion;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Pedido [cedula=" + cedula + ", cod_estado=" + cod_estado + ", cod_metodo=" + cod_metodo
+                + ", cod_pedido=" + cod_pedido + ", fecha_pedido=" + fecha_pedido + ", observacion=" + observacion
+                + "]";
+    }
     
 }

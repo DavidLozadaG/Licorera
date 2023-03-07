@@ -1,13 +1,22 @@
 package com.tienda.licorera.controlador;
 
 import com.tienda.licorera.dto.CambiarClave;
+import com.tienda.licorera.dto.CrearPedido;
+import com.tienda.licorera.dto.IngresarDetalle;
 import com.tienda.licorera.error.ErrorServicio;
 import com.tienda.licorera.modelo.Categoria;
+import com.tienda.licorera.modelo.Detalle;
 import com.tienda.licorera.modelo.Licor;
+import com.tienda.licorera.modelo.Metodo_pago;
+import com.tienda.licorera.modelo.Pedido;
 import com.tienda.licorera.modelo.Rol;
 import com.tienda.licorera.modelo.Usuario;
 import com.tienda.licorera.sevicio.ICategoriaServicio;
+import com.tienda.licorera.sevicio.IDetalleServicio;
+import com.tienda.licorera.sevicio.IEstadoPedido;
 import com.tienda.licorera.sevicio.ILicorServicio;
+import com.tienda.licorera.sevicio.IMetodoPgServicio;
+import com.tienda.licorera.sevicio.IPedidoServicio;
 import com.tienda.licorera.sevicio.IRolServicio;
 import com.tienda.licorera.sevicio.IUsuarioServicio;
 
@@ -22,6 +31,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,18 +51,70 @@ public class ControladorUsuario {
 
     @Autowired
     private ILicorServicio licorServicio;
+
     @Autowired
     private IRolServicio rolServicio;
 
+    @Autowired
+    private IMetodoPgServicio metodoServicio;
+
+    @Autowired
+    private IPedidoServicio pedidoServicio;
+
+    @Autowired
+    private IEstadoPedido estado_pedidoServicio;
+
+    @Autowired
+    private IDetalleServicio detalleServicio;
+
     @PreAuthorize("hasAnyRole('CLIENTE' OR 'ADMINISTRADOR')")
-    @GetMapping("/carrito")
-    public String carrito(Model model, Usuario usuario) {
-        model.addAttribute("usuario", usuario);
-        model.addAttribute("cabecera", "Carrito | MaxLicor's");
-        model.addAttribute("titulo", "Carrito");
-        List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
-        model.addAttribute("categorias", listadoCategorias);
-        return "usuario/carrito";
+    @PostMapping("/crearPedido")
+    public ResponseEntity<String> crearPedido(@Valid @RequestBody CrearPedido crearPedido, Errors errors) {
+        try {
+            if (errors.hasErrors()) {
+                String result = errors.getAllErrors()
+                        .stream().map(x -> x.getDefaultMessage())
+                        .collect(Collectors.joining(""));
+                throw new Exception(result);
+            }
+            Pedido pedido = new Pedido();
+            System.out.println(crearPedido.toString());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            pedido.setFecha_pedido(Timestamp.valueOf(dtf.format(LocalDateTime.now())));
+            pedido.setCedula(usuarioServicio.buscarPorCedula(crearPedido.getCedula()));
+            pedido.setCod_estado(estado_pedidoServicio.buscarEstado_pedido(crearPedido.getCod_estado()));
+            pedido.setCod_metodo(metodoServicio.buscarMet(crearPedido.getCod_metodo()));
+            pedidoServicio.guardarPedido(pedido);
+            System.out.println("*********DESPUES Este es el codigo del pedido***********"+pedido.getCod_pedido());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok("Success");
+    }
+
+    @PreAuthorize("hasAnyRole('CLIENTE' OR 'ADMINISTRADOR')")
+    @PostMapping("/ingresarDetalles")
+    public ResponseEntity<String> ingresarDetalles(@Valid @RequestBody IngresarDetalle ingresarDetalle, Errors errors) {
+        Pedido pedido = new Pedido();
+        Detalle detalle = new Detalle();
+        try {
+            if (errors.hasErrors()) {
+                String result = errors.getAllErrors()
+                        .stream().map(x -> x.getDefaultMessage())
+                        .collect(Collectors.joining(""));
+                throw new Exception(result);
+            }
+           
+            pedido = (pedidoServicio.listarTodos().get(pedidoServicio.listarTodos().size()-1));
+            System.out.println("*********Este es el codigo del pedido***********"+pedido.getCod_pedido());
+            detalle.setCod_pedido(pedido);
+            detalle.setCod_licor(licorServicio.buscarLicor(ingresarDetalle.getCod_licor()));
+            detalle.setCantidad(ingresarDetalle.getCantidad());
+            detalleServicio.guardarDetalle(detalle);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok("Success");
     }
 
     @PreAuthorize("hasAnyRole('CLIENTE' OR 'ADMINISTRADOR')")
@@ -61,6 +125,8 @@ public class ControladorUsuario {
         model.addAttribute("usuario", usuario);
         model.addAttribute("cabecera", "Perfil | MaxLicor's");
         model.addAttribute("titulo", "Perfil");
+        List<Metodo_pago> listadoMetodos = metodoServicio.listarTodos();
+        model.addAttribute("metodospago", listadoMetodos);
         List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
         model.addAttribute("categorias", listadoCategorias);
         model.addAttribute("CambiarClave", new CambiarClave(usuario.getCedula()));
@@ -69,19 +135,19 @@ public class ControladorUsuario {
 
     @PreAuthorize("hasAnyRole('CLIENTE' OR 'ADMINISTRADOR')")
     @PostMapping("/perfil/cambiarClave")
-    public ResponseEntity<String>cambiarClave(@Valid @RequestBody CambiarClave cambiarClave, Errors errors) {
-       try {
-           if (errors.hasErrors()) {
-               String result = errors.getAllErrors()
-               .stream().map(x -> x.getDefaultMessage())
-               .collect(Collectors.joining(""));
-               throw new Exception(result);
-           }
-           usuarioServicio.cambiarClave(cambiarClave);
-       } catch (Exception e) {
+    public ResponseEntity<String> cambiarClave(@Valid @RequestBody CambiarClave cambiarClave, Errors errors) {
+        try {
+            if (errors.hasErrors()) {
+                String result = errors.getAllErrors()
+                        .stream().map(x -> x.getDefaultMessage())
+                        .collect(Collectors.joining(""));
+                throw new Exception(result);
+            }
+            usuarioServicio.cambiarClave(cambiarClave);
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
-       }
-    return ResponseEntity.ok("Success");
+        }
+        return ResponseEntity.ok("Success");
     }
 
     @PreAuthorize("hasAnyRole('CLIENTE' OR 'ADMINISTRADOR')")
@@ -125,6 +191,8 @@ public class ControladorUsuario {
         List<Licor> listadoLicores = licorServicio.listarTodos();
         model.addAttribute("categorias", listadoCategorias);
         model.addAttribute("licores", listadoLicores);
+        List<Metodo_pago> listadoMetodos = metodoServicio.listarTodos();
+        model.addAttribute("metodospago", listadoMetodos);
         String email = auth.getName();
         if (session.getAttribute("usuario") == null) {
             Usuario usuario = usuarioServicio.buscarPorEmail(email);

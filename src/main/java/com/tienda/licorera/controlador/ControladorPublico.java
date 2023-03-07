@@ -15,9 +15,11 @@ import com.tienda.licorera.dto.CambiarClave;
 import com.tienda.licorera.error.ErrorServicio;
 import com.tienda.licorera.modelo.Categoria;
 import com.tienda.licorera.modelo.Licor;
+import com.tienda.licorera.modelo.Metodo_pago;
 import com.tienda.licorera.sevicio.EmailServImpl;
 import com.tienda.licorera.sevicio.ICategoriaServicio;
 import com.tienda.licorera.sevicio.ILicorServicio;
+import com.tienda.licorera.sevicio.IMetodoPgServicio;
 import com.tienda.licorera.sevicio.IRolServicio;
 import com.tienda.licorera.sevicio.IUsuarioServicio;
 
@@ -52,10 +54,15 @@ public class ControladorPublico {
     @Autowired
     EmailServImpl emailServImpl;
 
+    @Autowired
+    private IMetodoPgServicio metodoServicio;
+    
     // METODO PARA LISTAR LOS LICORES EN EL HOME
     @GetMapping({ "/", "/home", "/index" })
     public String listarLicores(Model model, Usuario usuario) {
         model.addAttribute("usuario", usuario);
+        List<Metodo_pago> listadoMetodos = metodoServicio.listarTodos();
+        model.addAttribute("metodospago",listadoMetodos);
         model.addAttribute("cabecera", "Licores Disponibles | MaxLicor's");
         model.addAttribute("titulo", "LICORES");
         List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
@@ -138,7 +145,7 @@ public class ControladorPublico {
             model.addAttribute("message", "Invalid Token");
             return "message";
         }
-        return "publico/recuperarContrasena";
+        return "publico/recuperarContraseña";
     }
 
     @PostMapping("/recuperarContraseña")
@@ -161,6 +168,8 @@ public class ControladorPublico {
     @GetMapping("/registro")
     public String registro(Usuario usuario, Model model) {
         model.addAttribute("usuario", usuario);
+        List<Metodo_pago> listadoMetodos = metodoServicio.listarTodos();
+        model.addAttribute("metodospago",listadoMetodos);
         model.addAttribute("cabecera", "Licores Disponibles | MaxLicor's");
         model.addAttribute("titulo", "LICORES");
         List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
@@ -173,6 +182,8 @@ public class ControladorPublico {
     @GetMapping("/registro/realizado")
     public String registroRealizo(Usuario usuario, Model model) {
         model.addAttribute("usuario", usuario);
+        List<Metodo_pago> listadoMetodos = metodoServicio.listarTodos();
+        model.addAttribute("metodospago",listadoMetodos);
         model.addAttribute("cabecera", "Licores Disponibles | MaxLicor's");
         model.addAttribute("titulo", "LICORES");
         List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
@@ -185,6 +196,8 @@ public class ControladorPublico {
     @GetMapping("/login")
     public String login(Usuario usuario, Model model) {
         model.addAttribute("usuario", usuario);
+        List<Metodo_pago> listadoMetodos = metodoServicio.listarTodos();
+        model.addAttribute("metodospago",listadoMetodos);
         model.addAttribute("cabecera", "Licores Disponibles | MaxLicor's");
         model.addAttribute("titulo", "LICORES");
         List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
@@ -197,6 +210,8 @@ public class ControladorPublico {
     @GetMapping("/MapaDelSitio")
     public String mapa(Model model, Usuario usuario) {
         model.addAttribute("usuario", usuario);
+        List<Metodo_pago> listadoMetodos = metodoServicio.listarTodos();
+        model.addAttribute("metodospago",listadoMetodos);
         model.addAttribute("cabecera", "Mapa del sitio | MaxLicor's");
         model.addAttribute("titulo", "Mapa del sitio");
         List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
@@ -207,6 +222,8 @@ public class ControladorPublico {
     @GetMapping("/contactoSoporte")
     public String contacto(Model model, Usuario usuario) {
         model.addAttribute("usuario", usuario);
+        List<Metodo_pago> listadoMetodos = metodoServicio.listarTodos();
+        model.addAttribute("metodospago",listadoMetodos);
         model.addAttribute("cabecera", "Contacto Soporte | MaxLicor's");
         model.addAttribute("titulo", "Contacto Soporte");
         List<Categoria> listadoCategorias = categoriaServicio.listarTodas();

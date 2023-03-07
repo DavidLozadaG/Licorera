@@ -5,9 +5,11 @@ import java.util.List;
 import com.tienda.licorera.error.ErrorServicio;
 import com.tienda.licorera.modelo.Categoria;
 import com.tienda.licorera.modelo.Licor;
+import com.tienda.licorera.modelo.Metodo_pago;
 import com.tienda.licorera.modelo.Usuario;
 import com.tienda.licorera.sevicio.ICategoriaServicio;
 import com.tienda.licorera.sevicio.ILicorServicio;
+import com.tienda.licorera.sevicio.IMetodoPgServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,7 +28,10 @@ public class ControladorCategoria {
 
     @Autowired
     private ICategoriaServicio categoriaServicio;
-
+    
+    @Autowired
+    private IMetodoPgServicio metodoServicio;
+    
     // Metodo para listar el licor segun su categoria
     @GetMapping("/categoria/{nomb_cat}")
     public String listarLicoresPorCat(@PathVariable("nomb_cat") String nomb_cat, Model model, Usuario usuario) {
@@ -34,6 +39,8 @@ public class ControladorCategoria {
         model.addAttribute("cabecera", nomb_cat + " | MaxLicor's");
         model.addAttribute("titulo", nomb_cat);
         model.addAttribute("categoria", nomb_cat);
+        List<Metodo_pago> listadoMetodos = metodoServicio.listarTodos();
+        model.addAttribute("metodospago",listadoMetodos);
         List<Categoria> listadoCategorias = categoriaServicio.listarTodas();
         Categoria categoria = categoriaServicio.buscarPorNombre(nomb_cat);
         List<Licor> listadoLicores = licorServicio.buscarPorCategoria(categoria.getCod_cat());
