@@ -145,7 +145,7 @@ public class ControladorPublico {
             model.addAttribute("message", "Invalid Token");
             return "message";
         }
-        return "publico/recuperarContraseña";
+        return "publico/recuperarContrasena";
     }
 
     @PostMapping("/recuperarContraseña")
